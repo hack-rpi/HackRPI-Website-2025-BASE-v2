@@ -8,7 +8,7 @@ export default function TitleText() {
 	// We may also want to make the count ease in and out
 	useEffect(() => {
 		const startCounting = setTimeout(() => {
-			const target = 2024;
+			const target = 2025;
 
 			const interval = setInterval(() => {
 				setYear((prev) => {
@@ -31,7 +31,7 @@ export default function TitleText() {
 			<h1 className="w-full text-5xl 2xs:text-7xl sm:text-8xl 2xl:text-9xl font-bold">HACKRPI</h1>
 			<h2 className="w-full text-4xl sm:text-[3.5rem] 2xl:text-7xl whitespace-nowrap h-14 2xl:h-20">Retro V. Modern</h2>
 			<p className={`w-full text-3xl sm:text-4xl 2xl:text-5xl mb-8`}>
-				November 9-10, <span onMouseEnter={() => setYear(1824)}>{year}</span>
+				Nov 15/16th, <span onMouseEnter={() => setYear(1824)}>{year}</span>
 			</p>
 			<RegistrationButton className="text-3xl" />
 		</div>
