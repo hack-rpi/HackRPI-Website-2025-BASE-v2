@@ -30,16 +30,6 @@ export const links: NavGroup[] = [
 			{ href: "/last-year#photos", children: "Photos" },
 		],
 	},
-	{
-		name: "Resources",
-		links: [
-			{ href: "/resources#web-dev", children: "Web Development" },
-			{ href: "/resources#git", children: "Git and GitHub" },
-			{ href: "/resources#leaflet", children: "Mapping Data" },
-			{ href: "/resources#desktop-dev", children: "Desktop Development" },
-			{ href: "/resources#submissions", children: "Submitting Your Project" },
-		],
-	},
 ];
 
 export default function NavBar({ showOnScroll }: { showOnScroll: boolean }) {
