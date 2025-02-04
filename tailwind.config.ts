@@ -12,7 +12,7 @@ const config: Config = {
 			sans: ["Helvetica", "Arial", "sans-serif"],
 			retro: ["Silkscreen", "serif"],
 			modern: ["Audiowide", "serif"],
-			neutral: ["Turret Road", "serif"]
+			neutral: ["Turret Road", "serif"],
 		},
 		extend: {
 			colors: {
@@ -31,14 +31,13 @@ const config: Config = {
 				"subway-yellow": "#f8a13a",
 				"subway-purple": "#b43c96",
 
-        //NEW COLORS - 2025
+				//NEW COLORS - 2025
 				"hackrpi-light-purple": "#9e40ee", //Primary
 				"hackrpi-dark-purple": "#733dbe", //Primary
 				"hackrpi-orange": "#e39036", //Secondary
 				"hackrpi-yellow": "#e9bc59", //Secondary
 				"hackrpi-pink": "#d5345d", //Secondary
 				"hackrpi-dark-blue": "#292333", //Background color
-
 
 				gold: "#ffd700",
 				silver: "#C0C0C0",

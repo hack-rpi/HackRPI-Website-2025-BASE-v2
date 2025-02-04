@@ -15,7 +15,9 @@ export default function Footer() {
 						<div className="mb-4">
 							<h2 className="text-2xl tracking-wider font-sans font-thin">
 								<span className="font-bold tracking-normal text-orange-400 font-neutral">HackRPI</span>{" "}
-								<span className="text-amber-400 font-retro"> Retro </span> <span className="text-amber-400 font-neutral font-bold"> V. </span> <span className="text-amber-400 font-modern">Modern </span>
+								<span className="text-amber-400 font-retro"> Retro </span>{" "}
+								<span className="text-amber-400 font-neutral font-bold"> V. </span>{" "}
+								<span className="text-amber-400 font-modern">Modern </span>
 							</h2>
 							<p>Darrin Communications Center @ Rensselaer Polytechnic Institute</p>
 							<p>110 8th St, Troy, NY 12180</p>
