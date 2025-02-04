@@ -25,7 +25,7 @@ function SponsorUsPage() {
 						<h1 className="text-3xl font-bold text-center mb-2">This Year We Need Your help: </h1>
 						<iframe
 							className="w-5/6 md:w-4/6 aspect-[8.5/11]"
-							src="https://drive.google.com/file/d/1n0A94WUZPzI5g1w46pR1VZ4bSXKOiFsy/preview"
+							src="https://drive.google.com/file/d/125uc-PALNo7daHw60glao-lj8qX_y5Wn/preview"
 							allow="autoplay"
 							sandbox="allow-scripts allow-same-origin allow-popups"
 						></iframe>
