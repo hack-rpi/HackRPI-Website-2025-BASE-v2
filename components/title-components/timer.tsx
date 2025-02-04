@@ -43,36 +43,36 @@ export default function Timer() {
 			{hackathonStarted && !hackathonEnded ? <h1 className="text-4xl font-bold mb-2">SUBMISSIONS DUE: </h1> : null}
 			{hackathonEnded ? <h1 className="text-4xl font-bold mb-2">THANKS FOR JOINING US! </h1> : null}
 			<div className="flex items-center justify-between w-full mb-4">
-				<Circle bgColor="bg-subway-red" textColor="text-white">
+				<Circle bgColor="bg-hackrpi-light-purple" textColor="text-white">
 					{DeltaTime.months > 9 ? DeltaTime.months : "0" + DeltaTime.months}
 				</Circle>
-				<Circle bgColor="bg-subway-yellow" textColor="text-white">
+				<Circle bgColor="bg-hackrpi-orange" textColor="text-white">
 					{DeltaTime.days > 9 ? DeltaTime.days : "0" + DeltaTime.days}
 				</Circle>
-				<Circle bgColor="bg-subway-green" textColor="text-white">
+				<Circle bgColor="bg-hackrpi-dark-purple" textColor="text-white">
 					{DeltaTime.hours > 9 ? DeltaTime.hours : "0" + DeltaTime.hours}
 				</Circle>
-				<Circle bgColor="bg-subway-blue" textColor="text-white">
+				<Circle bgColor="bg-hackrpi-yellow" textColor="text-white">
 					{DeltaTime.minutes > 9 ? DeltaTime.minutes : "0" + DeltaTime.minutes}
 				</Circle>
-				<Circle bgColor="bg-subway-purple" textColor="text-white">
+				<Circle bgColor="bg-hackrpi-pink" textColor="text-white">
 					{DeltaTime.seconds > 9 ? DeltaTime.seconds : "0" + DeltaTime.seconds}
 				</Circle>
 			</div>
 			<div className="flex items-center justify-between w-full">
-				<Circle bgColor="bg-subway-red" textColor="text-white">
+				<Circle bgColor="bg-hackrpi-light-purple" textColor="text-white">
 					M
 				</Circle>
-				<Circle bgColor="bg-subway-yellow" textColor="text-white">
+				<Circle bgColor="bg-hackrpi-orange" textColor="text-white">
 					D
 				</Circle>
-				<Circle bgColor="bg-subway-green" textColor="text-white">
+				<Circle bgColor="bg-hackrpi-dark-purple" textColor="text-white">
 					H
 				</Circle>
-				<Circle bgColor="bg-subway-blue" textColor="text-white">
+				<Circle bgColor="bg-hackrpi-yellow" textColor="text-white">
 					M
 				</Circle>
-				<Circle bgColor="bg-subway-purple" textColor="text-white">
+				<Circle bgColor="bg-hackrpi-pink" textColor="text-white">
 					S
 				</Circle>
 			</div>

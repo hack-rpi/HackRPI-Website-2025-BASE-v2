@@ -14,12 +14,12 @@ export default function AboutUs() {
 						HackRPI 2024 is Rensselaer Polytechnic Institute&apos;s 11th annual intercollegiate hackathon hosted by
 						students for students. Starting at noon on Saturday, November 9th, teams of 1-4 people have 24 hours to
 						build and submit projects relating to our theme,{" "}
-						<span className="text-hackrpi-primary-light-green font-bold">Urban Upgrades</span>. After submitting their
+						<span className="text-hackrpi-orange font-bold">Urban Upgrades</span>. After submitting their
 						projects, participants demonstrate their projects in front of a panel of professors, industry professionals,
 						and fellow students.
 					</p>
 					<p className="pb-3">
-						<span className="text-hackrpi-primary-light-green font-bold">Urban Upgrades</span> is all about enhancing
+						<span className="text-hackrpi-orange font-bold">Urban Upgrades</span> is all about enhancing
 						the infrastructure, services, and quality of life in our cities. From smart transportation systems and
 						sustainable energy solutions to improved public safety and inclusive community spaces, this theme challenges
 						you to develop ideas and technologies that make cities more livable, efficient, and enjoyable for everyone.
@@ -34,7 +34,7 @@ export default function AboutUs() {
 			</div>
 
 			<div className="w-full lg:w-2/6 flex flex-col items-center lg:items-start mt-4 lg:mt-0 h-full lg:ml-4">
-				<div className="w-full lg:w-11/12 bg-hackrpi-secondary-yellow text-black text-xl h-fit overflow-hidden whitespace-nowrap font-bold lg:mt-16 pl-1 ">
+				<div className="w-full lg:w-11/12 bg-hackrpi-dark-purple text-black text-xl h-fit overflow-hidden whitespace-nowrap font-bold lg:mt-16 pl-1 ">
 					REGISTER NOW! REGISTER NOW! REGISTER NOW! REGISTER NOW! REGISTER NOW! REGISTER NOW! REGISTER NOW!
 				</div>
 				<div className="w-full lg:w-11/12 bg-gray-900 text-white h-fit flex flex-col items-start justify-start">
