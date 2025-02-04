@@ -118,7 +118,7 @@ const FAQPage = () => {
 						key={index}
 						className={`collapse collapse-arrow custom-arrow bg-base-200 p-1 text-2xl border-t-2 ${
 							index === faqs.length - 1 ? "border-b-2" : ""
-						} border-hackrpi-primary-blue rounded-none`}
+						} border-hackrpi-orange rounded-none`}
 					>
 						<input
 							type="checkbox"
@@ -126,7 +126,7 @@ const FAQPage = () => {
 							checked={expandedIndex === index}
 							onChange={() => handleToggle(index)}
 						/>
-						<div className="collapse-title font-medium text-2xl text-hackrpi-primary-blue">{faq.title}</div>
+						<div className="collapse-title font-medium text-2xl text-hackrpi-yellow">{faq.title}</div>
 						<div className="collapse-content">{faq.content}</div>
 					</div>
 				))}
