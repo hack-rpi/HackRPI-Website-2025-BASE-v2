@@ -34,7 +34,7 @@ export default function PastYearProjects() {
 				<hr className="my-8 border-t border-gray-200 w-full desktop:w-1/2 " />
 				<ProjectCarousel projects={carouselPrizes} />
 				<hr className="my-8 border-t border-gray-200 w-full desktop:w-1/2 " id="photos" />
-				<h2 className="text-3xl font-bold text-center mb-8 pt-24">A Memorable Time in HackRPI X!</h2>
+				<h2 className="text-3xl font-bold text-center mb-8 pt-24">A Memorable Time in HackRPI XI!</h2>
 				<div className="flex items-center justify-center">
 					<div className="grid grid-cols-8 gap-2 desktop:gap-5 p-5">
 						<div className="col-span-4">
