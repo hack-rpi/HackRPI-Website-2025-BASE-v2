@@ -10,6 +10,9 @@ const config: Config = {
 	theme: {
 		fontFamily: {
 			sans: ["Helvetica", "Arial", "sans-serif"],
+			retro: ["Silkscreen", "serif"],
+			modern: ["Audiowide", "serif"],
+			neutral: ["Turret Road", "serif"]
 		},
 		extend: {
 			colors: {
