@@ -16,16 +16,16 @@ function SponsorUsPage() {
 						<h1 className="text-3xl font-bold text-center mb-2">Last Year:</h1>
 						<iframe
 							className="w-5/6 md:w-4/6 aspect-[8.5/11] mx-auto"
-							src="https://drive.google.com/file/d/1K4YpXPlna2iuA-qaCtlRENl0_e4c7oM8/preview"
+							src="https://drive.google.com/file/d/1n0A94WUZPzI5g1w46pR1VZ4bSXKOiFsy/preview"
 							allow="autoplay"
 							sandbox="allow-scripts allow-same-origin allow-popups"
 						></iframe>
 					</div>
 					<div className="flex flex-col items-center justify-center w-5/6 md:w-1/2 min-w-[350px] mb-2">
-						<h1 className="text-3xl font-bold text-center mb-2">This Year We Need Your help: </h1>
+						<h1 className="text-3xl font-bold text-center mb-2">This Year We Need Your Help: </h1>
 						<iframe
 							className="w-5/6 md:w-4/6 aspect-[8.5/11]"
-							src="https://drive.google.com/file/d/125uc-PALNo7daHw60glao-lj8qX_y5Wn/preview"
+							src="https://drive.google.com/file/d/1zKz7PLdIPuz4yya3JvIVm7q_yng9pcoy/preview"
 							allow="autoplay"
 							sandbox="allow-scripts allow-same-origin allow-popups"
 						></iframe>
