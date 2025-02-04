@@ -8,7 +8,7 @@ const Sponsors = () => {
 	const [sponsors] = useState<SponsorsJSON>(sponsorsJson);
 
 	return (
-		<div className="flex flex-col w-full justify-center items-start desktop:items-center pl-8 desktop:pl-0 bg-gradient-to-b from-hackrpi-secondary-dark-blue via-hackrpi-primary-blue to-hackrpi-secondary-dark-blue py-8 ">
+		<div className="flex flex-col w-full justify-center items-start desktop:items-center pl-8 desktop:pl-0 bg-gradient-to-b from-hackrpi-dark-blue via-hackrpi-orange to-hackrpi-dark-blue py-8 ">
 			<div className="w-11/12 desktop:w-2/3">
 				<h2 className="pb-10 text-white font-sans font-bold text-left text-4xl">
 					Thank you to our sponsors that make HackRPI possible!
