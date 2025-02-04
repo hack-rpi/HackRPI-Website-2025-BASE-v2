@@ -5,7 +5,10 @@ import RegistrationLink from "../themed-components/registration-link";
 
 export default function Footer() {
 	return (
-		<div className="flex flex-col items-start md:items-center justify-center w-full min-h-fit  z-10 bg-purple-700 pl-4 md:pl-0">
+		<div
+			className="flex flex-col items-start md:items-center justify-center w-full min-h-fit z-10 pl-4 md:pl-0"
+			style={{ background: "linear-gradient(to bottom, #733dbe, #8d45f2, #9e40ee)" }}
+		>
 			<div className="flex flex-col md:flex-row items-start md:items-center justify-center w-11/12 md:w-full h-fit md:h-40 my-1">
 				<div className="w-1/4 md:w-1/6 h-full mr-4">
 					<NextImage src={logo} alt="HackRPI Logo" className="h-full object-contain" />
