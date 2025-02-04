@@ -39,8 +39,9 @@ function EventPage() {
 						<div className="text-2xl mt-10">
 							<h3 className="font-bold text-2xl text-hackrpi-orange">Free Parking</h3>
 							<p className="text-hackrpi-yellow">
-								Parking is available at North Hall Parking Lot, 2-minute walk to Darrin Communications Center</p>
-							<p  className="text-hackrpi-yellow">
+								Parking is available at North Hall Parking Lot, 2-minute walk to Darrin Communications Center
+							</p>
+							<p className="text-hackrpi-yellow">
 								Parking Address:{" "}
 								<a
 									href="https://maps.google.com/?q=North+Lot+Troy+NY+12180"
@@ -52,7 +53,7 @@ function EventPage() {
 								</a>
 							</p>
 						</div>
-						<div className="mt-4 text-xl text-hackrpi-yellow" >
+						<div className="mt-4 text-xl text-hackrpi-yellow">
 							<p>
 								Be sure to check-in with our organizers at the organizing team table in the front of the DCC.
 								Participants will be given a wrist band at check-in which will grant access to food, and activities.
@@ -110,27 +111,28 @@ function EventPage() {
 							</p>
 							<ul className="text-lg list-disc list-inside text-hackrpi-yellow">
 								<li className=" border-b border-gray-400 mb-2">
-									<strong className="text-hackrpi-orange">Practicality & Utility</strong> What problem do you want to solve? How applicable is your hack
-									to problems we&apos;re facing today? Any future plans?
+									<strong className="text-hackrpi-orange">Practicality & Utility</strong> What problem do you want to
+									solve? How applicable is your hack to problems we&apos;re facing today? Any future plans?
 								</li>
 								<li className=" border-b border-gray-400 mb-2">
-									<strong className="text-hackrpi-orange">Creativity:</strong> How original is your hack? Is this a novel idea or something that many
-									people have come across?
+									<strong className="text-hackrpi-orange">Creativity:</strong> How original is your hack? Is this a
+									novel idea or something that many people have come across?
 								</li>
 								<li className=" border-b border-gray-400 mb-2">
-									<strong className="text-hackrpi-orange">Technical Difficulty:</strong> How technically challenging is it? Which technologies did you
-									use?
+									<strong className="text-hackrpi-orange">Technical Difficulty:</strong> How technically challenging is
+									it? Which technologies did you use?
 								</li>
 								<li className=" border-b border-gray-400 mb-2">
-									<strong className="text-hackrpi-orange">Effort:</strong> Did the team genuinely commit time and effort to this product?
+									<strong className="text-hackrpi-orange">Effort:</strong> Did the team genuinely commit time and effort
+									to this product?
 								</li>
 								<li className=" border-b border-gray-400 mb-2">
-									<strong className="text-hackrpi-orange">User Experience:</strong> What impression do you get from the hack? Does it provide for a
-									smooth user experience?
+									<strong className="text-hackrpi-orange">User Experience:</strong> What impression do you get from the
+									hack? Does it provide for a smooth user experience?
 								</li>
 								<li className=" border-b border-gray-400 mb-2">
-									<strong className="text-hackrpi-orange">Collaboration & Learning:</strong> Did the team work well together and split up work? Did they
-									learn from the experience?
+									<strong className="text-hackrpi-orange">Collaboration & Learning:</strong> Did the team work well
+									together and split up work? Did they learn from the experience?
 								</li>
 							</ul>
 						</div>
@@ -151,7 +153,10 @@ function EventPage() {
 								immediately after the submission deadline. You must be present at the event to give a live demo and
 								explain your project to the judges.
 							</p>
-							<HackRPILink href="https://hackrpi2024.devpost.com/" className="text-3xl mt-4 text-center text-hackrpi-orange">
+							<HackRPILink
+								href="https://hackrpi2024.devpost.com/"
+								className="text-3xl mt-4 text-center text-hackrpi-orange"
+							>
 								DEVPOST
 							</HackRPILink>
 						</div>
