@@ -14,7 +14,7 @@ export default function Footer() {
 					<div className=" w-11/12 flex flex-col justify-around items-start h-full">
 						<div className="mb-4">
 							<h2 className="text-2xl tracking-wider font-sans font-thin">
-								<span className="font-bold tracking-normal text-orange-400">HackRPI</span>{" "}
+                <span className="font-bold tracking-normal text-orange-400">HackRPI</span>{" "}
 								<span className="text-amber-400"> Retro V. Modern </span>
 							</h2>
 							<p>Darrin Communications Center @ Rensselaer Polytechnic Institute</p>
@@ -29,6 +29,7 @@ export default function Footer() {
 					</div>
 				</div>
 			</div>
+
 			<div className="flex flex-col items-start md:items-center justify-center w-fit pb-4 mb">
 				<p>
 					Made with <span className="text-red-600">❤️</span> by HackRPI.
