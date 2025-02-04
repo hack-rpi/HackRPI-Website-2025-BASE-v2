@@ -14,14 +14,14 @@ export default function HackRPIButton(props: HackRPIButtonProps) {
 			aria-pressed={props.active}
 			className={`${props.className} ${
 				props.active
-					? "bg-hackrpi-secondary-yellow text-hackrpi-secondary-dark-blue border-hackrpi-secondary-yellow"
-					: "border-hackrpi-secondary-yellow text-white"
-			} flex group  border-2  hover:bg-hackrpi-secondary-yellow hover:text-hackrpi-secondary-dark-blue transition-colors duration-200 font-sans font-medium ring-hackrpi-secondary-yellow relative pr-4`}
+					? "bg-hackrpi-pink text-hackrpi-orange border-hackrpi-pink"
+					: "border-hackrpi-pink text-white"
+			} flex group  border-2  hover:bg-hackrpi-pink hover:text-hackrpi-orange transition-colors duration-200 font-sans font-medium ring-hackrpi-pink relative pr-4`}
 		>
 			<div className="p-2 w-full">{props.children}</div>
 			<svg
-				className={`absolute top-1 right-1 group-hover:fill-hackrpi-secondary-dark-blue ${
-					props.active ? "fill-hackrpi-secondary-dark-blue" : "fill-hackrpi-secondary-yellow"
+				className={`absolute top-1 right-1 group-hover:fill-hackrpi-orange ${
+					props.active ? "fill-hackrpi-orange" : "fill-hackrpi-pink"
 				}  transition-colors duration-200`}
 				xmlns="http://www.w3.org/2000/svg"
 				width="15"
