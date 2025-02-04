@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export default function DesktopNavBar({ links }: { links: NavGroup[] }) {
 	return (
-		<div className="bg-hackrpi-secondary-dark-blue w-full h-16">
+		<div className="bg-hackrpi-dark-blue w-full h-16">
 			<div className="flex justify-center lg:justify-center items-center h-full">
 				<div className="flex items-center justify-center mr-4">
 					<Link href="/" className="w-fit whitespace-nowrap">
