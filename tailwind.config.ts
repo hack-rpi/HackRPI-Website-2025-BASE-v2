@@ -31,6 +31,12 @@ const config: Config = {
 				"subway-yellow": "#f8a13a",
 				"subway-purple": "#b43c96",
 
+				//new theme - additional colors
+				"test-white": "#FFFFFF",
+				"retro-orange": "#fbbb3f",
+				"retro-purple-medium": "#7e34c6",
+				"retro-purple-dark": "#2b2234",
+
 				//NEW COLORS - 2025
 				"hackrpi-light-purple": "#9e40ee", //Primary
 				"hackrpi-dark-purple": "#733dbe", //Primary
@@ -75,6 +81,7 @@ const config: Config = {
 					accent: "#e39036", //Registor now button, for instance
 					neutral: "#d5345d",
 					"base-100": "#292333", //Background color
+					"retro-purple-medium": "#7e34c6",
 				},
 			},
 		],
