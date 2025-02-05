@@ -27,7 +27,7 @@ const config: Config = {
 				"subway-green": "#00a65c",
 				"subway-yellow": "#f8a13a",
 				"subway-purple": "#b43c96",
-        
+
 				//new theme - additional colors
 				"test-white": "#FFFFFF",
 				"retro-orange": "#fbbb3f",
