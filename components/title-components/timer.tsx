@@ -5,8 +5,8 @@ import { type DeltaTime } from "@/utils/timer";
 import { calculateDeltaTime } from "@/utils/timer";
 
 export default function Timer() {
-	const hackathonStart = useMemo(() => new Date(1731168000000), []); // November 9, 2024 11:00:00 AM
-	const hackathonEnd = useMemo(() => new Date(1731254400000), []); // November 10, 2024 11:00:00 AM
+	const hackathonStart = useMemo(() => new Date("2025-11-15T11:00:00"), []); // November 15, 2025 11:00:00 AM
+	const hackathonEnd = useMemo(() => new Date("2025-11-16T11:00:00"), []); // November 16, 2025 11:00:00 AM
 
 	const [DeltaTime, setDeltaTime] = useState<DeltaTime>(
 		Date.now() > hackathonStart.getTime()
@@ -59,7 +59,7 @@ export default function Timer() {
 					{DeltaTime.seconds > 9 ? DeltaTime.seconds : "0" + DeltaTime.seconds}
 				</Circle>
 			</div>
-			<div className="flex items-center justify-between w-full">
+			<div className="flex items-center justify-between w-full font-modern">
 				<Circle bgColor="bg-subway-red" textColor="text-white">
 					M
 				</Circle>
