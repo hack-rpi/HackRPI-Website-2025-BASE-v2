@@ -1,4 +1,4 @@
-import xenia from "../public/team/photos/Xenia_Khusid.jpg";
+import xenia from "../public/team/photos/joerogansauna.jpg";
 import cj from "../public/team/photos/joerogansauna.jpg";
 import matthew from "../public/team/photos/joerogansauna.jpg";
 import shankar from "../public/team/photos/joerogansauna.jpg";
