@@ -27,6 +27,24 @@ export default function DesktopNavBar({ links }: { links: NavGroup[] }) {
 						Sponsor Us
 					</Link>
 					<Link
+						href="/event"
+						className="mx-2 whitespace-nowrap text-lg xl:text-xl bg-[length:0%_2px] bg-no-repeat bg-left-bottom transition-all duration-200 bg-gradient-to-r from-[#e9bc59] to-[#d5345d] hover:bg-[length:100%_2px]"
+					>
+						Event Info
+					</Link>
+					<Link
+						href="/event/schedule"
+						className="mx-2 whitespace-nowrap text-lg xl:text-xl bg-[length:0%_2px] bg-no-repeat bg-left-bottom transition-all duration-200 bg-gradient-to-r from-[#e9bc59] to-[#d5345d] hover:bg-[length:100%_2px]"
+					>
+						Schedule
+					</Link>
+					<Link
+						href="/event/prizes"
+						className="mx-2 whitespace-nowrap text-lg xl:text-xl bg-[length:0%_2px] bg-no-repeat bg-left-bottom transition-all duration-200 bg-gradient-to-r from-[#e9bc59] to-[#d5345d] hover:bg-[length:100%_2px]"
+					>
+						Prizes
+					</Link>
+					<Link
 						href="/2048/leaderboard"
 						className="mx-2 whitespace-nowrap text-lg xl:text-xl bg-[length:0%_2px] bg-no-repeat bg-left-bottom transition-all duration-200 bg-gradient-to-r from-[#e9bc59] to-[#d5345d] hover:bg-[length:100%_2px]"
 					>
