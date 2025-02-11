@@ -13,6 +13,7 @@ const config: Config = {
 			retro: ["Silkscreen", "serif"],
 			modern: ["Audiowide", "serif"],
 			neutral: ["Turret Road", "serif"],
+			pix: ["Pixelify Sans", "sans-serif"],
 		},
 		extend: {
 			colors: {
