@@ -6,7 +6,6 @@ import MlhBanner from "../mlh-banner/mlh-banner";
 
 export const links: NavGroup[] = [
 	{
-		//className="mx-2 whitespace-nowrap text-lg xl:text-xl bg-[length:0%_2px] bg-no-repeat bg-left-bottom transition-all duration-200 bg-gradient-to-r from-[#e9bc59] to-[#e9bc59] hover:bg-[length:100%_2px]"
 		name: "Home",
 		links: [
 			{ href: "/", children: "Home" },
@@ -14,14 +13,6 @@ export const links: NavGroup[] = [
 			{ href: "/#faq", children: "FAQ" },
 			{ href: "/#sponsors", children: "Sponsors" },
 			{ href: "/#team", children: "Team" },
-		],
-	},
-	{
-		name: "Event",
-		links: [
-			{ href: "/event", children: "Event Info" },
-			{ href: "/event/schedule", children: "Schedule" },
-			{ href: "/event/prizes", children: "Prizes" },
 		],
 	},
 	{
