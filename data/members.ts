@@ -125,7 +125,7 @@ export const team: Team = {
 			"team-color": teamColors.Marketing,
 			teamDescription:
 				"The Marketing team is responsible for promoting the hackathon and engaging with participants through social media, fliers, and other marketing materials.",
-		}
+		},
 	],
 	organizers: [
 		{
