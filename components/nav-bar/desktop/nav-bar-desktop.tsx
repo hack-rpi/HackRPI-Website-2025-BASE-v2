@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export default function DesktopNavBar({ links }: { links: NavGroup[] }) {
 	return (
-		<div className="bg-hackrpi-dark-blue w-full h-16">
+		<div className="bg-gradient-to-r from-hackrpi-light-purple via-hackrpi-pink to-hackrpi-light-purple w-full h-16">
 			<div className="flex justify-center lg:justify-center items-center h-full">
 				<div className="flex items-center justify-center mr-4">
 					<Link href="/" className="w-fit whitespace-nowrap">
@@ -22,19 +22,19 @@ export default function DesktopNavBar({ links }: { links: NavGroup[] }) {
 					))}
 					<Link
 						href="/sponsor-us"
-						className="mx-2 whitespace-nowrap text-lg xl:text-xl bg-[length:0%_2px] bg-no-repeat bg-left-bottom transition-all duration-200 bg-gradient-to-r from-hackrpi-primary-blue to-hackrpi-primary-blue hover:bg-[length:100%_2px]"
+						className="mx-2 whitespace-nowrap text-lg xl:text-xl bg-[length:0%_2px] bg-no-repeat bg-left-bottom transition-all duration-200 bg-gradient-to-r from-hackrpi-yellow to-hackrpi-yellow hover:bg-[length:100%_2px]"
 					>
 						Sponsor Us
 					</Link>
 					<Link
 						href="/2048/leaderboard"
-						className="mx-2 whitespace-nowrap text-lg xl:text-xl bg-[length:0%_2px] bg-no-repeat bg-left-bottom transition-all duration-200 bg-gradient-to-r from-hackrpi-primary-blue to-hackrpi-primary-blue hover:bg-[length:100%_2px]"
+						className="mx-2 whitespace-nowrap text-lg xl:text-xl bg-[length:0%_2px] bg-no-repeat bg-left-bottom transition-all duration-200 bg-gradient-to-r from-hackrpi-yellow to-hackrpi-yellow hover:bg-[length:100%_2px]"
 					>
 						2048 Leaderboard
 					</Link>
 					<Link
 						href="https://static.mlh.io/docs/mlh-code-of-conduct.pdf"
-						className="mx-2 whitespace-nowrap text-lg xl:text-xl bg-[length:0%_2px] bg-no-repeat bg-left-bottom transition-all duration-200 bg-gradient-to-r from-hackrpi-primary-blue to-hackrpi-primary-blue hover:bg-[length:100%_2px]"
+						className="mx-2 whitespace-nowrap text-lg xl:text-xl bg-[length:0%_2px] bg-no-repeat bg-left-bottom transition-all duration-200 bg-gradient-to-r from-hackrpi-yellow to-hackrpi-yellow hover:bg-[length:100%_2px]"
 						target="_blank"
 					>
 						Code of Conduct

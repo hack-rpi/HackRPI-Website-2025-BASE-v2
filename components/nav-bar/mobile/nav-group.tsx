@@ -20,8 +20,8 @@ export default function NavGroup({
 		>
 			<div
 				className={`relative w-11/12 flex items-center justify-between h-12 text-2xl bg-base-100 z-[5] rounded-t pl-2 collapse-arrow ${
-					clicked ? "bg-[length:100%_4px] bg-base-200" : "bg-base-100 bg-[length:0%_4px]"
-				} bg-gradient-to-r  bg-no-repeat from-hackrpi-primary-blue to-hackrpi-primary-blue bg-left-bottom motion-safe:hover:bg-[length:100%_4px] transition-all duration-200`}
+					clicked ? "bg-[length:100%_4px] hackrpi-dark-blue" : "bg-base-100 bg-[length:0%_4px]"
+				} bg-gradient-to-r  bg-no-repeat from-hackrpi-light-purple to-hackrpi-pink bg-left-bottom motion-safe:hover:bg-[length:100%_4px] transition-all duration-200`}
 			>
 				{name}
 				<svg
