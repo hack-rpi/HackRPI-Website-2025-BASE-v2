@@ -31,7 +31,6 @@ export default function InteractiveNavigationMap() {
 						href={link.href}
 						className="font-bold font-retro flex items-center group mb-3 lg:mb-6 xl:mb-8 2xl:mb-10"
 					>
-
 						<span className="">{link.children}</span>
 					</NextLink>
 				))}
@@ -41,7 +40,6 @@ export default function InteractiveNavigationMap() {
 						href={link.href}
 						className="font-bold flex font-modern items-center group mb-3 lg:mb-6 xl:mb-8 2xl:mb-10"
 					>
-
 						<span className="">{link.children}</span>
 					</NextLink>
 				))}
@@ -49,4 +47,3 @@ export default function InteractiveNavigationMap() {
 		</div>
 	);
 }
-
