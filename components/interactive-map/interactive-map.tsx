@@ -7,7 +7,7 @@ const links: Link[] = [
 	{ href: "/event/schedule", children: "Schedule" },
 	{ href: "/event/prizes", children: "Prizes" },
 	{ href: "/resources", children: "Resources" },
-	{ href: "/last-year", children: "HackRPI X" },
+	{ href: "/last-year", children: "HackRPI XII" },
 	{ href: "/sponsor-us", children: "Sponsor Us" },
 ];
 const firsthalflink: Link[] = [
@@ -49,6 +49,4 @@ export default function InteractiveNavigationMap() {
 		</div>
 	);
 }
-
-
 

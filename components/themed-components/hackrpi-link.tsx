@@ -12,7 +12,7 @@ export default function HackRPILink({
 	return (
 		<NextLink
 			href={href}
-			className={`${className} group border-hackrpi-pink border-2 text-white hover:bg-hackrpi-pink hover:text-hackrpi-yellow transition-colors duration-200 font-sans font-medium relative `}
+			className={`${className} group border-hackrpi-pink border-2 text-hackrpi-orange hover:bg-hackrpi-pink hover:text-hackrpi-yellow transition-colors duration-200 font-pix font-medium relative text-3xl`}
 		>
 			{children}
 			<svg

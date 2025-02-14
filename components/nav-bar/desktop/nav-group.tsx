@@ -7,7 +7,7 @@ export default function NavGroup({ name, links }: { name: string; links: Link[] 
 			<div
 				tabIndex={0}
 				role="button"
-				className="text-lg xl:text-xl bg-[length:0%_2px] bg-no-repeat bg-left-bottom transition-all duration-200 bg-gradient-to-r from-hackrpi-primary-blue to-hackrpi-primary-blue hover:bg-[length:100%_2px] focus:bg-[length:100%_4px] "
+				className="text-lg xl:text-xl bg-[length:0%_2px] bg-no-repeat bg-left-bottom transition-all duration-200 bg-gradient-to-r from-[#e9bc59] to-[#d5345d] hover:bg-[length:100%_2px] focus:bg-[length:100%_4px] "
 			>
 				{name}
 			</div>
