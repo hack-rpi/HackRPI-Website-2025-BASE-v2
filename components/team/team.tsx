@@ -28,9 +28,19 @@ export default function TeamComponent() {
 		setDirectorsAnim((prev) => {
 			if (prev.hover) return prev;
 			if (prev.offset <= -110) {
-				return { directors: [...prev.directors.slice(1), prev.directors[0]], offset: 5, hover: prev.hover,time: Date.now()};
+				return {
+					directors: [...prev.directors.slice(1), prev.directors[0]],
+					offset: 5,
+					hover: prev.hover,
+					time: Date.now(),
+				};
 			}
-			return { directors: prev.directors, offset: prev.offset - ((Date.now() - prev.time) *DIRECTOR_DX_PERCENT), hover: prev.hover ,time: Date.now()};
+			return {
+				directors: prev.directors,
+				offset: prev.offset - (Date.now() - prev.time) * DIRECTOR_DX_PERCENT,
+				hover: prev.hover,
+				time: Date.now(),
+			};
 		});
 		requestAnimationFrame(animate_directors);
 	}, []);
@@ -39,9 +49,19 @@ export default function TeamComponent() {
 		setOrganizersAnim((prev) => {
 			if (prev.hover) return prev;
 			if (prev.offset <= -111.5) {
-				return { organizers: [...prev.organizers.slice(1), prev.organizers[0]], offset: 11.5, hover: prev.hover,time: Date.now()};
+				return {
+					organizers: [...prev.organizers.slice(1), prev.organizers[0]],
+					offset: 11.5,
+					hover: prev.hover,
+					time: Date.now(),
+				};
 			}
-			return { organizers: prev.organizers, offset: prev.offset - ((Date.now() - prev.time) *ORGANIZER_DX_PERCENT), hover: prev.hover,time: Date.now()};
+			return {
+				organizers: prev.organizers,
+				offset: prev.offset - (Date.now() - prev.time) * ORGANIZER_DX_PERCENT,
+				hover: prev.hover,
+				time: Date.now(),
+			};
 		});
 		requestAnimationFrame(animate_organizers);
 	}, []);
@@ -93,12 +113,12 @@ export default function TeamComponent() {
 					className="w-full h-fit overflow-hidden flex text-nowrap py-4 text-white"
 					onMouseEnter={() => {
 						setDirectorsAnim((prev) => {
-							return { directors: prev.directors, offset: prev.offset, hover: true ,time: Date.now()};
+							return { directors: prev.directors, offset: prev.offset, hover: true, time: Date.now() };
 						});
 					}}
 					onMouseLeave={() => {
 						setDirectorsAnim((prev) => {
-							return { directors: prev.directors, offset: prev.offset, hover: false ,time: Date.now()};
+							return { directors: prev.directors, offset: prev.offset, hover: false, time: Date.now() };
 						});
 					}}
 				>
@@ -111,12 +131,12 @@ export default function TeamComponent() {
 					className="w-full h-fit overflow-hidden flex text-nowrap py-4"
 					onMouseEnter={() => {
 						setOrganizersAnim((prev) => {
-							return { organizers: prev.organizers, offset: prev.offset, hover: true ,time: Date.now()};
+							return { organizers: prev.organizers, offset: prev.offset, hover: true, time: Date.now() };
 						});
 					}}
 					onMouseLeave={() => {
 						setOrganizersAnim((prev) => {
-							return { organizers: prev.organizers, offset: prev.offset, hover: false ,time: Date.now()};
+							return { organizers: prev.organizers, offset: prev.offset, hover: false, time: Date.now() };
 						});
 					}}
 				>
