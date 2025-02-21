@@ -12,23 +12,35 @@ export default function TeamComponent() {
 		directors: team.directors,
 		offset: 0,
 		hover: false,
+		time: Date.now(),
 	});
 	const [organizersAnim, setOrganizersAnim] = useState({
 		organizers: team.organizers,
 		offset: 0,
 		hover: false,
+		time: Date.now(),
 	});
 
-	const DIRECTOR_DX_PERCENT = 0.5;
-	const ORGANIZER_DX_PERCENT = 1.25;
+	const DIRECTOR_DX_PERCENT = 0.03;
+	const ORGANIZER_DX_PERCENT = 0.07;
 
 	const animate_directors = useCallback(() => {
 		setDirectorsAnim((prev) => {
 			if (prev.hover) return prev;
 			if (prev.offset <= -110) {
-				return { directors: [...prev.directors.slice(1), prev.directors[0]], offset: 5, hover: prev.hover };
+				return {
+					directors: [...prev.directors.slice(1), prev.directors[0]],
+					offset: 5,
+					hover: prev.hover,
+					time: Date.now(),
+				};
 			}
-			return { directors: prev.directors, offset: prev.offset - DIRECTOR_DX_PERCENT, hover: prev.hover };
+			return {
+				directors: prev.directors,
+				offset: prev.offset - (Date.now() - prev.time) * DIRECTOR_DX_PERCENT,
+				hover: prev.hover,
+				time: Date.now(),
+			};
 		});
 		requestAnimationFrame(animate_directors);
 	}, []);
@@ -37,9 +49,19 @@ export default function TeamComponent() {
 		setOrganizersAnim((prev) => {
 			if (prev.hover) return prev;
 			if (prev.offset <= -111.5) {
-				return { organizers: [...prev.organizers.slice(1), prev.organizers[0]], offset: 11.5, hover: prev.hover };
+				return {
+					organizers: [...prev.organizers.slice(1), prev.organizers[0]],
+					offset: 11.5,
+					hover: prev.hover,
+					time: Date.now(),
+				};
 			}
-			return { organizers: prev.organizers, offset: prev.offset - ORGANIZER_DX_PERCENT, hover: prev.hover };
+			return {
+				organizers: prev.organizers,
+				offset: prev.offset - (Date.now() - prev.time) * ORGANIZER_DX_PERCENT,
+				hover: prev.hover,
+				time: Date.now(),
+			};
 		});
 		requestAnimationFrame(animate_organizers);
 	}, []);
@@ -91,12 +113,12 @@ export default function TeamComponent() {
 					className="w-full h-fit overflow-hidden flex text-nowrap py-4 text-white"
 					onMouseEnter={() => {
 						setDirectorsAnim((prev) => {
-							return { directors: prev.directors, offset: prev.offset, hover: true };
+							return { directors: prev.directors, offset: prev.offset, hover: true, time: Date.now() };
 						});
 					}}
 					onMouseLeave={() => {
 						setDirectorsAnim((prev) => {
-							return { directors: prev.directors, offset: prev.offset, hover: false };
+							return { directors: prev.directors, offset: prev.offset, hover: false, time: Date.now() };
 						});
 					}}
 				>
@@ -109,12 +131,12 @@ export default function TeamComponent() {
 					className="w-full h-fit overflow-hidden flex text-nowrap py-4"
 					onMouseEnter={() => {
 						setOrganizersAnim((prev) => {
-							return { organizers: prev.organizers, offset: prev.offset, hover: true };
+							return { organizers: prev.organizers, offset: prev.offset, hover: true, time: Date.now() };
 						});
 					}}
 					onMouseLeave={() => {
 						setOrganizersAnim((prev) => {
-							return { organizers: prev.organizers, offset: prev.offset, hover: false };
+							return { organizers: prev.organizers, offset: prev.offset, hover: false, time: Date.now() };
 						});
 					}}
 				>
