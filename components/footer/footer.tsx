@@ -7,7 +7,7 @@ export default function Footer() {
 	return (
 		<div
 			className="flex flex-col items-start md:items-center justify-center w-full min-h-fit z-10 pl-4 md:pl-0"
-			style={{ background: "linear-gradient(to bottom, #733dbe, #8d45f2, #9e40ee)" }}
+			style={{ background: "linear-gradient(to bottom, #9e40ee, #e39036, #d5345d)" }}
 		>
 			<div className="flex flex-col md:flex-row items-start md:items-center justify-center w-11/12 md:w-full h-fit md:h-40 my-1">
 				<div className="w-1/4 md:w-1/6 h-full mr-4">
@@ -15,8 +15,8 @@ export default function Footer() {
 				</div>
 				<div className="w-full md:w-2/6 h-full mr-1 my-4">
 					<div className=" w-11/12 flex flex-col justify-around items-start h-full">
-						<div className="mb-4">
-							<h2 className="text-2xl tracking-wider font-sans font-thin">
+						<div className="mb-4 text-2xl font-bold font-sans">
+							<h2 className="text-4xl tracking-wider font-sans font-thin">
 								<span className="font-bold tracking-normal text-orange-400 font-neutral">HackRPI</span>{" "}
 								<span className="text-amber-400 font-retro"> Retro </span>{" "}
 								<span className="text-amber-400 font-neutral font-bold"> V. </span>{" "}
