@@ -126,7 +126,7 @@ const FAQPage = () => {
 							checked={expandedIndex === index}
 							onChange={() => handleToggle(index)}
 						/>
-						<div className="collapse-title font-medium text-2xl text-retro-orange">{faq.title}</div>
+						<div className="collapse-title font-test font-medium text-2xl text-retro-orange">{faq.title}</div>
 						<div className="collapse-content">{faq.content}</div>
 					</div>
 				))}

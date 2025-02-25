@@ -1,6 +1,12 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+/*test font*/
+@import url('https://fonts.googleapis.com/css2?family=Darumadrop+One&display=swap');
+
+body {
+	font-family: "Darumadrop", sans-serif;
+  }
 
 /* attempt to modify caret size */
 .custom-arrow .collapse-title::before {

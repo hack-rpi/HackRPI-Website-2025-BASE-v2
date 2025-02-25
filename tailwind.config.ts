@@ -10,6 +10,7 @@ const config: Config = {
 	theme: {
 		fontFamily: {
 			sans: ["Helvetica", "Arial", "sans-serif"],
+			test: ["Darumadrop", "sans-serif"],
 		},
 		extend: {
 			colors: {
