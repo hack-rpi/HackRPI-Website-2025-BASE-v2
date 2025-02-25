@@ -110,7 +110,7 @@ const FAQPage = () => {
 			id="faq"
 		>
 			<div className="flex w-full desktop:w-2/3">
-				<h1 className="font-modern text-white text-left text-4xl text-shadow-md pb-4">FAQQs</h1>
+				<h1 className="font-modern text-white text-left text-4xl text-shadow-md pb-4">FAQs</h1>
 			</div>
 			<div className="w-full desktop:w-2/3">
 				{faqs.map((faq, index) => (
@@ -126,8 +126,8 @@ const FAQPage = () => {
 							checked={expandedIndex === index}
 							onChange={() => handleToggle(index)}
 						/>
-						<div className="collapse-title font-test font-medium text-2xl text-retro-orange">{faq.title}</div>
-						<div className="collapse-content">{faq.content}</div>
+						<div className="font-modern collapse-title font-bold text-2xl text-retro-orange">{faq.title}</div>
+						<div className="font-neutral collapse-content">{faq.content}</div>
 					</div>
 				))}
 			</div>
