@@ -1,7 +1,8 @@
 import NextLink from "next/link";
-import { Link } from "@/data/nav-bar-links";
+import { Link as lin } from "@/data/nav-bar-links";
+import Link from "next/link";
 
-export default function NavGroup({ name, links }: { name: string; links: Link[] }) {
+export default function NavGroup({ name, links }: { name: string; links: lin[] }) {
 	return (
 		<div className="dropdown dropdown-hover mx-2 whitespace-nowrap">
 			<div
@@ -9,7 +10,7 @@ export default function NavGroup({ name, links }: { name: string; links: Link[] 
 				role="button"
 				className="text-lg xl:text-xl bg-[length:0%_2px] bg-no-repeat bg-left-bottom transition-all duration-200 bg-gradient-to-r from-hackrpi-yellow to-hackrpi-yellow hover:bg-[length:100%_2px] focus:bg-[length:100%_4px] "
 			>
-				{name}
+				<Link href={links[0].href}>{name}</Link>
 			</div>
 			<ul
 				tabIndex={0}
