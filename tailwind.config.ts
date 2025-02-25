@@ -16,10 +16,10 @@ const config: Config = {
 		},
 		extend: {
 			colors: {
-				"hackrpi-primary-blue": "#74b7ef",
+				"hackrpi-primary-blue": "#74b7ef", //DaisyUI Primary - Now dark purple
 				"hackrpi-primary-dark-green": "#264e33",
 				"hackrpi-primary-light-green": "#88b63a",
-				"hackrpi-secondary-grey": "#efefef",
+				"hackrpi-secondary-grey": "#efefef", //Daisy UI Neutral - Now light purple?
 				"hackrpi-secondary-light-blue": "#4a6277",
 				"hackrpi-secondary-dark-blue": "#27303b",
 				"hackrpi-secondary-dark-green": "#27303b",
@@ -30,11 +30,21 @@ const config: Config = {
 				"subway-green": "#00a65c",
 				"subway-yellow": "#f8a13a",
 				"subway-purple": "#b43c96",
-				//new theme
+
+				//new theme - additional colors
 				"test-white": "#FFFFFF",
 				"retro-orange": "#fbbb3f",
 				"retro-purple-medium": "#7e34c6",
 				"retro-purple-dark": "#2b2234",
+
+				//NEW COLORS - 2025
+				"hackrpi-light-purple": "#9e40ee", //Primary
+				"hackrpi-dark-purple": "#733dbe", //Primary
+				"hackrpi-orange": "#e39036", //Secondary
+				"hackrpi-yellow": "#e9bc59", //Secondary
+				"hackrpi-pink": "#d5345d", //Secondary
+				"hackrpi-dark-blue": "#292333", //Background color
+
 				gold: "#ffd700",
 				silver: "#C0C0C0",
 				bronze: "#cd7f32",
@@ -66,11 +76,11 @@ const config: Config = {
 		themes: [
 			{
 				hackrpi: {
-					primary: "#74b7ef",
-					secondary: "#88b63a",
-					accent: "#edd559",
-					neutral: "#efefef",
-					"base-100": "#27303b",
+					primary: "#733dbe", //Shows up in footer for example
+					secondary: "#9e40ee", //Also background color
+					accent: "#e39036", //Registor now button, for instance
+					neutral: "#d5345d",
+					"base-100": "#292333", //Background color
 					"retro-purple-medium": "#7e34c6",
 				},
 			},
