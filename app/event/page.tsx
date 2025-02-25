@@ -17,10 +17,10 @@ function EventPage() {
 			<div className="justify-center flex w-full flex-col  bg-hackrpi-dark-blue pt-24 desktop:pt-16">
 				<div className="px-4 flex flex-wrap items-start justify-center mb-8">
 					<div className="w-full desktop:w-1/2 p-4 min-w-[350px] sm:min-w-[450px]">
-						<h1 className="font-semibold text-4xl text-hackrpi-orange mb-4 font-neutral">Location</h1>
+						<h1 className="font-semibold text-5xl text-hackrpi-orange mb-4 font-neutral">Location:</h1>
 						<div className="text-2xl mb-10">
-							<h3 className="text-hackrpi-orange text-2xl font-bold">📍 Darrin Communications Center</h3>
-							<h3 className="text-hackrpi-yellow">Rensselaer Polytechnic Institute</h3>
+							<h3 className="text-hackrpi-orange text-3xl font-bold">📍 Darrin Communications Center 📍</h3>
+							<h3 className="text-hackrpi-yellow font-bold"> Rensselaer Polytechnic Institute</h3>
 							<p className="text-hackrpi-yellow">
 								Address:{" "}
 								<a
