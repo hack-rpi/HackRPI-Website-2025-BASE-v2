@@ -27,7 +27,7 @@ export default function Footer() {
 						</div>
 					</div>
 				</div>
-				<div className="w-3/4 md:w-1/3 md:border-l-2 border-hackrpi-pink h-full">
+				<div className="w-3/4 md:w-1/3 md:border-l-2 border-hackrpi-dark-blue h-full">
 					<div className="w-11/12 h-full flex flex-col items-start justify-around md:ml-4">
 						<RegistrationLink className="text-xl mb-4" />
 						<SocialLinks />
