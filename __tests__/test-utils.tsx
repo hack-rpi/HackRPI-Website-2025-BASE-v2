@@ -9,7 +9,7 @@ import { render, RenderOptions, RenderResult, screen, within } from "@testing-li
 import userEvent from "@testing-library/user-event";
 import { useSearchParams, useParams, usePathname, useRouter } from "next/navigation";
 
-// Mock Next.js router - this is imported in the jest.setup.js file
+// Mock Next.js router
 export const mockRouterPush = jest.fn();
 export const mockRouterPrefetch = jest.fn();
 export const mockRouterReplace = jest.fn();
@@ -18,7 +18,7 @@ export const mockRouterBack = jest.fn();
 export const mockRouterForward = jest.fn();
 export const mockScrollIntoView = jest.fn();
 
-// 2025 best practice: Provide a theme context if your app uses themes
+// Advanced Theme context provider for testing
 export const ThemeProvider = ({ children, theme = "light" }: { children: React.ReactNode; theme?: string }) => {
 	return (
 		<div data-theme={theme} data-testid="theme-provider">
@@ -27,7 +27,7 @@ export const ThemeProvider = ({ children, theme = "light" }: { children: React.R
 	);
 };
 
-// Mock Next.js navigation hooks - 2025 updated approach
+// Mock Next.js navigation hooks with improved typings
 jest.mock("next/navigation", () => ({
 	useRouter: jest.fn(() => ({
 		push: mockRouterPush,
@@ -43,7 +43,7 @@ jest.mock("next/navigation", () => ({
 	useParams: jest.fn(() => ({})),
 }));
 
-// Extended render options interface with custom wrapper options
+// Extended render options interface
 interface ExtendedRenderOptions extends Omit<RenderOptions, "wrapper"> {
 	route?: string;
 	withRouter?: boolean;
@@ -51,23 +51,31 @@ interface ExtendedRenderOptions extends Omit<RenderOptions, "wrapper"> {
 	themeValue?: string;
 	params?: Record<string, string>;
 	searchParams?: URLSearchParams;
+	// Add fakeTimers option to control Jest's fake timers during rendering
+	useFakeTimers?: boolean;
 }
 
 /**
- * Custom render function that provides common test providers
- * This is based on the 2025 best practice of having a single render function
- * that sets up all providers needed for tests
+ * Custom render function with comprehensive provider setup
  */
 export function renderWithProviders(
 	ui: ReactElement,
 	options: ExtendedRenderOptions = {},
 ): RenderResult & { user: ReturnType<typeof userEvent.setup> } {
-	// Setup user event with realistic delay and pointer options
-	// 2025 best practice: Configure userEvent with more realistic settings
+	// Setup fake timers before user events if requested
+	if (options.useFakeTimers && typeof jest.useFakeTimers === 'function') {
+		jest.useFakeTimers();
+	}
+
+	// Setup user event with optimal settings for test reliability
 	const user = userEvent.setup({
-		delay: 10,
-		pointerEventsCheck: 0,
+		delay: null, // No delay in tests for faster execution
+		pointerEventsCheck: 0, 
 		advanceTimers: jest.advanceTimersByTime,
+		// Configure skipHover to true to avoid hover-related issues in tests
+		skipHover: true,
+		// Skip auto-waiting which can cause test flakiness
+		skipAutoClose: true
 	});
 
 	// Set up route-specific mocks if provided
@@ -83,7 +91,7 @@ export function renderWithProviders(
 		(useSearchParams as jest.Mock).mockReturnValue(options.searchParams);
 	}
 
-	// Create wrapper with all required providers - 2025 improvement for better context support
+	// Comprehensive wrapper with theme and other potential providers
 	const AllTheProviders = ({ children }: { children: React.ReactNode }) => {
 		let wrapped = <>{children}</>;
 
@@ -102,11 +110,13 @@ export function renderWithProviders(
 }
 
 /**
- * Reset all mocks between tests
- * Call this in beforeEach for consistent test isolation
+ * Reset all mocks between tests with better cleanup
  */
 export function resetAllMocks() {
 	jest.clearAllMocks();
+	jest.clearAllTimers();
+	
+	// Reset router mocks
 	mockRouterPush.mockClear();
 	mockRouterPrefetch.mockClear();
 	mockRouterReplace.mockClear();
@@ -115,15 +125,23 @@ export function resetAllMocks() {
 	mockRouterForward.mockClear();
 	mockScrollIntoView.mockClear();
 
-	// Reset Next.js navigation hooks to default values
+	// Reset Next.js navigation hooks
 	(usePathname as jest.Mock).mockReturnValue("/");
 	(useSearchParams as jest.Mock).mockReturnValue(new URLSearchParams());
 	(useParams as jest.Mock).mockReturnValue({});
+	(useRouter as jest.Mock).mockImplementation(() => ({
+		push: mockRouterPush,
+		prefetch: mockRouterPrefetch,
+		replace: mockRouterReplace,
+		refresh: mockRouterRefresh,
+		back: mockRouterBack,
+		forward: mockRouterForward,
+		pathname: "/",
+	}));
 }
 
 /**
- * Configure document.getElementById mocks for Home page elements
- * This is a common pattern needed in many tests
+ * Configure document.getElementById mocks with better element simulation
  */
 export function mockHomePageElements() {
 	document.getElementById = jest.fn((id) => {
@@ -132,16 +150,37 @@ export function mockHomePageElements() {
 		const element = document.createElement("div");
 		element.id = id;
 
+		// More realistic element property simulation
 		Object.defineProperties(element, {
 			offsetTop: { configurable: true, value: 100 },
 			offsetHeight: { configurable: true, value: 200 },
-			scrollIntoView: { configurable: true, value: mockScrollIntoView },
+			offsetWidth: { configurable: true, value: 800 },
+			clientHeight: { configurable: true, value: 200 },
+			clientWidth: { configurable: true, value: 800 },
+			scrollIntoView: { 
+				configurable: true, 
+				value: mockScrollIntoView 
+			},
+			// Add getBoundingClientRect for more accurate element positioning
+			getBoundingClientRect: {
+				configurable: true,
+				value: () => ({
+					top: 100,
+					left: 0,
+					right: 800,
+					bottom: 300,
+					width: 800,
+					height: 200,
+					x: 0,
+					y: 100
+				})
+			}
 		});
 
 		return element;
 	});
 
-	// Mock window.scrollY for scroll tests
+	// Mock window.scrollY for scroll tests with a default value
 	Object.defineProperty(window, "scrollY", {
 		writable: true,
 		value: 500,
@@ -149,43 +188,81 @@ export function mockHomePageElements() {
 }
 
 /**
- * Simulate window resize to test responsive behavior
- * @param width The window width to simulate
- * @param height Optional height to simulate
+ * Simulate window resize with improved event dispatching
  */
-export function setWindowDimensions(width: number, height?: number) {
+export function setWindowDimensions(width: number, height: number = 800) {
+	// Store original dimensions
+	const originalWidth = window.innerWidth;
+	const originalHeight = window.innerHeight;
+	
+	// Set new dimensions
 	Object.defineProperty(window, "innerWidth", {
 		writable: true,
 		value: width,
 	});
-	if (height) {
+	Object.defineProperty(window, "innerHeight", {
+		writable: true,
+		value: height,
+	});
+	
+	// Create resize event with proper event initialization
+	const resizeEvent = new Event('resize');
+	window.dispatchEvent(resizeEvent);
+	
+	// Return function to restore original dimensions
+	return () => {
+		Object.defineProperty(window, "innerWidth", {
+			writable: true,
+			value: originalWidth,
+		});
 		Object.defineProperty(window, "innerHeight", {
 			writable: true,
-			value: height,
+			value: originalHeight,
 		});
-	}
-	window.dispatchEvent(new Event("resize"));
+		window.dispatchEvent(new Event('resize'));
+	};
 }
 
 /**
- * Mock a form submission event
- * 2025 Best Practice: Include more form event properties
+ * Mock a form submission event with comprehensive event properties
  */
-export function mockFormEvent() {
-	return {
+export function mockFormEvent(formData?: Record<string, any>) {
+	const mockEvent = {
 		preventDefault: jest.fn(),
 		stopPropagation: jest.fn(),
 		target: {
 			checkValidity: jest.fn().mockReturnValue(true),
 			reportValidity: jest.fn(),
 			reset: jest.fn(),
+			elements: {},
+			...formData
 		},
+		// Add currentTarget for form event consistency
+		currentTarget: {
+			checkValidity: jest.fn().mockReturnValue(true),
+			reportValidity: jest.fn(),
+			reset: jest.fn(),
+			elements: {},
+			...formData
+		}
 	};
+	
+	// Add formData support for modern forms
+	if (formData) {
+		mockEvent.target.elements = Object.fromEntries(
+			Object.entries(formData).map(([key, value]) => [
+				key, 
+				{ value, name: key, id: key }
+			])
+		);
+		mockEvent.currentTarget.elements = mockEvent.target.elements;
+	}
+	
+	return mockEvent;
 }
 
 /**
- * Helper for creating accessible element mocks with proper ARIA roles
- * 2025 Best Practice: Enhanced accessibility testing support
+ * Helper for creating consistent accessible element mocks
  */
 export const createMockElement = {
 	navigation: (props: any = {}) => (
@@ -237,26 +314,58 @@ export const createMockElement = {
 };
 
 /**
- * 2025 Best Practice: Helper for testing accessibility
- * Performs basic accessibility checks on the given element
+ * Comprehensive accessibility testing helper
  */
 export function checkAccessibility(element: HTMLElement) {
 	// Check for common accessibility issues
+	
+	// All interactive elements should have accessible names
 	const buttons = within(element).queryAllByRole("button");
 	buttons.forEach((button) => {
-		expect(button).toHaveAttribute("aria-label");
+		expect(button).toHaveAccessibleName();
 	});
 
 	const links = within(element).queryAllByRole("link");
 	links.forEach((link) => {
-		expect(link).toHaveAttribute("aria-label");
+		expect(link).toHaveAccessibleName();
 	});
 
+	const inputs = within(element).queryAllByRole("textbox");
+	inputs.forEach((input) => {
+		expect(input).toHaveAccessibleName();
+	});
+
+	// All images should have alt text
 	const images = within(element).queryAllByRole("img");
 	images.forEach((img) => {
 		expect(img).toHaveAttribute("alt");
 	});
+	
+	// All form elements should have associated labels
+	const formElements = [
+		...within(element).queryAllByRole("textbox"),
+		...within(element).queryAllByRole("checkbox"),
+		...within(element).queryAllByRole("radio"),
+		...within(element).queryAllByRole("combobox"),
+	];
+	
+	formElements.forEach((formElement) => {
+		expect(formElement).toHaveAccessibleName();
+	});
+	
+	// All headings should be in a logical order
+	const headings = within(element).queryAllByRole("heading");
+	if (headings.length > 1) {
+		let previousLevel = 0;
+		headings.forEach((heading) => {
+			const level = parseInt(heading.tagName.charAt(1));
+			// Heading levels should only increase by one
+			if (previousLevel > 0) {
+				expect(level - previousLevel).toBeLessThanOrEqual(1);
+			}
+			previousLevel = level;
+		});
+	}
 }
 
-// Export default empty object to prevent Jest from treating this as a test file
 export default {};

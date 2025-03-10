@@ -1,358 +1,583 @@
-import { get_leaderboard, create_leaderboard_entry, fetchEvents, is_game_ready } from "@/app/actions";
+// Mock these modules before importing the functions
 import { generateClient } from "aws-amplify/api";
 import * as Auth from "@aws-amplify/auth";
+import { Profanity } from "@2toad/profanity";
 
-// 2025 Best Practice: More explicit mocking with proper types
-jest.mock("@aws-amplify/auth", () => ({
-	fetchAuthSession: jest.fn(),
-}));
+// Remove this import as we'll move it below after setting up mocks
+// import { get_leaderboard, create_leaderboard_entry, fetchEvents, is_game_ready, LeaderboardEntry } from "@/app/actions";
 
-jest.mock("aws-amplify/api", () => ({
-	generateClient: jest.fn(),
-}));
-
-// 2025 Best Practice: Type the mock functions properly
-const mockListByScore = jest.fn();
-const mockCreate = jest.fn();
-const mockList = jest.fn();
-
-// 2025 Best Practice: More realistic mock implementation
-(generateClient as jest.Mock).mockImplementation(() => ({
-	models: {
-		Leaderboard: {
-			listByScore: mockListByScore,
-			create: mockCreate,
-		},
-		event: {
-			list: mockList,
-		},
-	},
-}));
-
-// Define types for mocked responses to avoid linter errors
-type LeaderboardEntry = {
-	id: string;
-	username: string;
-	score: number;
-	year: number;
-};
-
-type LeaderboardResponse = {
-	status: number;
-	message: string;
-	entry?: LeaderboardEntry;
-};
-
-// Mock the actions module directly - 2025 Best Practice: Proper spying approach
-jest.mock("@/app/actions", () => {
-	// Use actual implementation for type safety but mock the functions
-	const originalModule = jest.requireActual("@/app/actions");
-
+// This object will be defined inline in the mock instead of referencing mockClient
+jest.mock("aws-amplify/api", () => {
+	// Declare mock functions
+	const mockListByScore = jest.fn();
+	const mockCreate = jest.fn();
+	const mockList = jest.fn();
+	
+	// Return the mock implementation
 	return {
-		...originalModule,
-		get_leaderboard: jest.fn(),
-		create_leaderboard_entry: jest.fn(),
-		fetchEvents: jest.fn(),
-		is_game_ready: jest.fn(),
+		generateClient: jest.fn().mockReturnValue({
+			models: {
+				Leaderboard: {
+					listByScore: mockListByScore,
+					create: mockCreate,
+				},
+				event: {
+					list: mockList,
+				}
+			}
+		})
 	};
+});
+
+// Extract the mocked functions after mocking
+const mockGenerateClient = generateClient as jest.MockedFunction<typeof generateClient>;
+const mockClient = mockGenerateClient() as any;
+const mockListByScore = mockClient.models.Leaderboard.listByScore;
+const mockCreate = mockClient.models.Leaderboard.create;
+const mockList = mockClient.models.event.list;
+
+// Mock Auth module
+jest.mock("@aws-amplify/auth", () => ({
+	fetchAuthSession: jest.fn().mockResolvedValue({
+		tokens: {
+			accessToken: {
+				payload: {}
+			}
+		}
+	}),
+}));
+
+// Mock Profanity module
+jest.mock("@2toad/profanity", () => {
+	return {
+		Profanity: jest.fn().mockImplementation(() => ({
+			addWords: jest.fn(),
+			exists: jest.fn().mockImplementation(word => {
+				// Mock profanity detection for testing
+				return word.includes('badword');
+			})
+		}))
+	};
+});
+
+// Now import the functions being tested AFTER all mocks are set up
+import { get_leaderboard, create_leaderboard_entry, fetchEvents, is_game_ready, LeaderboardEntry } from "@/app/actions";
+
+// Define mock generators for consistent test data
+const generateMockLeaderboardEntry = (
+	id: string, 
+	username: string, 
+	score: number, 
+	year: number = 2024
+): LeaderboardEntry => ({
+	id,
+	username,
+	score,
+	year
+});
+
+const generateMockEvent = (id: string, visible: boolean = true) => ({
+	id,
+	title: `Event ${id}`,
+	description: `Description for event ${id}`,
+	startTime: Date.now(),
+	endTime: Date.now() + 3600000,
+	location: `Location ${id}`,
+	speaker: `Speaker ${id}`,
+	eventType: "default",
+	visible
 });
 
 describe("Server Actions", () => {
 	beforeEach(() => {
-		// 2025 Best Practice: More thorough mocking cleanup
 		jest.clearAllMocks();
-		(get_leaderboard as jest.Mock).mockReset();
-		(create_leaderboard_entry as jest.Mock).mockReset();
-		(fetchEvents as jest.Mock).mockReset();
-		(is_game_ready as jest.Mock).mockReset();
+		
+		// Reset all mocks with consistent behavior
+		(Auth.fetchAuthSession as jest.Mock).mockReset();
+		(Auth.fetchAuthSession as jest.Mock).mockResolvedValue({
+			tokens: {
+				accessToken: {
+					payload: {}
+				}
+			}
+		});
+		
+		// Reset individual model function mocks
+		mockListByScore.mockReset();
+		mockCreate.mockReset();
+		mockList.mockReset();
+	});
+
+	describe("is_game_ready", () => {
+		let originalDate: DateConstructor;
+		
+		beforeEach(() => {
+			// Store the original Date constructor
+			originalDate = global.Date;
+		});
+		
+		afterEach(() => {
+			// Restore the original Date constructor
+			global.Date = originalDate;
+		});
+		
+		it("should return true when current time is within game window", async () => {
+			// Mock Date to return a time during the game window
+			// 1 hour after SATURDAY_START (Nov 9, 2024 10:00 AM)
+			const mockDate = new Date(1731160800000 + 3600000);
+			global.Date = class extends Date {
+				constructor(...args: any[]) {
+					if (args.length === 0) {
+						super(mockDate);
+					} else {
+						super(...args);
+					}
+				}
+			} as DateConstructor;
+			
+			const result = await is_game_ready();
+			expect(result).toBe(true);
+		});
+		
+		it("should return false when current time is before game window", async () => {
+			// Mock Date to return a time before the game window
+			// 1 hour before SATURDAY_START
+			const mockDate = new Date(1731160800000 - 3600000);
+			global.Date = class extends Date {
+				constructor(...args: any[]) {
+					if (args.length === 0) {
+						super(mockDate);
+					} else {
+						super(...args);
+					}
+				}
+			} as DateConstructor;
+			
+			const result = await is_game_ready();
+			expect(result).toBe(false);
+		});
+		
+		it("should return false when current time is after game window", async () => {
+			// Mock Date to return a time after the game window
+			// 1 hour after end time
+			const mockDate = new Date(1731254400000 + 86400000 + 3600000);
+			global.Date = class extends Date {
+				constructor(...args: any[]) {
+					if (args.length === 0) {
+						super(mockDate);
+					} else {
+						super(...args);
+					}
+				}
+			} as DateConstructor;
+			
+			const result = await is_game_ready();
+			expect(result).toBe(false);
+		});
+		
+		it("should handle edge case of exactly at start time", async () => {
+			// Mock Date to return exactly the start time
+			const mockDate = new Date(1731160800000);
+			global.Date = class extends Date {
+				constructor(...args: any[]) {
+					if (args.length === 0) {
+						super(mockDate);
+					} else {
+						super(...args);
+					}
+				}
+			} as DateConstructor;
+			
+			const result = await is_game_ready();
+			expect(result).toBe(true);
+		});
 	});
 
 	describe("get_leaderboard", () => {
-		// 2025 Best Practice: More descriptive test names
-		it("should successfully fetch and return leaderboard entries", async () => {
-			const mockData = [
-				{ id: "1", username: "player1", score: 1000, year: 2024 },
-				{ id: "2", username: "player2", score: 500, year: 2024 },
+		it("should fetch leaderboard entries for regular users", async () => {
+			// Setup mock response
+			const mockEntries = [
+				generateMockLeaderboardEntry("1", "player1", 1000),
+				generateMockLeaderboardEntry("2", "player2", 500)
 			];
-
-			// 2025 Best Practice: Use mockResolvedValueOnce for more predictable tests
-			(get_leaderboard as jest.Mock).mockResolvedValueOnce(mockData);
-
-			const result = await get_leaderboard();
-
-			expect(result).toEqual(mockData);
-			expect(get_leaderboard).toHaveBeenCalledTimes(1);
-		});
-
-		it("should handle errors gracefully and return an empty array", async () => {
-			// 2025 Best Practice: Simulate error handling properly
-			(get_leaderboard as jest.Mock).mockImplementationOnce(async () => {
-				try {
-					throw new Error("API Error");
-				} catch (error) {
-					console.error("Error fetching leaderboard:", error);
-					return [];
+			
+			mockListByScore.mockResolvedValueOnce({
+				data: mockEntries,
+				errors: null
+			});
+			
+			// Mock user not being in directors group
+			(Auth.fetchAuthSession as jest.Mock).mockResolvedValueOnce({
+				tokens: {
+					accessToken: {
+						payload: {}
+					}
 				}
 			});
-
+			
 			const result = await get_leaderboard();
-
-			expect(result).toEqual([]);
-			expect(get_leaderboard).toHaveBeenCalledTimes(1);
+			
+			// Verify results
+			expect(result).toEqual(mockEntries);
+			expect(mockListByScore).toHaveBeenCalledWith(
+				{ year: 2024 },
+				{
+					limit: 50,
+					sortDirection: "DESC",
+					authMode: "identityPool" // Regular user uses identityPool
+				}
+			);
 		});
-
-		// 2025 Best Practice: Test filtering, sorting and other business logic
-		it("should return entries sorted by score in descending order", async () => {
-			const unsortedData = [
-				{ id: "1", username: "player1", score: 500, year: 2024 },
-				{ id: "2", username: "player2", score: 1000, year: 2024 },
-				{ id: "3", username: "player3", score: 750, year: 2024 },
+		
+		it("should fetch leaderboard entries for directors", async () => {
+			// Setup mock response
+			const mockEntries = [
+				generateMockLeaderboardEntry("1", "player1", 1000),
+				generateMockLeaderboardEntry("2", "player2", 500)
 			];
-
-			const expectedSortedData = [
-				{ id: "2", username: "player2", score: 1000, year: 2024 },
-				{ id: "3", username: "player3", score: 750, year: 2024 },
-				{ id: "1", username: "player1", score: 500, year: 2024 },
-			];
-
-			// Mock returning data that needs to be sorted
-			(get_leaderboard as jest.Mock).mockResolvedValueOnce(expectedSortedData);
-
+			
+			mockListByScore.mockResolvedValueOnce({
+				data: mockEntries,
+				errors: null
+			});
+			
+			// Mock user being in directors group
+			(Auth.fetchAuthSession as jest.Mock).mockResolvedValueOnce({
+				tokens: {
+					accessToken: {
+						payload: {
+							"cognito:groups": ["directors"]
+						}
+					}
+				}
+			});
+			
 			const result = await get_leaderboard();
-
-			expect(result).toEqual(expectedSortedData);
-			expect(result[0].score).toBeGreaterThanOrEqual(result[1].score);
-			expect(result[1].score).toBeGreaterThanOrEqual(result[2].score);
+			
+			// Verify results
+			expect(result).toEqual(mockEntries);
+			expect(mockListByScore).toHaveBeenCalledWith(
+				{ year: 2024 },
+				{
+					limit: 50,
+					sortDirection: "DESC",
+					authMode: "userPool" // Director uses userPool
+				}
+			);
+		});
+		
+		it("should return empty array when API returns errors", async () => {
+			// Mock API error
+			mockListByScore.mockResolvedValueOnce({
+				data: null,
+				errors: [{ message: "API Error" }]
+			});
+			
+			// Mock console.error to verify it was called
+			const originalConsoleError = console.error;
+			const mockConsoleError = jest.fn();
+			console.error = mockConsoleError;
+			
+			const result = await get_leaderboard();
+			
+			// Verify error handling
+			expect(result).toEqual([]);
+			expect(mockConsoleError).toHaveBeenCalled();
+			// Check that something was logged without specifying the exact message
+			
+			// Restore console.error
+			console.error = originalConsoleError;
+		});
+		
+		it("should handle authentication errors gracefully", async () => {
+			// Mock authentication error
+			(Auth.fetchAuthSession as jest.Mock).mockRejectedValueOnce(new Error("Auth error"));
+			
+			// Mock the subsequent call to ensure we don't have a null pointer exception
+			mockListByScore.mockResolvedValueOnce({
+				data: [],
+				errors: null
+			});
+			
+			// Mock console.error
+			const originalConsoleError = console.error;
+			const mockConsoleError = jest.fn();
+			console.error = mockConsoleError;
+			
+			const result = await get_leaderboard();
+			
+			// Verify error handling
+			expect(result).toEqual([]);
+			// Verify that console.error was called (with any arguments)
+			expect(mockConsoleError).toHaveBeenCalled();
+			
+			// Restore console.error
+			console.error = originalConsoleError;
 		});
 	});
 
 	describe("create_leaderboard_entry", () => {
-		it("should reject invalid usernames with proper error message", async () => {
-			// 2025 Best Practice: More realistic error handling
-			(create_leaderboard_entry as jest.Mock).mockResolvedValueOnce({
-				status: 401,
-				message: "Usernames must be alphanumeric and less than 20 characters.",
-			});
-
+		it("should reject usernames with profanity", async () => {
 			const result = await create_leaderboard_entry({
-				username: "invalid-username!",
-				score: 1000,
+				username: "userbadword",
+				score: 1000
 			});
-
+			
+			// Verify rejection
 			expect(result.status).toBe(401);
 			expect(result.message).toContain("Usernames must be alphanumeric and less than 20 characters");
-			expect(create_leaderboard_entry).toHaveBeenCalledTimes(1);
-			expect(create_leaderboard_entry).toHaveBeenCalledWith({
-				username: "invalid-username!",
-				score: 1000,
-			});
+			expect(mockCreate).not.toHaveBeenCalled();
 		});
-
-		it("should reject invalid scores with appropriate validation message", async () => {
-			(create_leaderboard_entry as jest.Mock).mockResolvedValueOnce({
-				status: 401,
-				message: "Invalid score.",
+		
+		it("should reject usernames longer than 20 characters", async () => {
+			const result = await create_leaderboard_entry({
+				username: "thisusernameiswaytoolongforthelimit",
+				score: 1000
 			});
-
+			
+			// Verify rejection
+			expect(result.status).toBe(401);
+			expect(result.message).toContain("Usernames must be alphanumeric and less than 20 characters");
+			expect(mockCreate).not.toHaveBeenCalled();
+		});
+		
+		it("should reject usernames with non-alphanumeric characters", async () => {
+			const result = await create_leaderboard_entry({
+				username: "user@name!",
+				score: 1000
+			});
+			
+			// Verify rejection
+			expect(result.status).toBe(401);
+			expect(result.message).toContain("Usernames must be alphanumeric and less than 20 characters");
+			expect(mockCreate).not.toHaveBeenCalled();
+		});
+		
+		it("should reject negative scores", async () => {
 			const result = await create_leaderboard_entry({
 				username: "validuser",
-				score: -100, // Negative score
+				score: -100
 			});
-
+			
+			// Verify rejection
 			expect(result.status).toBe(401);
 			expect(result.message).toContain("Invalid score");
-			expect(create_leaderboard_entry).toHaveBeenCalledTimes(1);
-			expect(create_leaderboard_entry).toHaveBeenCalledWith({
-				username: "validuser",
-				score: -100,
-			});
+			expect(mockCreate).not.toHaveBeenCalled();
 		});
-
-		it("should successfully create a valid leaderboard entry", async () => {
-			// 2025 Best Practice: More detailed success response
-			const mockResponse: LeaderboardResponse = {
-				status: 200,
-				message: "Success",
-				entry: {
-					id: "new-id",
-					username: "validuser",
-					score: 1000,
-					year: 2025,
-				},
-			};
-
-			(create_leaderboard_entry as jest.Mock).mockResolvedValueOnce(mockResponse);
-
-			const result = (await create_leaderboard_entry({
-				username: "validuser",
-				score: 1000,
-			})) as LeaderboardResponse; // Cast the result to our custom type
-
-			expect(result.status).toBe(200);
-			expect(result.message).toBe("Success");
-			// Use type assertion to inform TypeScript about the structure
-			expect(result.entry).toBeDefined();
-			expect((result as LeaderboardResponse).entry?.id).toBe("new-id");
-
-			expect(create_leaderboard_entry).toHaveBeenCalledTimes(1);
-			expect(create_leaderboard_entry).toHaveBeenCalledWith({
-				username: "validuser",
-				score: 1000,
-			});
-		});
-
-		// 2025 Best Practice: Test error handling for server errors
-		it("should handle server errors appropriately", async () => {
-			(create_leaderboard_entry as jest.Mock).mockResolvedValueOnce({
-				status: 500,
-				message: "Server error occurred",
-			});
-
+		
+		it("should reject scores over 200000", async () => {
 			const result = await create_leaderboard_entry({
 				username: "validuser",
-				score: 1000,
+				score: 250000
 			});
-
+			
+			// Verify rejection
+			expect(result.status).toBe(401);
+			expect(result.message).toContain("Invalid score");
+			expect(mockCreate).not.toHaveBeenCalled();
+		});
+		
+		it("should reject non-integer scores", async () => {
+			const result = await create_leaderboard_entry({
+				username: "validuser",
+				score: 1000.5
+			});
+			
+			// Verify rejection
+			expect(result.status).toBe(401);
+			expect(result.message).toContain("Invalid score");
+			expect(mockCreate).not.toHaveBeenCalled();
+		});
+		
+		it("should reject scores that aren't multiples of 2", async () => {
+			const result = await create_leaderboard_entry({
+				username: "validuser",
+				score: 1001
+			});
+			
+			// Verify rejection
+			expect(result.status).toBe(401);
+			expect(result.message).toContain("Invalid score");
+			expect(mockCreate).not.toHaveBeenCalled();
+		});
+		
+		it("should successfully create valid entries", async () => {
+			// Mock successful create
+			mockCreate.mockResolvedValueOnce({
+				data: {
+					id: "new-entry-id",
+					username: "validuser",
+					score: 1000,
+					year: 2024
+				},
+				errors: null
+			});
+			
+			const result = await create_leaderboard_entry({
+				username: "validuser",
+				score: 1000
+			});
+			
+			// Verify success
+			expect(result.status).toBe(200);
+			expect(result.message).toBe("Success");
+			expect(mockCreate).toHaveBeenCalledWith(
+				{
+					username: "validuser",
+					score: 1000,
+					year: expect.any(Number)
+				},
+				{
+					authMode: "identityPool"
+				}
+			);
+		});
+		
+		it("should handle API errors during creation", async () => {
+			// Mock API error
+			mockCreate.mockResolvedValueOnce({
+				data: null,
+				errors: [{ message: "Database error" }]
+			});
+			
+			// Mock console.error
+			const originalConsoleError = console.error;
+			const mockConsoleError = jest.fn();
+			console.error = mockConsoleError;
+			
+			const result = await create_leaderboard_entry({
+				username: "validuser",
+				score: 1000
+			});
+			
+			// Verify error handling
 			expect(result.status).toBe(500);
-			expect(result.message).toContain("Server error occurred");
+			expect(result.message).toContain("Failed to create leaderboard entry");
+			expect(mockConsoleError).toHaveBeenCalled();
+			
+			// Restore console.error
+			console.error = originalConsoleError;
 		});
 	});
 
 	describe("fetchEvents", () => {
-		it("should fetch events successfully with all required fields", async () => {
-			// 2025 Best Practice: More realistic data with all fields that UI might need
-			const mockEvents = [
-				{
-					id: "1",
-					title: "Opening Ceremony",
-					description: "Welcome to HackRPI",
-					startTime: 1000,
-					endTime: 2000,
-					location: "DCC 308",
-					speaker: "HackRPI Team",
-					eventType: "default",
-					visible: true,
-					column: 0,
-					image: "/images/opening.jpg",
-					requiresRegistration: false,
-				},
+		it("should fetch events for regular users", async () => {
+			// Setup mock response with three visible events
+			const mockEventData = [
+				generateMockEvent("1", true),
+				generateMockEvent("2", true),
+				generateMockEvent("3", true)
 			];
-
-			(fetchEvents as jest.Mock).mockResolvedValueOnce({
-				status: 200,
-				message: "Success",
-				events: mockEvents,
+			
+			mockList.mockResolvedValueOnce({
+				data: mockEventData,
+				errors: null
 			});
-
-			const result = await fetchEvents();
-
-			expect(result.status).toBe(200);
-			expect(result.message).toBe("Success");
-			expect(result.events).toHaveLength(1);
-			expect(result.events[0].title).toBe("Opening Ceremony");
-			expect(result.events[0]).toHaveProperty("eventType");
-			expect(result.events[0]).toHaveProperty("visible");
-			expect(fetchEvents).toHaveBeenCalledTimes(1);
-		});
-
-		it("should handle errors when fetching events and return an empty array", async () => {
-			// 2025 Best Practice: Better error handling with more details
-			(fetchEvents as jest.Mock).mockResolvedValueOnce({
-				status: 500,
-				message: "Failed to fetch events. Error: Network timeout",
-				events: [],
-			});
-
-			const result = await fetchEvents();
-
-			expect(result.status).toBe(500);
-			expect(result.message).toBe("Failed to fetch events. Error: Network timeout");
-			expect(result.events).toEqual([]);
-			expect(fetchEvents).toHaveBeenCalledTimes(1);
-		});
-
-		// 2025 Best Practice: Test filtering functionality
-		it("should filter out non-visible events", async () => {
-			const mockAllEvents = [
-				{
-					id: "1",
-					title: "Opening Ceremony",
-					description: "Welcome to HackRPI",
-					startTime: 1000,
-					visible: true,
-					column: 0,
-				},
-				{
-					id: "2",
-					title: "Hidden Event",
-					description: "This should not be visible",
-					startTime: 1500,
-					visible: false,
-					column: 0,
-				},
-			];
-
-			const expectedVisibleEvents = [
-				{
-					id: "1",
-					title: "Opening Ceremony",
-					description: "Welcome to HackRPI",
-					startTime: 1000,
-					visible: true,
-					column: 0,
-				},
-			];
-
-			(fetchEvents as jest.Mock).mockResolvedValueOnce({
-				status: 200,
-				message: "Success",
-				events: expectedVisibleEvents,
-			});
-
-			const result = await fetchEvents();
-
-			expect(result.status).toBe(200);
-			expect(result.events).toHaveLength(1);
-			expect(result.events[0].title).toBe("Opening Ceremony");
-			expect(result.events.find((e) => e.title === "Hidden Event")).toBeUndefined();
-		});
-	});
-
-	describe("is_game_ready", () => {
-		it("should return true when the game is ready to be played", async () => {
-			// 2025 Best Practice: Mock with implementation reasoning
-			(is_game_ready as jest.Mock).mockResolvedValueOnce(true);
-
-			const result = await is_game_ready();
-
-			expect(result).toBe(true);
-			expect(is_game_ready).toHaveBeenCalledTimes(1);
-		});
-
-		it("should return false when the game is not ready to be played", async () => {
-			(is_game_ready as jest.Mock).mockResolvedValueOnce(false);
-
-			const result = await is_game_ready();
-
-			expect(result).toBe(false);
-			expect(is_game_ready).toHaveBeenCalledTimes(1);
-		});
-
-		// 2025 Best Practice: Test error handling in boolean functions
-		it("should return false when checking game ready status fails", async () => {
-			(is_game_ready as jest.Mock).mockImplementationOnce(async () => {
-				try {
-					throw new Error("Service unavailable");
-				} catch (error) {
-					console.error("Error checking game status:", error);
-					return false;
+			
+			// Mock user not being in directors group
+			(Auth.fetchAuthSession as jest.Mock).mockResolvedValueOnce({
+				tokens: {
+					accessToken: {
+						payload: {}
+					}
 				}
 			});
-
-			const result = await is_game_ready();
-
-			expect(result).toBe(false);
-			expect(is_game_ready).toHaveBeenCalledTimes(1);
+			
+			const result = await fetchEvents();
+			
+			// Update expected number of events
+			expect(result.status).toBe(200);
+			expect(result.message).toBe("Success");
+			expect(result.events.length).toBe(3); // Expect all three events
+		});
+		
+		it("should fetch events for directors", async () => {
+			// Setup mock response with three visible events
+			const mockEventData = [
+				generateMockEvent("1", true),
+				generateMockEvent("2", true),
+				generateMockEvent("3", true)
+			];
+			
+			mockList.mockResolvedValueOnce({
+				data: mockEventData,
+				errors: null
+			});
+			
+			// Mock user being in directors group
+			(Auth.fetchAuthSession as jest.Mock).mockResolvedValueOnce({
+				tokens: {
+					accessToken: {
+						payload: {
+							"cognito:groups": ["directors"]
+						}
+					}
+				}
+			});
+			
+			const result = await fetchEvents();
+			
+			// Update expected number of events
+			expect(result.status).toBe(200);
+			expect(result.message).toBe("Success");
+			expect(result.events.length).toBe(3); // Expect all three events
+		});
+		
+		it("should handle API errors when fetching events", async () => {
+			// Mock API error
+			mockList.mockResolvedValueOnce({
+				data: null,
+				errors: [{ message: "API Error" }]
+			});
+			
+			// Mock console.error
+			const originalConsoleError = console.error;
+			const mockConsoleError = jest.fn();
+			console.error = mockConsoleError;
+			
+			const result = await fetchEvents();
+			
+			// Verify error handling
+			expect(result.status).toBe(500);
+			expect(result.message).toBe("Failed to fetch events.");
+			expect(result.events).toEqual([]);
+			expect(mockConsoleError).toHaveBeenCalled();
+			
+			// Restore console.error
+			console.error = originalConsoleError;
+		});
+		
+		it("should handle authentication errors when fetching events", async () => {
+			// Mock authentication error
+			(Auth.fetchAuthSession as jest.Mock).mockRejectedValueOnce(new Error("Auth error"));
+			
+			// Mock console.error
+			const originalConsoleError = console.error;
+			const mockConsoleError = jest.fn();
+			console.error = mockConsoleError;
+			
+			// Mock successful list to test auth error specifically
+			mockList.mockResolvedValueOnce({
+				data: [generateMockEvent("1")],
+				errors: null
+			});
+			
+			const result = await fetchEvents();
+			
+			// Verify error handling for auth error only
+			expect(result.status).toBe(200); // Still 200 because List succeeds
+			expect(result.events.length).toBe(1);
+			expect(mockConsoleError).toHaveBeenCalled();
+			expect(mockList).toHaveBeenCalledWith({
+				authMode: "identityPool", // Default to identityPool on auth error
+				limit: 200,
+				filter: {
+					visible: { eq: true }
+				}
+			});
+			
+			// Restore console.error
+			console.error = originalConsoleError;
 		});
 	});
 });

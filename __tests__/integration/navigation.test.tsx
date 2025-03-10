@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import React from "react";
-import { screen, within } from "@testing-library/react";
+import { screen, within, act } from "@testing-library/react";
 import Home from "@/app/page";
 import {
 	renderWithProviders,
@@ -230,6 +230,9 @@ global.IntersectionObserver = MockIntersectionObserver as unknown as typeof Inte
 describe("Home Page Integration", () => {
 	// Setup before each test
 	beforeEach(() => {
+		// Enable fake timers for this test file
+		jest.useFakeTimers();
+		
 		resetAllMocks();
 		mockHomePageElements();
 
@@ -258,6 +261,11 @@ describe("Home Page Integration", () => {
 		mockHandleFAQClick.mockClear();
 		mockHandleAboutClick.mockClear();
 		mockHandleHomeClick.mockClear();
+	});
+
+	afterEach(() => {
+		// Clean up by restoring real timers
+		jest.useRealTimers();
 	});
 
 	describe("Page Structure and Layout", () => {
@@ -348,28 +356,38 @@ describe("Home Page Integration", () => {
 
 	describe("User Interactions", () => {
 		it("should navigate to sections when anchor links are clicked", async () => {
-			// 2025 Best Practice: More comprehensive user interaction testing
-			const { user } = renderWithProviders(<Home />);
+			// Use the improved renderWithProviders with useFakeTimers option
+			const { user } = renderWithProviders(<Home />, { useFakeTimers: true });
 
 			// Find and click the FAQ link
 			const navBar = screen.getByRole("navigation", { name: "Main Navigation" });
 			const faqLink = within(navBar).getByRole("link", { name: /faq/i });
-			await user.click(faqLink);
+			
+			// Wrap user actions in act and properly advance timers
+			await act(async () => {
+				await user.click(faqLink);
+				// Run timers after user actions
+				jest.runAllTimers();
+			});
 
 			// Verify FAQ click handler was called
 			expect(mockHandleFAQClick).toHaveBeenCalledTimes(1);
 
 			// Find and click the About link
 			const aboutLink = within(navBar).getByRole("link", { name: /about/i });
-			await user.click(aboutLink);
+			
+			await act(async () => {
+				await user.click(aboutLink);
+				// Run timers after user actions
+				jest.runAllTimers();
+			});
 
 			// Verify About click handler was called
 			expect(mockHandleAboutClick).toHaveBeenCalledTimes(1);
 		});
 
 		it("should ensure keyboard accessibility for navigation", async () => {
-			// 2025 Best Practice: Test keyboard accessibility
-			const { user } = renderWithProviders(<Home />);
+			const { user } = renderWithProviders(<Home />, { useFakeTimers: true });
 
 			// Focus the navigation
 			const navBar = screen.getByRole("navigation", { name: "Main Navigation" });
@@ -381,8 +399,12 @@ describe("Home Page Integration", () => {
 			// Simulate focus on the FAQ link
 			navLinks[4].focus(); // The FAQ link is the 5th element (index 4)
 
-			// Press Enter to activate the link
-			await user.keyboard("{Enter}");
+			// Press Enter to activate the link with proper timer handling
+			await act(async () => {
+				await user.keyboard("{Enter}");
+				// Run timers after keyboard action
+				jest.runAllTimers();
+			});
 
 			// Check if the FAQ click handler was called
 			expect(mockHandleFAQClick).toHaveBeenCalledTimes(1);
