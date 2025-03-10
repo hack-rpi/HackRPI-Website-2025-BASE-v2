@@ -110,7 +110,7 @@ const FAQPage = () => {
 			id="faq"
 		>
 			<div className="flex w-full desktop:w-2/3">
-				<h1 className="font-mokoto font-normal text-white text-left text-4xl text-shadow-md pb-4">FAQs</h1>
+				<h1 className="font-modern text-white text-left text-4xl text-shadow-md pb-4">FAQs</h1>
 			</div>
 			<div className="w-full desktop:w-2/3">
 				{faqs.map((faq, index) => (
@@ -118,7 +118,7 @@ const FAQPage = () => {
 						key={index}
 						className={`collapse collapse-arrow custom-arrow bg-retro-purple-dark p-1 text-2xl border-t-2 ${
 							index === faqs.length - 1 ? "border-b-2" : ""
-						} border-retro-orange rounded-none`} //color?
+						} border-retro-orange rounded-none`} 
 					>
 						<input
 							type="checkbox"
@@ -126,8 +126,8 @@ const FAQPage = () => {
 							checked={expandedIndex === index}
 							onChange={() => handleToggle(index)}
 						/>
-						<div className="collapse-title font-medium text-2xl text-retro-orange">{faq.title}</div>
-						<div className="collapse-content">{faq.content}</div>
+						<div className="font-modern collapse-title font-bold text-2xl text-retro-orange">{faq.title}</div>
+						<div className="font-neutral collapse-content">{faq.content}</div>
 					</div>
 				))}
 			</div>
