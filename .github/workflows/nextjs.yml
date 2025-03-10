@@ -140,7 +140,7 @@ jobs:
         id: node-modules-cache
         with:
           path: node_modules
-          key: ${{ runner.os }}-${{ steps.detect-package-manager.outputs.manager }}-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}
+          key: ${{ runner.os }}-${{ steps.detect-package-manager.outputs.manager }}-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-v1
       
       - name: Restore Next.js build cache
         uses: actions/cache@v4
@@ -155,7 +155,7 @@ jobs:
       
       - name: Install dependencies
         if: steps.node-modules-cache.outputs.cache-hit != 'true'
-        run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
+        run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }} --no-audit --force
       
       # Preserved from original workflow
       - name: Add Amplify outputs file
@@ -167,7 +167,7 @@ jobs:
       - name: Build with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
         env:
-          NODE_OPTIONS: --max-old-space-size=4096
+          NODE_OPTIONS: --max-old-space-size=4096 --no-deprecation
 
   # Test job
   test:
@@ -207,11 +207,11 @@ jobs:
         id: node-modules-cache
         with:
           path: node_modules
-          key: ${{ runner.os }}-${{ steps.detect-package-manager.outputs.manager }}-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}
+          key: ${{ runner.os }}-${{ steps.detect-package-manager.outputs.manager }}-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-v1
       
       - name: Install dependencies
         if: steps.node-modules-cache.outputs.cache-hit != 'true'
-        run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
+        run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }} --no-audit --force
       
       # Added Amplify file creation steps
       - name: Add Amplify outputs file
