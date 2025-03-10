@@ -1,7 +1,12 @@
 /** @type {import('jest').Config} */
 const config = {
 	testEnvironment: "jsdom",
-	testPathIgnorePatterns: ["<rootDir>/node_modules/", "<rootDir>/.next/", "<rootDir>/amplify/"],
+	testPathIgnorePatterns: [
+		"<rootDir>/node_modules/", 
+		"<rootDir>/.next/", 
+		"<rootDir>/amplify/",
+		"<rootDir>/__tests__/test-utils.tsx"
+	],
 	moduleNameMapper: {
 		// Handle module aliases
 		"^@/(.*)$": "<rootDir>/$1",

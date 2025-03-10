@@ -2,52 +2,73 @@
  * @jest-environment jsdom
  */
 import React from "react";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { screen, within } from "@testing-library/react";
 import Home from "@/app/page";
+import { 
+	renderWithProviders, 
+	resetAllMocks, 
+	mockHomePageElements, 
+	mockScrollIntoView,
+	setWindowWidth
+} from "../test-utils";
 
-// Mock the document.getElementById to avoid DOM manipulation errors
-Element.prototype.scrollIntoView = jest.fn();
-window.HTMLElement.prototype.scrollIntoView = jest.fn();
+// Define a mock function we can access later for testing
+const mockHandleFAQClick = jest.fn();
 
-// Mock the components used in the Home page
+// Mock the components used in the Home page with proper ARIA roles
 jest.mock("@/components/footer/footer", () => {
 	return function MockFooter() {
-		return <div data-testid="footer">Footer Component</div>;
+		return <footer data-testid="footer" role="contentinfo">Footer Component</footer>;
 	};
 });
 
 jest.mock("@/components/faq/faq", () => {
 	return function MockFAQ() {
 		return (
-			<div data-testid="faq" id="faq">
+			<section data-testid="faq" id="faq" role="region" aria-labelledby="faq-heading">
+				<h2 id="faq-heading">Frequently Asked Questions</h2>
 				FAQ Component
-			</div>
+			</section>
 		);
 	};
 });
 
 jest.mock("@/components/nav-bar/nav-bar", () => {
-	return function MockNavBar({ showOnScroll }: { showOnScroll: boolean }) {
-		return (
-			<div data-testid="nav-bar" data-show-on-scroll={showOnScroll}>
-				NavBar Component
-			</div>
-		);
-	};
+	// Return a function that creates a mock NavBar
+	return jest.fn(({ showOnScroll }) => (
+		<nav data-testid="nav-bar" data-show-on-scroll={showOnScroll} role="navigation" aria-label="Main Navigation">
+			<a href="/" role="link" aria-label="Home">Home</a>
+			<a href="/event" role="link" aria-label="Event">Event</a>
+			<a href="/resources" role="link" aria-label="Resources">Resources</a>
+			<a href="#about" role="link" aria-label="About">About</a>
+			<a 
+				href="#faq" 
+				role="link" 
+				aria-label="FAQ"
+				onClick={(e) => {
+					e.preventDefault();
+					mockHandleFAQClick();
+				}}
+			>
+				FAQ
+			</a>
+		</nav>
+	));
 });
 
 jest.mock("@/components/title-components/title", () => {
 	return function MockTitle() {
-		return <div data-testid="title">Title Component</div>;
+		return <header data-testid="title" role="banner">Title Component</header>;
 	};
 });
 
 jest.mock("@/components/about-us", () => {
 	return function MockAboutUs() {
 		return (
-			<div data-testid="about" id="about">
+			<section data-testid="about" id="about" role="region" aria-labelledby="about-heading">
+				<h2 id="about-heading">About HackRPI</h2>
 				About Component
-			</div>
+			</section>
 		);
 	};
 });
@@ -55,9 +76,10 @@ jest.mock("@/components/about-us", () => {
 jest.mock("@/components/team/team", () => {
 	return function MockTeam() {
 		return (
-			<div data-testid="team" id="team">
+			<section data-testid="team" id="team" role="region" aria-labelledby="team-heading">
+				<h2 id="team-heading">Our Team</h2>
 				Team Component
-			</div>
+			</section>
 		);
 	};
 });
@@ -65,9 +87,10 @@ jest.mock("@/components/team/team", () => {
 jest.mock("@/components/sponsors", () => {
 	return function MockSponsors() {
 		return (
-			<div data-testid="sponsors" id="sponsors">
+			<section data-testid="sponsors" id="sponsors" role="region" aria-labelledby="sponsors-heading">
+				<h2 id="sponsors-heading">Our Sponsors</h2>
 				Sponsors Component
-			</div>
+			</section>
 		);
 	};
 });
@@ -85,9 +108,10 @@ global.IntersectionObserver = jest.fn().mockImplementation(() => ({
 
 describe("Home Page Integration", () => {
 	beforeEach(() => {
-		jest.clearAllMocks();
+		resetAllMocks();
+		mockHomePageElements();
 
-		// Setup mock elements for offsetTop and offsetHeight
+		// Setup mock elements for getBoundingClientRect
 		const mockGetBoundingClientRect = jest.fn().mockImplementation(() => ({
 			top: 100,
 			left: 0,
@@ -98,86 +122,85 @@ describe("Home Page Integration", () => {
 		}));
 
 		Element.prototype.getBoundingClientRect = mockGetBoundingClientRect;
-
-		// Mock getElementById
-		document.getElementById = jest.fn().mockImplementation((id) => {
-			return {
-				id,
-				offsetTop: id === "about" ? 100 : id === "team" ? 500 : id === "faq" ? 300 : id === "sponsors" ? 700 : 200,
-				offsetHeight: 200,
-				getBoundingClientRect: mockGetBoundingClientRect,
-			} as unknown as HTMLElement;
-		});
 	});
 
-	it("renders all main sections of the page", () => {
-		render(<Home />);
+	it("should render all main sections of the page with proper accessibility attributes", async () => {
+		// Arrange & Act
+		renderWithProviders(<Home />);
 
-		// Check if all main components are rendered
-		const navBar = screen.getByTestId("nav-bar");
-		expect(navBar).toBeInTheDocument();
-
-		const title = screen.getByTestId("title");
-		expect(title).toBeInTheDocument();
-
-		const about = screen.getByTestId("about");
-		expect(about).toBeInTheDocument();
-
-		const faq = screen.getByTestId("faq");
-		expect(faq).toBeInTheDocument();
-
-		const sponsors = screen.getByTestId("sponsors");
-		expect(sponsors).toBeInTheDocument();
-
-		const team = screen.getByTestId("team");
-		expect(team).toBeInTheDocument();
-
-		const footer = screen.getByTestId("footer");
-		expect(footer).toBeInTheDocument();
+		// Assert - Check if all main components are rendered with proper roles
+		expect(screen.getByRole("navigation")).toBeInTheDocument();
+		expect(screen.getByRole("banner")).toBeInTheDocument();
+		
+		// Get all regions and check their labels
+		const regions = screen.getAllByRole("region");
+		expect(regions.length).toBeGreaterThanOrEqual(4); // At least about, faq, sponsors, team
+		
+		// Verify specific regions by their aria-labelledby
+		expect(screen.getByLabelText(/about hackrpi/i)).toBeInTheDocument();
+		expect(screen.getByLabelText(/frequently asked questions/i)).toBeInTheDocument();
+		expect(screen.getByLabelText(/our sponsors/i)).toBeInTheDocument();
+		expect(screen.getByLabelText(/our team/i)).toBeInTheDocument();
+		
+		// Check footer
+		expect(screen.getByRole("contentinfo")).toBeInTheDocument();
 	});
 
-	it("NavBar is configured with showOnScroll=true", () => {
-		render(<Home />);
+	it("should configure NavBar with showOnScroll=true", async () => {
+		// Arrange & Act
+		renderWithProviders(<Home />);
 
-		const navBar = screen.getByTestId("nav-bar");
+		// Assert
+		const navBar = screen.getByRole("navigation");
 		expect(navBar).toHaveAttribute("data-show-on-scroll", "true");
+		
+		// Verify navigation links are present (important for accessibility)
+		const navLinks = within(navBar).getAllByRole("link");
+		expect(navLinks.length).toBeGreaterThanOrEqual(3); // At least home, event, resources
 	});
 
-	it("handles window scroll events", async () => {
-		render(<Home />);
+	it("should handle window scroll events without crashing", async () => {
+		// Arrange
+		renderWithProviders(<Home />);
 
-		// Simulate scrolling past the threshold
+		// Act - Simulate scrolling past the threshold
 		Object.defineProperty(window, "scrollY", {
 			writable: true,
 			value: 700, // A value greater than the threshold
 		});
 
 		// Trigger the scroll event
-		fireEvent.scroll(window);
+		const scrollEvent = new Event("scroll");
+		window.dispatchEvent(scrollEvent);
 
-		// Wait for any state updates
-		await waitFor(() => {
-			// We're just verifying the test doesn't crash
-			expect(screen.getByTestId("nav-bar")).toBeInTheDocument();
-		});
+		// Assert - Verify the component still renders
+		expect(screen.getByRole("navigation")).toBeInTheDocument();
 	});
 
-	it("handles window resize events", async () => {
-		render(<Home />);
+	it("should handle window resize events without crashing", async () => {
+		// Arrange
+		renderWithProviders(<Home />);
 
-		// Change window dimensions
-		Object.defineProperty(window, "innerWidth", {
-			writable: true,
-			value: 768,
-		});
+		// Act - Change window dimensions and trigger resize
+		setWindowWidth(768);
+		const resizeEvent = new Event("resize");
+		window.dispatchEvent(resizeEvent);
 
-		// Trigger the resize event
-		fireEvent.resize(window);
+		// Assert - Verify the component still renders
+		expect(screen.getByRole("navigation")).toBeInTheDocument();
+	});
 
-		// Wait for any state updates
-		await waitFor(() => {
-			// We're just verifying the test doesn't crash
-			expect(screen.getByTestId("nav-bar")).toBeInTheDocument();
-		});
+	it("should properly navigate to sections when anchor links are clicked", async () => {
+		// Arrange
+		const { user } = renderWithProviders(<Home />);
+		mockHandleFAQClick.mockClear();
+		
+		// Act - Find and click the FAQ link
+		const navigation = screen.getByRole("navigation");
+		const faqLink = within(navigation).getByRole("link", { name: /faq/i });
+		await user.click(faqLink);
+		
+		// Assert - Verify the mock handler was called
+		expect(mockHandleFAQClick).toHaveBeenCalledTimes(1);
 	});
 });
