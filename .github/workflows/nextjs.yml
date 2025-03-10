@@ -92,7 +92,7 @@ jobs:
         id: node-modules-cache
         with:
           path: node_modules
-          key: ${{ runner.os }}-${{ steps.detect-package-manager.outputs.manager }}-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}
+          key: ${{ runner.os }}-${{ steps.detect-package-manager.outputs.manager }}-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-v2
       
       - name: Install dependencies
         if: steps.node-modules-cache.outputs.cache-hit != 'true'
@@ -140,7 +140,7 @@ jobs:
         id: node-modules-cache
         with:
           path: node_modules
-          key: ${{ runner.os }}-${{ steps.detect-package-manager.outputs.manager }}-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-v1
+          key: ${{ runner.os }}-${{ steps.detect-package-manager.outputs.manager }}-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-v2
       
       - name: Restore Next.js build cache
         uses: actions/cache@v4
@@ -207,7 +207,7 @@ jobs:
         id: node-modules-cache
         with:
           path: node_modules
-          key: ${{ runner.os }}-${{ steps.detect-package-manager.outputs.manager }}-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-v1
+          key: ${{ runner.os }}-${{ steps.detect-package-manager.outputs.manager }}-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-v2
       
       - name: Install dependencies
         if: steps.node-modules-cache.outputs.cache-hit != 'true'
