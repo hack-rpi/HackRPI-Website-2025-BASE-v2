@@ -7,6 +7,7 @@ Thank you for considering contributing to our project! We appreciate your time a
 - [Getting Started](#getting-started)
 - [How to Contribute](#how-to-contribute)
 - [Code Style](#code-style)
+- [Testing Guidelines](#testing-guidelines)
 - [Bug Reports](#bug-reports)
 - [Feature Requests](#feature-requests)
 - [Pull Requests](#pull-requests)
@@ -74,6 +75,36 @@ There are a few code style things to mention:
    1. You can run eslint with `npx eslint .eslintrc.js`
    1. You can run prettier to format the repository with `npx prettier --write .`
    1. Both of these will run automatically when you make your pull request but its good to stick with the formatting throughout development.
+
+## Testing Guidelines
+
+We use Jest and React Testing Library for testing our application. When contributing, please ensure that your code is well-tested by following these guidelines:
+
+1. **Write Tests for New Features**
+   - All new functionality should have corresponding tests.
+   - For utility functions, write unit tests in the `__tests__/unit/` directory.
+   - For components, write component tests in the `__tests__/components/` directory.
+   - For complex interactions, write integration tests in the `__tests__/integration/` directory.
+
+2. **Run Tests Before Submitting**
+   - Before creating a pull request, run the test suite to make sure all tests pass:
+     ```bash
+     npm test
+     ```
+   - If your tests fail, fix the issues before submitting your PR.
+
+3. **Test Coverage**
+   - Aim for high test coverage in your code changes.
+   - You can check test coverage by running:
+     ```bash
+     npm run test:ci
+     ```
+
+4. **Testing Best Practices**
+   - Test component behavior, not implementation details.
+   - Use meaningful test descriptions that describe the expected behavior.
+   - Mock external dependencies like API calls.
+   - For more detailed information, refer to the [testing documentation](__tests__/README.md).
 
 ## Bug Reports
 
