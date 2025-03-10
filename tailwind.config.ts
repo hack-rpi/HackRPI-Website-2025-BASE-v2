@@ -12,7 +12,8 @@ const config: Config = {
 			sans: ["Helvetica", "Arial", "sans-serif"],
 			retro: ["Silkscreen", "serif"],
 			modern: ["Audiowide", "serif"],
-			neutral: ["Turret Road", "serif"]
+			neutral: ["Turret Road", "serif"],
+			pix: ["Pixelify Sans", "sans-serif"],
 		},
 		extend: {
 			colors: {

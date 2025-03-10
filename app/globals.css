@@ -2,7 +2,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Turret+Road:wght@200;300;400;500;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Bungee+Shade:wght@400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400&display=swap");
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
@@ -14,7 +15,7 @@
 
 :root,
 [data-amplify-theme] {
-	--amplify-colors-background-primary: #27303b;
+	--amplify-colors-background-primary: #080a0b;
 	--amplify-components-field-label-color: #efefef;
 	--amplify-components-button-primary-background-color: #74b7ef;
 	--amplify-components-button-primary-color: #213445;

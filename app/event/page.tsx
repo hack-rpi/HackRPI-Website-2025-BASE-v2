@@ -17,10 +17,10 @@ function EventPage() {
 			<div className="justify-center flex w-full flex-col  bg-hackrpi-dark-blue pt-24 desktop:pt-16">
 				<div className="px-4 flex flex-wrap items-start justify-center mb-8">
 					<div className="w-full desktop:w-1/2 p-4 min-w-[350px] sm:min-w-[450px]">
-						<h1 className="font-semibold text-4xl text-hackrpi-orange mb-4">Location</h1>
+						<h1 className="font-semibold text-5xl text-hackrpi-orange mb-4 font-neutral">Location:</h1>
 						<div className="text-2xl mb-10">
-							<h3 className="text-hackrpi-orange text-2xl font-bold">📍 Darrin Communications Center</h3>
-							<h3 className="text-hackrpi-yellow">Rensselaer Polytechnic Institute</h3>
+							<h3 className="text-hackrpi-orange text-3xl font-bold">📍 Darrin Communications Center 📍</h3>
+							<h3 className="text-hackrpi-yellow font-bold"> Rensselaer Polytechnic Institute</h3>
 							<p className="text-hackrpi-yellow">
 								Address:{" "}
 								<a
@@ -34,10 +34,19 @@ function EventPage() {
 							</p>
 						</div>
 
-						<GoogleMapsWidget />
+						<div className="w-full h-96">
+							<iframe
+								width="100%"
+								height="100%"
+								frameBorder="0"
+								style={{ border: 0 }}
+								src="https://maps.google.com/?q=Darrin+Communications+Center+51+College+Ave+Troy+NY+12180&output=embed"
+								allowFullScreen
+							></iframe>
+						</div>
 
 						<div className="text-2xl mt-10">
-							<h3 className="font-bold text-2xl text-hackrpi-orange">Free Parking</h3>
+							<h3 className="font-bold text-2xl text-hackrpi-orange font-neutral">Free Parking</h3>
 							<p className="text-hackrpi-yellow">
 								Parking is available at North Hall Parking Lot, 2-minute walk to Darrin Communications Center
 							</p>
@@ -67,7 +76,7 @@ function EventPage() {
 						<MapsDCCLow />
 					</div>
 				</div>
-				<div className="flex flex-col items-start justify-start bg-hackrpi-light-purple w-full py-8">
+				<div className="flex flex-row items-center justify-center bg-gradient-to-r from-hackrpi-pink via-hackrpi-light-purple to-hackrpi-pink w-full py-8">
 					<h1 className="text-4xl text-white font-bold ml-4">Need Help?</h1>
 					<div className="w-full flex items-start justify-start flex-col md:flex-row">
 						<div className="container p-4">

@@ -16,14 +16,6 @@ export const links: NavGroup[] = [
 		],
 	},
 	{
-		name: "Event",
-		links: [
-			{ href: "/event", children: "Event Info" },
-			{ href: "/event/schedule", children: "Schedule" },
-			{ href: "/event/prizes", children: "Prizes" },
-		],
-	},
-	{
 		name: "HackRPI XI",
 		links: [
 			{ href: "/last-year#winners", children: "Winners" },

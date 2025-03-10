@@ -60,42 +60,42 @@ export default function Home() {
 				<div
 					className={`${
 						showHighlightDot ? "fixed top-32 right-3.5 block" : "opacity-0"
-					} w-12 h-12 z-[5] bg-white border-[6px] border-hackrpi-primary-blue rounded-full transition-opacity duration-500`}
+					} w-12 h-12 z-[5] bg-white border-[6px] border-hackrpi-light-purple rounded-full transition-opacity duration-500`}
 				></div>
 
 				<div
-					className="absolute w-3 right-8	 bg-hackrpi-primary-blue"
+					className="absolute w-3 right-8	 bg-hackrpi-light-purple"
 					style={{
 						top: lineStart + "px",
 						height: lineEnd - lineStart + "px",
 					}}
 				></div>
 				<div
-					className={`absolute bg-hackrpi-secondary-dark-blue  w-12 h-12 rounded-full  border-[6px] border-hackrpi-primary-blue transition-colors duration-300 z-0 right-3.5`}
+					className={`absolute bg-hackrpi-secondary-dark-blue  w-12 h-12 rounded-full  border-[6px] border-hackrpi-light-purple transition-colors duration-300 z-0 right-3.5`}
 					style={{
 						top: lineStart - 20 + "px",
 					}}
 				></div>
 				<div
-					className={`absolute bg-hackrpi-secondary-dark-blue  w-12 h-12 rounded-full  border-[6px] border-hackrpi-primary-blue transition-colors duration-300 z-0 right-3.5`}
+					className={`absolute bg-hackrpi-secondary-dark-blue  w-12 h-12 rounded-full  border-[6px] border-hackrpi-light-purple transition-colors duration-300 z-0 right-3.5`}
 					style={{
 						top: faqStart - 22 + "px",
 					}}
 				></div>
 				<div
-					className={`absolute bg-hackrpi-secondary-dark-blue  w-12 h-12 rounded-full  border-[6px] border-hackrpi-primary-blue transition-colors duration-300 z-0 right-3.5`}
+					className={`absolute bg-hackrpi-secondary-dark-blue  w-12 h-12 rounded-full  border-[6px] border-hackrpi-light-purple transition-colors duration-300 z-0 right-3.5`}
 					style={{
 						top: sponsorsStart + 150 + "px",
 					}}
 				></div>
 				<div
-					className={`absolute bg-hackrpi-secondary-dark-blue  w-12 h-12 rounded-full  border-[6px] border-hackrpi-primary-blue transition-colors duration-300 z-0 right-3.5`}
+					className={`absolute bg-hackrpi-secondary-dark-blue  w-12 h-12 rounded-full  border-[6px] border-hackrpi-light-purple transition-colors duration-300 z-0 right-3.5`}
 					style={{
 						top: teamStart - 22 + "px",
 					}}
 				></div>
 				<div
-					className={`absolute bg-hackrpi-secondary-dark-blue w-12 h-12 rounded-full  border-[6px] border-hackrpi-primary-blue transition-colors duration-300 z-0 right-3.5`}
+					className={`absolute bg-hackrpi-secondary-dark-blue w-12 h-12 rounded-full  border-[6px] border-hackrpi-light-purple transition-colors duration-300 z-0 right-3.5`}
 					style={{
 						top: lineEnd - 20 + "px",
 					}}

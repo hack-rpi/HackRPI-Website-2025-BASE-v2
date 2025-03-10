@@ -21,7 +21,7 @@ export default function MobileNavBar({ links }: { links: NavGroup[] }) {
 
 	return (
 		<>
-			<div className="w-screen h-24 flex items-center justify-center fixed top-0 bg-hackrpi-dark-blue z-20">
+			<div className="w-screen h-24 flex items-center justify-center fixed top-0 bg-gradient-to-r from-hackrpi-light-purple via-hackrpi-pink to-hackrpi-light-purple z-20">
 				<div className="flex items-center justify-start w-1/3">
 					<button onClick={() => setNavMenuOpen((prev) => !prev)} className="text-white text-4xl ml-8 ">
 						<NextImg alt="Hamburger Menu" src="/menu-icon.svg" width={40} height={40} priority={true} />
