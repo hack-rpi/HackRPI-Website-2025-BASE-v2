@@ -28,10 +28,10 @@ describe("AboutUs Component", () => {
 		const mainHeading = screen.getByRole("heading", { name: /About HackRPI/i });
 		expect(mainHeading).toBeInTheDocument();
 
-		// Check if the "When & Where" heading is rendered 
+		// Check if the "When & Where" heading is rendered
 		const whenWhereHeading = screen.getByRole("heading", { name: /When & Where/i });
 		expect(whenWhereHeading).toBeInTheDocument();
-		
+
 		// 2025 best practice: Test section structure and relationships
 		// Use container query to find the about section (using the id)
 		const aboutSection = container.querySelector("#about");
@@ -50,7 +50,7 @@ describe("AboutUs Component", () => {
 		const firstThemeElement = themeElements[0];
 		expect(firstThemeElement).toHaveClass("text-hackrpi-orange");
 		expect(firstThemeElement).toHaveClass("font-bold");
-		
+
 		// 2025 best practice: Find a paragraph that contains the theme element
 		const paragraphWithTheme = firstThemeElement.closest("p");
 		expect(paragraphWithTheme).not.toBeNull();
@@ -64,15 +64,15 @@ describe("AboutUs Component", () => {
 		// 2025 best practice: Test how the information is structured for users
 		const dateElement = screen.getByText("November 15-16, 2025");
 		expect(dateElement).toBeInTheDocument();
-		
+
 		// Test that location info is properly grouped - get the exact text content
 		const rpiElement = screen.getAllByText(/Rensselaer Polytechnic Institute/)[1]; // Get the second occurrence (location section)
 		expect(rpiElement).toBeInTheDocument();
-		
+
 		// Find the parent div that contains all location info
 		const locationSection = rpiElement.closest("div");
 		expect(locationSection).not.toBeNull();
-		
+
 		// Check that both location elements are within the same container
 		expect(within(locationSection as HTMLElement).getByText("Darrin Communications Center")).toBeInTheDocument();
 	});
@@ -85,11 +85,11 @@ describe("AboutUs Component", () => {
 		const registrationLink = screen.getByRole("link", { name: /Registration Link/i });
 		expect(registrationLink).toBeInTheDocument();
 		expect(registrationLink).toHaveClass("text-xl");
-		
+
 		// 2025 best practice: Find the REGISTER NOW text separately
 		const registerNowText = screen.getByText(/REGISTER NOW!/i);
 		expect(registerNowText).toBeInTheDocument();
-		
+
 		// Verify they are both in the document but don't assert they're in the same container
 		expect(container).toContainElement(registrationLink);
 		expect(container).toContainElement(registerNowText);
@@ -107,7 +107,7 @@ describe("AboutUs Component", () => {
 		expect(darkPurpleDiv).toBeInTheDocument();
 		expect(darkPurpleDiv).toHaveClass("text-black");
 		expect(darkPurpleDiv?.textContent).toContain("REGISTER NOW!");
-		
+
 		// 2025 best practice: Check if it has styling for scrolling text
 		expect(darkPurpleDiv).toHaveClass("overflow-hidden");
 		expect(darkPurpleDiv).toHaveClass("whitespace-nowrap");
@@ -122,26 +122,26 @@ describe("AboutUs Component", () => {
 
 		const goalText = screen.getByText(/Our goal is to inspire and challenge innovators/i);
 		expect(goalText).toBeInTheDocument();
-		
+
 		// 2025 best practice: Test that important information is highlighted
 		const highlightedInfo = screen.getAllByText(/Urban Upgrades/i);
 		expect(highlightedInfo.length).toBeGreaterThan(0);
 	});
-	
+
 	// 2025 best practice: Add accessibility testing
 	it("is accessible with proper ARIA attributes", () => {
 		const { container } = renderWithProviders(<AboutUs />);
-		
+
 		// 2025 best practice: Test for basic accessibility patterns
 		const links = screen.getAllByRole("link");
 		expect(links.length).toBeGreaterThan(0);
-		links.forEach(link => {
+		links.forEach((link) => {
 			expect(link).toHaveAccessibleName();
 		});
-		
+
 		const headings = screen.getAllByRole("heading");
 		expect(headings.length).toBeGreaterThan(1);
-		
+
 		// Check that the component has a logical structure
 		expect(container.querySelector("#about")).not.toBeNull();
 	});

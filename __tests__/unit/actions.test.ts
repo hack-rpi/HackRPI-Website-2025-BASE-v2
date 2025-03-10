@@ -47,7 +47,7 @@ type LeaderboardResponse = {
 jest.mock("@/app/actions", () => {
 	// Use actual implementation for type safety but mock the functions
 	const originalModule = jest.requireActual("@/app/actions");
-	
+
 	return {
 		...originalModule,
 		get_leaderboard: jest.fn(),
@@ -100,7 +100,7 @@ describe("Server Actions", () => {
 			expect(result).toEqual([]);
 			expect(get_leaderboard).toHaveBeenCalledTimes(1);
 		});
-		
+
 		// 2025 Best Practice: Test filtering, sorting and other business logic
 		it("should return entries sorted by score in descending order", async () => {
 			const unsortedData = [
@@ -108,7 +108,7 @@ describe("Server Actions", () => {
 				{ id: "2", username: "player2", score: 1000, year: 2024 },
 				{ id: "3", username: "player3", score: 750, year: 2024 },
 			];
-			
+
 			const expectedSortedData = [
 				{ id: "2", username: "player2", score: 1000, year: 2024 },
 				{ id: "3", username: "player3", score: 750, year: 2024 },
@@ -177,30 +177,30 @@ describe("Server Actions", () => {
 					id: "new-id",
 					username: "validuser",
 					score: 1000,
-					year: 2025
-				}
+					year: 2025,
+				},
 			};
-			
+
 			(create_leaderboard_entry as jest.Mock).mockResolvedValueOnce(mockResponse);
 
-			const result = await create_leaderboard_entry({
+			const result = (await create_leaderboard_entry({
 				username: "validuser",
 				score: 1000,
-			}) as LeaderboardResponse; // Cast the result to our custom type
+			})) as LeaderboardResponse; // Cast the result to our custom type
 
 			expect(result.status).toBe(200);
 			expect(result.message).toBe("Success");
 			// Use type assertion to inform TypeScript about the structure
 			expect(result.entry).toBeDefined();
 			expect((result as LeaderboardResponse).entry?.id).toBe("new-id");
-			
+
 			expect(create_leaderboard_entry).toHaveBeenCalledTimes(1);
 			expect(create_leaderboard_entry).toHaveBeenCalledWith({
 				username: "validuser",
 				score: 1000,
 			});
 		});
-		
+
 		// 2025 Best Practice: Test error handling for server errors
 		it("should handle server errors appropriately", async () => {
 			(create_leaderboard_entry as jest.Mock).mockResolvedValueOnce({
@@ -237,7 +237,7 @@ describe("Server Actions", () => {
 					requiresRegistration: false,
 				},
 			];
-			
+
 			(fetchEvents as jest.Mock).mockResolvedValueOnce({
 				status: 200,
 				message: "Success",
@@ -270,7 +270,7 @@ describe("Server Actions", () => {
 			expect(result.events).toEqual([]);
 			expect(fetchEvents).toHaveBeenCalledTimes(1);
 		});
-		
+
 		// 2025 Best Practice: Test filtering functionality
 		it("should filter out non-visible events", async () => {
 			const mockAllEvents = [
@@ -291,7 +291,7 @@ describe("Server Actions", () => {
 					column: 0,
 				},
 			];
-			
+
 			const expectedVisibleEvents = [
 				{
 					id: "1",
@@ -302,7 +302,7 @@ describe("Server Actions", () => {
 					column: 0,
 				},
 			];
-			
+
 			(fetchEvents as jest.Mock).mockResolvedValueOnce({
 				status: 200,
 				message: "Success",
@@ -314,7 +314,7 @@ describe("Server Actions", () => {
 			expect(result.status).toBe(200);
 			expect(result.events).toHaveLength(1);
 			expect(result.events[0].title).toBe("Opening Ceremony");
-			expect(result.events.find(e => e.title === "Hidden Event")).toBeUndefined();
+			expect(result.events.find((e) => e.title === "Hidden Event")).toBeUndefined();
 		});
 	});
 
@@ -337,7 +337,7 @@ describe("Server Actions", () => {
 			expect(result).toBe(false);
 			expect(is_game_ready).toHaveBeenCalledTimes(1);
 		});
-		
+
 		// 2025 Best Practice: Test error handling in boolean functions
 		it("should return false when checking game ready status fails", async () => {
 			(is_game_ready as jest.Mock).mockImplementationOnce(async () => {

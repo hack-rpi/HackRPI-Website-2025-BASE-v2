@@ -20,7 +20,11 @@ export const mockScrollIntoView = jest.fn();
 
 // 2025 best practice: Provide a theme context if your app uses themes
 export const ThemeProvider = ({ children, theme = "light" }: { children: React.ReactNode; theme?: string }) => {
-	return <div data-theme={theme} data-testid="theme-provider">{children}</div>;
+	return (
+		<div data-theme={theme} data-testid="theme-provider">
+			{children}
+		</div>
+	);
 };
 
 // Mock Next.js navigation hooks - 2025 updated approach
