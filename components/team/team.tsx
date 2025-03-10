@@ -92,18 +92,21 @@ export default function TeamComponent() {
 					<HackRPILink
 						className="w-72 h-12 flex items-center justify-center text-xl text-center my-1"
 						href="https://discord.gg/Pzmdt7FYnu"
+						target="_blank"
 					>
 						Join our Organizing Team!
 					</HackRPILink>
 					<HackRPILink
 						className="w-72 h-12 flex items-center justify-center text-xl text-center my-1 sm:mx-2 "
 						href="https://forms.gle/2riKKB6H2ajsd1FM7"
+						target="_blank"
 					>
 						Help Mentor!
 					</HackRPILink>
 					<HackRPILink
 						className="w-72 h-12 flex items-center justify-center text-xl text-center my-1"
 						href="https://forms.gle/3M6TZo7PRwgWSqqB8"
+						target="_blank"
 					>
 						Volunteer!
 					</HackRPILink>

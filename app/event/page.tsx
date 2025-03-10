@@ -101,6 +101,7 @@ function EventPage() {
 							<HackRPILink
 								href="https://discord.gg/7b2zc8fe26"
 								className="hover:bg-gradient-to-br hover:from-[#5865F2] hover:to-[#7289da] hover:bg-transparent hover:border-[#5865F2] w-20 h-20 flex items-center justify-center"
+								target="_blank"
 							>
 								<Image src="/social/discord.svg" alt="Discord Logo" width={50} height={50} />
 							</HackRPILink>
@@ -165,6 +166,7 @@ function EventPage() {
 							<HackRPILink
 								href="https://hackrpi2024.devpost.com/"
 								className="text-3xl mt-4 text-center text-hackrpi-orange"
+								target="_blank"
 							>
 								DEVPOST
 							</HackRPILink>
