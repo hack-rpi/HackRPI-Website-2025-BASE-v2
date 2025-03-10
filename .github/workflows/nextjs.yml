@@ -88,7 +88,7 @@ jobs:
       
       # Optimized caching strategy
       - name: Cache node_modules
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         id: node-modules-cache
         with:
           path: node_modules
@@ -136,14 +136,14 @@ jobs:
       
       # Reusing improved caching from above
       - name: Cache node_modules
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         id: node-modules-cache
         with:
           path: node_modules
           key: ${{ runner.os }}-${{ steps.detect-package-manager.outputs.manager }}-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}
       
       - name: Restore Next.js build cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             .next/cache
@@ -169,7 +169,7 @@ jobs:
         env:
           NODE_OPTIONS: --max-old-space-size=4096
 
-  # Added tests job (if you have tests)
+  # Test job
   test:
     runs-on: ubuntu-latest
     needs: [changes]
@@ -203,7 +203,7 @@ jobs:
           cache: ${{ steps.detect-package-manager.outputs.manager }}
       
       - name: Cache node_modules
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         id: node-modules-cache
         with:
           path: node_modules
@@ -214,4 +214,4 @@ jobs:
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
       
       - name: Run tests
-        run: ${{ steps.detect-package-manager.outputs.runner }} test
+        run: ${{ steps.detect-package-manager.outputs.manager }} test
