@@ -2,7 +2,6 @@ import { Link } from "@/data/nav-bar-links";
 // import Image from "next/image";
 import NextLink from "next/link";
 
-
 // Commented out because we don't have the links yet
 // const links: Link[] = [
 // 	{ href: "/event", children: "Event Information" },
