@@ -158,7 +158,7 @@ describe("Event Page", () => {
 		render(<EventPage />);
 
 		// Check for the Devpost link
-		const devpostLink = screen.getByTestId("hackrpi-link-https-hackrpi2024-devpost-com-");
+		const devpostLink = screen.getByTestId("hackrpi-link-https---hackrpi2024-devpost-com-");
 		expect(devpostLink).toBeInTheDocument();
 		expect(devpostLink).toHaveAttribute("href", "https://hackrpi2024.devpost.com/");
 		expect(devpostLink.textContent).toBe("DEVPOST");
@@ -172,7 +172,7 @@ describe("Event Page", () => {
 		expect(screen.getByText("EVENT DISCORD")).toBeInTheDocument();
 
 		// Check for the Discord link with specific testid
-		const discordLink = screen.getByTestId("hackrpi-link-https-discord-gg-7b2zc8fe26");
+		const discordLink = screen.getByTestId("hackrpi-link-https---discord-gg-7b2zc8fe26");
 		expect(discordLink).toHaveAttribute("href", "https://discord.gg/7b2zc8fe26");
 	});
 });
