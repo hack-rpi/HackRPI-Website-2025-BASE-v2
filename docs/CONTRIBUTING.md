@@ -81,12 +81,14 @@ There are a few code style things to mention:
 We use Jest and React Testing Library for testing our application. When contributing, please ensure that your code is well-tested by following these guidelines:
 
 1. **Write Tests for New Features**
+
    - All new functionality should have corresponding tests.
    - For utility functions, write unit tests in the `__tests__/unit/` directory.
    - For components, write component tests in the `__tests__/components/` directory.
    - For complex interactions, write integration tests in the `__tests__/integration/` directory.
 
 2. **Run Tests Before Submitting**
+
    - Before creating a pull request, run the test suite to make sure all tests pass:
      ```bash
      npm test
@@ -94,6 +96,7 @@ We use Jest and React Testing Library for testing our application. When contribu
    - If your tests fail, fix the issues before submitting your PR.
 
 3. **Test Coverage**
+
    - Aim for high test coverage in your code changes.
    - You can check test coverage by running:
      ```bash

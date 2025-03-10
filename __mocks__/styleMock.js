@@ -1,2 +1,2 @@
 // Mock file for CSS
-module.exports = {}; 
+module.exports = {};
