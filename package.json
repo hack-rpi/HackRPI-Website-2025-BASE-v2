@@ -43,7 +43,7 @@
 		"babel-jest": "^29.7.0",
 		"constructs": "^10.4.2",
 		"daisyui": "^4.12.13",
-		"esbuild": "^0.24.0",
+		"esbuild": "^0.25.1",
 		"eslint": "^8.57.0",
 		"eslint-config-next": "^14.2.16",
 		"eslint-plugin-import": "^2.31.0",
