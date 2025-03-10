@@ -118,7 +118,7 @@ const FAQPage = () => {
 						key={index}
 						className={`collapse collapse-arrow custom-arrow bg-retro-purple-dark p-1 text-2xl border-t-2 ${
 							index === faqs.length - 1 ? "border-b-2" : ""
-						} border-retro-orange rounded-none`} 
+						} border-retro-orange rounded-none`}
 					>
 						<input
 							type="checkbox"
