@@ -213,5 +213,12 @@ jobs:
         if: steps.node-modules-cache.outputs.cache-hit != 'true'
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
       
+      # Added Amplify file creation steps
+      - name: Add Amplify outputs file
+        run: touch amplify_outputs.json
+      
+      - name: Populate Amplify outputs file
+        run: echo "{}" > amplify_outputs.json
+      
       - name: Run tests
         run: ${{ steps.detect-package-manager.outputs.manager }} test
