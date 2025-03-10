@@ -3,7 +3,7 @@
  */
 import React from "react";
 import { render, screen, within } from "@testing-library/react";
-import userEvent from '@testing-library/user-event';
+import userEvent from "@testing-library/user-event";
 
 // Import the components
 import Home from "@/app/page";
@@ -26,16 +26,16 @@ jest.mock("next/navigation", () => ({
 		prefetch: mockRouterPrefetch,
 		back: jest.fn(),
 		forward: jest.fn(),
-		pathname: '/',
+		pathname: "/",
 		query: {},
-		asPath: '/',
+		asPath: "/",
 		events: {
 			on: jest.fn(),
 			off: jest.fn(),
 			emit: jest.fn(),
-		}
+		},
 	}),
-	usePathname: () => '/',
+	usePathname: () => "/",
 	useSearchParams: () => new URLSearchParams(),
 }));
 
@@ -43,10 +43,10 @@ jest.mock("next/navigation", () => ({
 jest.mock("@/components/nav-bar/nav-bar", () => {
 	return jest.fn(({ showOnScroll }: { showOnScroll: boolean }) => (
 		<div data-testid="nav-bar" data-show-on-scroll={showOnScroll} role="navigation">
-			<a 
-				data-testid="home-link" 
-				href="/" 
-				role="link" 
+			<a
+				data-testid="home-link"
+				href="/"
+				role="link"
 				aria-label="Navigate to Home"
 				onClick={(e) => {
 					e.preventDefault();
@@ -55,10 +55,10 @@ jest.mock("@/components/nav-bar/nav-bar", () => {
 			>
 				Home
 			</a>
-			<a 
-				data-testid="event-link" 
-				href="/event" 
-				role="link" 
+			<a
+				data-testid="event-link"
+				href="/event"
+				role="link"
 				aria-label="Navigate to Event"
 				onClick={(e) => {
 					e.preventDefault();
@@ -67,10 +67,10 @@ jest.mock("@/components/nav-bar/nav-bar", () => {
 			>
 				Event
 			</a>
-			<a 
-				data-testid="resources-link" 
-				href="/resources" 
-				role="link" 
+			<a
+				data-testid="resources-link"
+				href="/resources"
+				role="link"
 				aria-label="Navigate to Resources"
 				onClick={(e) => {
 					e.preventDefault();
@@ -79,10 +79,10 @@ jest.mock("@/components/nav-bar/nav-bar", () => {
 			>
 				Resources
 			</a>
-			<a 
-				data-testid="last-year-link" 
-				href="/last-year" 
-				role="link" 
+			<a
+				data-testid="last-year-link"
+				href="/last-year"
+				role="link"
 				aria-label="Navigate to Last Year"
 				onClick={(e) => {
 					e.preventDefault();
@@ -91,10 +91,10 @@ jest.mock("@/components/nav-bar/nav-bar", () => {
 			>
 				Last Year
 			</a>
-			<a 
-				data-testid="faq-link" 
-				href="#faq" 
-				role="link" 
+			<a
+				data-testid="faq-link"
+				href="#faq"
+				role="link"
 				aria-label="FAQ"
 				onClick={(e) => {
 					e.preventDefault();
@@ -112,8 +112,8 @@ jest.mock("@/app/page", () => {
 	return () => (
 		<div className="flex flex-col" role="main">
 			<nav data-testid="nav-bar" role="navigation">
-				<a 
-					href="/" 
+				<a
+					href="/"
 					data-testid="home-link"
 					onClick={(e) => {
 						e.preventDefault();
@@ -124,8 +124,8 @@ jest.mock("@/app/page", () => {
 				>
 					Home
 				</a>
-				<a 
-					href="/event" 
+				<a
+					href="/event"
 					data-testid="event-link"
 					onClick={(e) => {
 						e.preventDefault();
@@ -136,8 +136,8 @@ jest.mock("@/app/page", () => {
 				>
 					Event
 				</a>
-				<a 
-					href="/resources" 
+				<a
+					href="/resources"
 					data-testid="resources-link"
 					onClick={(e) => {
 						e.preventDefault();
@@ -148,8 +148,8 @@ jest.mock("@/app/page", () => {
 				>
 					Resources
 				</a>
-				<a 
-					href="/last-year" 
+				<a
+					href="/last-year"
 					data-testid="last-year-link"
 					onClick={(e) => {
 						e.preventDefault();
@@ -174,12 +174,22 @@ jest.mock("@/app/page", () => {
 				</a>
 			</nav>
 			<main>
-				<section id="about" data-testid="about" role="region" aria-label="About">About Section</section>
-				<section id="faq" data-testid="faq" role="region" aria-label="FAQ">FAQ Section</section>
-				<section id="sponsors" data-testid="sponsors" role="region" aria-label="Sponsors">Sponsors Section</section>
-				<section id="team" data-testid="team" role="region" aria-label="Team">Team Section</section>
+				<section id="about" data-testid="about" role="region" aria-label="About">
+					About Section
+				</section>
+				<section id="faq" data-testid="faq" role="region" aria-label="FAQ">
+					FAQ Section
+				</section>
+				<section id="sponsors" data-testid="sponsors" role="region" aria-label="Sponsors">
+					Sponsors Section
+				</section>
+				<section id="team" data-testid="team" role="region" aria-label="Team">
+					Team Section
+				</section>
 			</main>
-			<footer data-testid="footer" role="contentinfo">Footer</footer>
+			<footer data-testid="footer" role="contentinfo">
+				Footer
+			</footer>
 		</div>
 	);
 });
@@ -188,8 +198,8 @@ jest.mock("@/app/event/page", () => {
 	return () => (
 		<div role="main">
 			<nav data-testid="nav-bar" role="navigation">
-				<a 
-					href="/" 
+				<a
+					href="/"
 					data-testid="home-link"
 					onClick={(e) => {
 						e.preventDefault();
@@ -210,8 +220,8 @@ jest.mock("@/app/resources/page", () => {
 	return () => (
 		<div role="main">
 			<nav data-testid="nav-bar" role="navigation">
-				<a 
-					href="/event" 
+				<a
+					href="/event"
 					data-testid="event-link"
 					onClick={(e) => {
 						e.preventDefault();
@@ -232,8 +242,8 @@ jest.mock("@/app/last-year/page", () => {
 	return () => (
 		<div role="main">
 			<nav data-testid="nav-bar" role="navigation">
-				<a 
-					href="/resources" 
+				<a
+					href="/resources"
 					data-testid="resources-link"
 					onClick={(e) => {
 						e.preventDefault();
@@ -253,24 +263,44 @@ jest.mock("@/app/last-year/page", () => {
 // Mock maps components
 jest.mock("@/components/maps/maps", () => ({
 	__esModule: true,
-	default: () => <div data-testid="maps" role="img" aria-label="Maps">Maps Component</div>,
-	MapsDCCLow: () => <div data-testid="maps-dcc" role="img" aria-label="DCC Map">DCC Map Component</div>,
+	default: () => (
+		<div data-testid="maps" role="img" aria-label="Maps">
+			Maps Component
+		</div>
+	),
+	MapsDCCLow: () => (
+		<div data-testid="maps-dcc" role="img" aria-label="DCC Map">
+			DCC Map Component
+		</div>
+	),
 }));
 
 jest.mock("@/components/maps/google_maps", () => ({
 	__esModule: true,
-	default: () => <div data-testid="google-maps" role="img" aria-label="Google Maps">Google Maps Component</div>,
+	default: () => (
+		<div data-testid="google-maps" role="img" aria-label="Google Maps">
+			Google Maps Component
+		</div>
+	),
 }));
 
 jest.mock("@/components/prev-projects/project-display", () => {
 	return function MockProjectDisplay() {
-		return <div data-testid="project-display" role="article">Project Display</div>;
+		return (
+			<div data-testid="project-display" role="article">
+				Project Display
+			</div>
+		);
 	};
 });
 
 jest.mock("@/components/prev-projects/project-carousel", () => {
 	return function MockProjectCarousel() {
-		return <div data-testid="project-carousel" role="region" aria-label="Project Carousel">Project Carousel</div>;
+		return (
+			<div data-testid="project-carousel" role="region" aria-label="Project Carousel">
+				Project Carousel
+			</div>
+		);
 	};
 });
 
@@ -285,12 +315,7 @@ jest.mock("@/components/themed-components/hackrpi-link", () => {
 		className?: string;
 	}) {
 		return (
-			<a 
-				data-testid="hackrpi-link" 
-				href={href} 
-				className={className} 
-				role="link"
-			>
+			<a data-testid="hackrpi-link" href={href} className={className} role="link">
 				{children}
 			</a>
 		);
@@ -313,32 +338,32 @@ function mockHomePageElements() {
 	// Mock the DOM elements that are accessed in the Home page
 	document.getElementById = jest.fn((id) => {
 		// Create and return fake elements for each ID
-		const element = document.createElement('div');
+		const element = document.createElement("div");
 		element.id = id;
-		
+
 		// Add properties needed for the component
 		Object.defineProperties(element, {
 			offsetTop: {
 				configurable: true,
-				value: 100
+				value: 100,
 			},
 			offsetHeight: {
 				configurable: true,
-				value: 200
+				value: 200,
 			},
 			scrollIntoView: {
 				configurable: true,
-				value: jest.fn()
-			}
+				value: jest.fn(),
+			},
 		});
-		
+
 		return element;
 	});
-	
+
 	// Mock window.scrollY
-	Object.defineProperty(window, 'scrollY', {
+	Object.defineProperty(window, "scrollY", {
 		writable: true,
-		value: 500
+		value: 500,
 	});
 }
 
@@ -353,10 +378,10 @@ function renderWithRouter(ui: React.ReactElement) {
 		delay: 10,
 		pointerEventsCheck: 0,
 	});
-	
+
 	// Render the component
 	const result = render(ui);
-	
+
 	return {
 		user,
 		...result,
@@ -368,20 +393,20 @@ describe("Page Navigation Integration Tests", () => {
 		// Reset mocks
 		jest.clearAllMocks();
 		mockHomePageElements();
-		
+
 		// Mock scrollIntoView for anchor navigation
 		Element.prototype.scrollIntoView = jest.fn();
-		
+
 		// Setup mock getElementById for navigating to sections
 		document.getElementById = jest.fn((id) => {
 			if (!id) return null;
-			
-			const element = document.createElement('div');
+
+			const element = document.createElement("div");
 			element.id = id;
 			Object.defineProperties(element, {
 				offsetTop: { configurable: true, value: 100 },
 				offsetHeight: { configurable: true, value: 200 },
-				scrollIntoView: { configurable: true, value: jest.fn() }
+				scrollIntoView: { configurable: true, value: jest.fn() },
 			});
 			return element;
 		});
@@ -390,12 +415,12 @@ describe("Page Navigation Integration Tests", () => {
 	it("should navigate from Home to Event page when event link is clicked", async () => {
 		// Arrange
 		const { user } = renderWithRouter(<Home />);
-		
+
 		// Act - Using ARIA best practices for finding elements
-		const navigation = screen.getByRole('navigation');
-		const eventLink = within(navigation).getByRole('link', { name: /event/i });
+		const navigation = screen.getByRole("navigation");
+		const eventLink = within(navigation).getByRole("link", { name: /event/i });
 		await user.click(eventLink);
-		
+
 		// Assert with descriptive comment
 		expect(mockRouterPush).toHaveBeenCalledWith("/event");
 		// Router should navigate to the event page
@@ -404,12 +429,12 @@ describe("Page Navigation Integration Tests", () => {
 	it("should navigate from Home to Resources page when resources link is clicked", async () => {
 		// Arrange
 		const { user } = renderWithRouter(<Home />);
-		
+
 		// Act - Using ARIA best practices for finding elements
-		const navigation = screen.getByRole('navigation');
-		const resourcesLink = within(navigation).getByRole('link', { name: /resources/i });
+		const navigation = screen.getByRole("navigation");
+		const resourcesLink = within(navigation).getByRole("link", { name: /resources/i });
 		await user.click(resourcesLink);
-		
+
 		// Assert with descriptive comment
 		expect(mockRouterPush).toHaveBeenCalledWith("/resources");
 		// Router should navigate to the resources page
@@ -418,12 +443,12 @@ describe("Page Navigation Integration Tests", () => {
 	it("should navigate from Home to Last Year page when last year link is clicked", async () => {
 		// Arrange
 		const { user } = renderWithRouter(<Home />);
-		
+
 		// Act - Using ARIA best practices for finding elements
-		const navigation = screen.getByRole('navigation');
-		const lastYearLink = within(navigation).getByRole('link', { name: /last year/i });
+		const navigation = screen.getByRole("navigation");
+		const lastYearLink = within(navigation).getByRole("link", { name: /last year/i });
 		await user.click(lastYearLink);
-		
+
 		// Assert with descriptive comment
 		expect(mockRouterPush).toHaveBeenCalledWith("/last-year");
 		// Router should navigate to the last year page
@@ -432,12 +457,12 @@ describe("Page Navigation Integration Tests", () => {
 	it("should navigate from Event page back to Home when home link is clicked", async () => {
 		// Arrange
 		const { user } = renderWithRouter(<EventPage />);
-		
+
 		// Act - Using ARIA best practices for finding elements
-		const navigation = screen.getByRole('navigation');
-		const homeLink = within(navigation).getByRole('link', { name: /home/i });
+		const navigation = screen.getByRole("navigation");
+		const homeLink = within(navigation).getByRole("link", { name: /home/i });
 		await user.click(homeLink);
-		
+
 		// Assert with descriptive comment
 		expect(mockRouterPush).toHaveBeenCalledWith("/");
 		// Router should navigate to the home page
@@ -446,12 +471,12 @@ describe("Page Navigation Integration Tests", () => {
 	it("should navigate from Resources page to Event page when event link is clicked", async () => {
 		// Arrange
 		const { user } = renderWithRouter(<ResourcesPage />);
-		
+
 		// Act - Using ARIA best practices for finding elements
-		const navigation = screen.getByRole('navigation');
-		const eventLink = within(navigation).getByRole('link', { name: /event/i });
+		const navigation = screen.getByRole("navigation");
+		const eventLink = within(navigation).getByRole("link", { name: /event/i });
 		await user.click(eventLink);
-		
+
 		// Assert with descriptive comment
 		expect(mockRouterPush).toHaveBeenCalledWith("/event");
 		// Router should navigate to the event page
@@ -460,12 +485,12 @@ describe("Page Navigation Integration Tests", () => {
 	it("should navigate from Last Year page to Resources page when resources link is clicked", async () => {
 		// Arrange
 		const { user } = renderWithRouter(<PastYearProjects />);
-		
+
 		// Act - Using ARIA best practices for finding elements
-		const navigation = screen.getByRole('navigation');
-		const resourcesLink = within(navigation).getByRole('link', { name: /resources/i });
+		const navigation = screen.getByRole("navigation");
+		const resourcesLink = within(navigation).getByRole("link", { name: /resources/i });
 		await user.click(resourcesLink);
-		
+
 		// Assert with descriptive comment
 		expect(mockRouterPush).toHaveBeenCalledWith("/resources");
 		// Router should navigate to the resources page
@@ -474,15 +499,15 @@ describe("Page Navigation Integration Tests", () => {
 	it("should scroll into view when an anchor link is clicked", async () => {
 		// Arrange
 		const { user } = renderWithRouter(<Home />);
-		
+
 		// Reset the mock counter
 		mockScrollIntoView.mockClear();
-		
+
 		// Act - Simulate a click on the FAQ link
-		const navigation = screen.getByRole('navigation');
-		const faqLink = within(navigation).getByRole('link', { name: /faq/i });
+		const navigation = screen.getByRole("navigation");
+		const faqLink = within(navigation).getByRole("link", { name: /faq/i });
 		await user.click(faqLink);
-		
+
 		// Assert with better error messages
 		expect(mockScrollIntoView).toHaveBeenCalledTimes(1);
 		// scrollIntoView should be called exactly once when FAQ link is clicked
@@ -491,10 +516,10 @@ describe("Page Navigation Integration Tests", () => {
 	it("should handle anchor navigation in the URL", async () => {
 		// Create a mock for handling hash change
 		const mockHandleHashChange = jest.fn();
-		
+
 		// Add a hash change event listener
-		window.addEventListener('hashchange', mockHandleHashChange);
-		
+		window.addEventListener("hashchange", mockHandleHashChange);
+
 		// Simulate a URL with an anchor
 		Object.defineProperty(window, "location", {
 			writable: true,
@@ -504,28 +529,36 @@ describe("Page Navigation Integration Tests", () => {
 				hash: "#about",
 			},
 		});
-		
+
 		// Trigger hash change event
 		const hashChangeEvent = new Event("hashchange");
 		window.dispatchEvent(hashChangeEvent);
-		
+
 		// Verify the hash change handler was called
 		expect(mockHandleHashChange).toHaveBeenCalledTimes(1);
-		
+
 		// Clean up
-		window.removeEventListener('hashchange', mockHandleHashChange);
+		window.removeEventListener("hashchange", mockHandleHashChange);
 	});
 });
 
 jest.mock("@/components/footer/footer", () => {
 	return function MockFooter() {
-		return <div data-testid="footer" role="contentinfo">Footer</div>;
+		return (
+			<div data-testid="footer" role="contentinfo">
+				Footer
+			</div>
+		);
 	};
 });
 
 jest.mock("@/components/title-components/title", () => {
 	return function MockTitle() {
-		return <div data-testid="title" role="banner">Title Component</div>;
+		return (
+			<div data-testid="title" role="banner">
+				Title Component
+			</div>
+		);
 	};
 });
 
