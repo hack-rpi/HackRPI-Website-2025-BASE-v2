@@ -1,15 +1,15 @@
-import { get_leaderboard, create_leaderboard_entry, fetchEvents, is_game_ready } from '@/app/actions';
-import { generateClient } from 'aws-amplify/api';
-import * as Auth from '@aws-amplify/auth';
+import { get_leaderboard, create_leaderboard_entry, fetchEvents, is_game_ready } from "@/app/actions";
+import { generateClient } from "aws-amplify/api";
+import * as Auth from "@aws-amplify/auth";
 
 // Mock AWS Amplify Auth
-jest.mock('@aws-amplify/auth', () => ({
-  fetchAuthSession: jest.fn(),
+jest.mock("@aws-amplify/auth", () => ({
+	fetchAuthSession: jest.fn(),
 }));
 
 // Mock AWS Amplify API
-jest.mock('aws-amplify/api', () => ({
-  generateClient: jest.fn(),
+jest.mock("aws-amplify/api", () => ({
+	generateClient: jest.fn(),
 }));
 
 // Setup mock functions
@@ -19,196 +19,196 @@ const mockList = jest.fn();
 
 // Mock the generateClient function
 (generateClient as jest.Mock).mockReturnValue({
-  models: {
-    Leaderboard: {
-      listByScore: mockListByScore,
-      create: mockCreate,
-    },
-    event: {
-      list: mockList,
-    },
-  },
+	models: {
+		Leaderboard: {
+			listByScore: mockListByScore,
+			create: mockCreate,
+		},
+		event: {
+			list: mockList,
+		},
+	},
 });
 
 // Mock the actions module directly
-jest.mock('@/app/actions', () => ({
-  get_leaderboard: jest.fn(),
-  create_leaderboard_entry: jest.fn(),
-  fetchEvents: jest.fn(),
-  is_game_ready: jest.fn(),
+jest.mock("@/app/actions", () => ({
+	get_leaderboard: jest.fn(),
+	create_leaderboard_entry: jest.fn(),
+	fetchEvents: jest.fn(),
+	is_game_ready: jest.fn(),
 }));
 
-describe('Server Actions', () => {
-  beforeEach(() => {
-    jest.clearAllMocks();
-  });
+describe("Server Actions", () => {
+	beforeEach(() => {
+		jest.clearAllMocks();
+	});
 
-  describe('get_leaderboard', () => {
-    it('should fetch leaderboard entries', async () => {
-      const mockData = [
-        { id: '1', username: 'player1', score: 1000, year: 2024 },
-        { id: '2', username: 'player2', score: 500, year: 2024 },
-      ];
-      
-      // Mock the implementation for this test
-      (get_leaderboard as jest.Mock).mockResolvedValueOnce(mockData);
+	describe("get_leaderboard", () => {
+		it("should fetch leaderboard entries", async () => {
+			const mockData = [
+				{ id: "1", username: "player1", score: 1000, year: 2024 },
+				{ id: "2", username: "player2", score: 500, year: 2024 },
+			];
 
-      const result = await get_leaderboard();
+			// Mock the implementation for this test
+			(get_leaderboard as jest.Mock).mockResolvedValueOnce(mockData);
 
-      // Should return the mocked data
-      expect(result).toEqual(mockData);
-      expect(get_leaderboard).toHaveBeenCalledTimes(1);
-    });
+			const result = await get_leaderboard();
 
-    it('should handle errors and return an empty array', async () => {
-      // Mock implementation to return empty array on error
-      (get_leaderboard as jest.Mock).mockResolvedValueOnce([]);
+			// Should return the mocked data
+			expect(result).toEqual(mockData);
+			expect(get_leaderboard).toHaveBeenCalledTimes(1);
+		});
 
-      const result = await get_leaderboard();
+		it("should handle errors and return an empty array", async () => {
+			// Mock implementation to return empty array on error
+			(get_leaderboard as jest.Mock).mockResolvedValueOnce([]);
 
-      // Should return an empty array
-      expect(result).toEqual([]);
-      expect(get_leaderboard).toHaveBeenCalledTimes(1);
-    });
-  });
+			const result = await get_leaderboard();
 
-  describe('create_leaderboard_entry', () => {
-    it('should reject invalid usernames', async () => {
-      // Mock implementation for invalid username
-      (create_leaderboard_entry as jest.Mock).mockResolvedValueOnce({
-        status: 401,
-        message: 'Usernames must be alphanumeric and less than 20 characters.',
-      });
+			// Should return an empty array
+			expect(result).toEqual([]);
+			expect(get_leaderboard).toHaveBeenCalledTimes(1);
+		});
+	});
 
-      const result = await create_leaderboard_entry({
-        username: 'invalid-username!',
-        score: 1000,
-      });
+	describe("create_leaderboard_entry", () => {
+		it("should reject invalid usernames", async () => {
+			// Mock implementation for invalid username
+			(create_leaderboard_entry as jest.Mock).mockResolvedValueOnce({
+				status: 401,
+				message: "Usernames must be alphanumeric and less than 20 characters.",
+			});
 
-      // Should reject with a 401 status
-      expect(result.status).toBe(401);
-      expect(result.message).toContain('Usernames must be alphanumeric and less than 20 characters');
-      expect(create_leaderboard_entry).toHaveBeenCalledTimes(1);
-      expect(create_leaderboard_entry).toHaveBeenCalledWith({
-        username: 'invalid-username!',
-        score: 1000,
-      });
-    });
+			const result = await create_leaderboard_entry({
+				username: "invalid-username!",
+				score: 1000,
+			});
 
-    it('should reject invalid scores', async () => {
-      // Mock implementation for invalid score
-      (create_leaderboard_entry as jest.Mock).mockResolvedValueOnce({
-        status: 401,
-        message: 'Invalid score.',
-      });
+			// Should reject with a 401 status
+			expect(result.status).toBe(401);
+			expect(result.message).toContain("Usernames must be alphanumeric and less than 20 characters");
+			expect(create_leaderboard_entry).toHaveBeenCalledTimes(1);
+			expect(create_leaderboard_entry).toHaveBeenCalledWith({
+				username: "invalid-username!",
+				score: 1000,
+			});
+		});
 
-      const result = await create_leaderboard_entry({
-        username: 'validuser',
-        score: -100, // Negative score
-      });
+		it("should reject invalid scores", async () => {
+			// Mock implementation for invalid score
+			(create_leaderboard_entry as jest.Mock).mockResolvedValueOnce({
+				status: 401,
+				message: "Invalid score.",
+			});
 
-      // Should reject with a 401 status
-      expect(result.status).toBe(401);
-      expect(result.message).toContain('Invalid score');
-      expect(create_leaderboard_entry).toHaveBeenCalledTimes(1);
-      expect(create_leaderboard_entry).toHaveBeenCalledWith({
-        username: 'validuser',
-        score: -100,
-      });
-    });
+			const result = await create_leaderboard_entry({
+				username: "validuser",
+				score: -100, // Negative score
+			});
 
-    it('should successfully create a valid leaderboard entry', async () => {
-      // Mock successful creation
-      (create_leaderboard_entry as jest.Mock).mockResolvedValueOnce({
-        status: 200,
-        message: 'Success',
-      });
+			// Should reject with a 401 status
+			expect(result.status).toBe(401);
+			expect(result.message).toContain("Invalid score");
+			expect(create_leaderboard_entry).toHaveBeenCalledTimes(1);
+			expect(create_leaderboard_entry).toHaveBeenCalledWith({
+				username: "validuser",
+				score: -100,
+			});
+		});
 
-      const result = await create_leaderboard_entry({
-        username: 'validuser',
-        score: 1000, // Valid score
-      });
+		it("should successfully create a valid leaderboard entry", async () => {
+			// Mock successful creation
+			(create_leaderboard_entry as jest.Mock).mockResolvedValueOnce({
+				status: 200,
+				message: "Success",
+			});
 
-      // Should return success
-      expect(result.status).toBe(200);
-      expect(result.message).toBe('Success');
-      expect(create_leaderboard_entry).toHaveBeenCalledTimes(1);
-      expect(create_leaderboard_entry).toHaveBeenCalledWith({
-        username: 'validuser',
-        score: 1000,
-      });
-    });
-  });
+			const result = await create_leaderboard_entry({
+				username: "validuser",
+				score: 1000, // Valid score
+			});
 
-  describe('fetchEvents', () => {
-    it('should fetch events successfully', async () => {
-      // Mock successful events fetch
-      (fetchEvents as jest.Mock).mockResolvedValueOnce({
-        status: 200,
-        message: 'Success',
-        events: [
-          {
-            id: '1',
-            title: 'Opening Ceremony',
-            description: 'Welcome to HackRPI',
-            startTime: 1000,
-            endTime: 2000,
-            location: 'DCC 308',
-            speaker: 'HackRPI Team',
-            eventType: 'default',
-            visible: true,
-            column: 0,
-          },
-        ],
-      });
+			// Should return success
+			expect(result.status).toBe(200);
+			expect(result.message).toBe("Success");
+			expect(create_leaderboard_entry).toHaveBeenCalledTimes(1);
+			expect(create_leaderboard_entry).toHaveBeenCalledWith({
+				username: "validuser",
+				score: 1000,
+			});
+		});
+	});
 
-      const result = await fetchEvents();
+	describe("fetchEvents", () => {
+		it("should fetch events successfully", async () => {
+			// Mock successful events fetch
+			(fetchEvents as jest.Mock).mockResolvedValueOnce({
+				status: 200,
+				message: "Success",
+				events: [
+					{
+						id: "1",
+						title: "Opening Ceremony",
+						description: "Welcome to HackRPI",
+						startTime: 1000,
+						endTime: 2000,
+						location: "DCC 308",
+						speaker: "HackRPI Team",
+						eventType: "default",
+						visible: true,
+						column: 0,
+					},
+				],
+			});
 
-      // Should return the data as expected
-      expect(result.status).toBe(200);
-      expect(result.message).toBe('Success');
-      expect(result.events).toHaveLength(1);
-      expect(result.events[0].title).toBe('Opening Ceremony');
-      expect(fetchEvents).toHaveBeenCalledTimes(1);
-    });
+			const result = await fetchEvents();
 
-    it('should handle errors when fetching events', async () => {
-      // Mock API error
-      (fetchEvents as jest.Mock).mockResolvedValueOnce({
-        status: 500,
-        message: 'Failed to fetch events.',
-        events: [],
-      });
+			// Should return the data as expected
+			expect(result.status).toBe(200);
+			expect(result.message).toBe("Success");
+			expect(result.events).toHaveLength(1);
+			expect(result.events[0].title).toBe("Opening Ceremony");
+			expect(fetchEvents).toHaveBeenCalledTimes(1);
+		});
 
-      const result = await fetchEvents();
+		it("should handle errors when fetching events", async () => {
+			// Mock API error
+			(fetchEvents as jest.Mock).mockResolvedValueOnce({
+				status: 500,
+				message: "Failed to fetch events.",
+				events: [],
+			});
 
-      // Should return error status and message
-      expect(result.status).toBe(500);
-      expect(result.message).toBe('Failed to fetch events.');
-      expect(result.events).toEqual([]);
-      expect(fetchEvents).toHaveBeenCalledTimes(1);
-    });
-  });
+			const result = await fetchEvents();
 
-  describe('is_game_ready', () => {
-    it('should return true when the game is ready', async () => {
-      // Mock game ready
-      (is_game_ready as jest.Mock).mockResolvedValueOnce(true);
-      
-      const result = await is_game_ready();
-      
-      expect(result).toBe(true);
-      expect(is_game_ready).toHaveBeenCalledTimes(1);
-    });
+			// Should return error status and message
+			expect(result.status).toBe(500);
+			expect(result.message).toBe("Failed to fetch events.");
+			expect(result.events).toEqual([]);
+			expect(fetchEvents).toHaveBeenCalledTimes(1);
+		});
+	});
 
-    it('should return false when the game is not ready', async () => {
-      // Mock game not ready
-      (is_game_ready as jest.Mock).mockResolvedValueOnce(false);
-      
-      const result = await is_game_ready();
-      
-      expect(result).toBe(false);
-      expect(is_game_ready).toHaveBeenCalledTimes(1);
-    });
-  });
-}); 
+	describe("is_game_ready", () => {
+		it("should return true when the game is ready", async () => {
+			// Mock game ready
+			(is_game_ready as jest.Mock).mockResolvedValueOnce(true);
+
+			const result = await is_game_ready();
+
+			expect(result).toBe(true);
+			expect(is_game_ready).toHaveBeenCalledTimes(1);
+		});
+
+		it("should return false when the game is not ready", async () => {
+			// Mock game not ready
+			(is_game_ready as jest.Mock).mockResolvedValueOnce(false);
+
+			const result = await is_game_ready();
+
+			expect(result).toBe(false);
+			expect(is_game_ready).toHaveBeenCalledTimes(1);
+		});
+	});
+});

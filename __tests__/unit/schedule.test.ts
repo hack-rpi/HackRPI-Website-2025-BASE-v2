@@ -1,5 +1,5 @@
-import { arrangeEvents } from '@/utils/schedule';
-import type { Event } from '@/data/schedule';
+import { arrangeEvents } from "@/utils/schedule";
+import type { Event } from "@/data/schedule";
 
 // Extend the Event type to include column
 interface TestEvent extends Event {
@@ -22,17 +22,17 @@ describe('arrangeEvents', () => {
   });
 
   // Test case 1: Empty array
-  it('should return an empty array when input is empty', () => {
+  it("should return an empty array when input is empty", () => {
     const result = arrangeEvents([]);
     expect(result).toEqual([]);
   });
 
   // Test case 2: Events with no overlaps
-  it('should place events in a single column when there are no time conflicts', () => {
+  it("should place events in a single column when there are no time conflicts", () => {
     const events: Event[] = [
-      createTestEvent('1', 1000, 2000),
-      createTestEvent('2', 2000, 3000),
-      createTestEvent('3', 3000, 4000)
+      createTestEvent("1", 1000, 2000),
+      createTestEvent("2", 2000, 3000),
+      createTestEvent("3", 3000, 4000),
     ];
 
     const result = arrangeEvents(events);
@@ -41,11 +41,11 @@ describe('arrangeEvents', () => {
   });
 
   // Test case 3: Events with overlaps
-  it('should place overlapping events in separate columns', () => {
+  it("should place overlapping events in separate columns", () => {
     const events: Event[] = [
-      createTestEvent('1', 1000, 3000),
-      createTestEvent('2', 2000, 4000),
-      createTestEvent('3', 5000, 6000)
+      createTestEvent("1", 1000, 3000),
+      createTestEvent("2", 2000, 4000),
+      createTestEvent("3", 5000, 6000),
     ];
 
     const result = arrangeEvents(events);
@@ -252,4 +252,4 @@ describe('arrangeEvents', () => {
     const event8Col = result4.findIndex(col => col.some(e => e.id === '8'));
     expect(event7Col).not.toBe(event8Col);
   });
-}); 
+});

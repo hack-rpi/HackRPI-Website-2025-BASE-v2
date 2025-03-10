@@ -37,21 +37,22 @@ npm run test:ci
 Unit tests should focus on testing a single function or small piece of logic. They should be isolated from other parts of the application.
 
 Example:
-```typescript
-import { calculateDeltaTime } from '@/utils/timer';
 
-describe('calculateDeltaTime', () => {
-  test('should return all zeros when end time is earlier than current time', () => {
-    const currentTime = new Date('2025-01-02T12:00:00Z');
-    const endTime = new Date('2025-01-01T12:00:00Z');
-    
-    const result = calculateDeltaTime(currentTime, endTime);
-    expect(result.seconds).toBe(0);
-    expect(result.minutes).toBe(0);
-    expect(result.hours).toBe(0);
-    expect(result.days).toBe(0);
-    expect(result.months).toBe(0);
-  });
+```typescript
+import { calculateDeltaTime } from "@/utils/timer";
+
+describe("calculateDeltaTime", () => {
+	test("should return all zeros when end time is earlier than current time", () => {
+		const currentTime = new Date("2025-01-02T12:00:00Z");
+		const endTime = new Date("2025-01-01T12:00:00Z");
+
+		const result = calculateDeltaTime(currentTime, endTime);
+		expect(result.seconds).toBe(0);
+		expect(result.minutes).toBe(0);
+		expect(result.hours).toBe(0);
+		expect(result.days).toBe(0);
+		expect(result.months).toBe(0);
+	});
 });
 ```
 
@@ -60,6 +61,7 @@ describe('calculateDeltaTime', () => {
 Component tests should verify that a component renders correctly and behaves as expected in response to user interaction. Dependencies should be mocked.
 
 Example:
+
 ```typescript
 import { render, screen } from '@testing-library/react';
 import AboutUs from '@/components/about-us';
@@ -75,6 +77,7 @@ test('renders the component with correct headings', () => {
 Integration tests should verify that multiple components work together correctly. They may use fewer mocks than component tests.
 
 Example:
+
 ```typescript
 import { render, screen } from '@testing-library/react';
 import Home from '@/app/page';
@@ -94,4 +97,4 @@ We use various mocking strategies:
 2. **API Mocks**: For AWS Amplify and other external services
 3. **DOM Mocks**: For browser APIs like `window` and `document`
 
-Look at the `jest.setup.js` file for global mocks. 
+Look at the `jest.setup.js` file for global mocks.
