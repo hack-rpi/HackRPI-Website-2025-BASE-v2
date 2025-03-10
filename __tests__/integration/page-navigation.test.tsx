@@ -343,7 +343,7 @@ function mockHomePageElements() {
 
 		const element = document.createElement("div");
 		element.id = id;
-		
+
 		// Enhanced properties
 		Object.defineProperties(element, {
 			offsetTop: { configurable: true, value: 100 },
@@ -351,9 +351,9 @@ function mockHomePageElements() {
 			offsetWidth: { configurable: true, value: 800 },
 			clientHeight: { configurable: true, value: 200 },
 			clientWidth: { configurable: true, value: 800 },
-			scrollIntoView: { 
-				configurable: true, 
-				value: mockScrollIntoView 
+			scrollIntoView: {
+				configurable: true,
+				value: mockScrollIntoView,
 			},
 			getBoundingClientRect: {
 				configurable: true,
@@ -365,11 +365,11 @@ function mockHomePageElements() {
 					width: 800,
 					height: 200,
 					x: 0,
-					y: 100
-				})
-			}
+					y: 100,
+				}),
+			},
 		});
-		
+
 		return element;
 	});
 
@@ -387,7 +387,7 @@ function renderWithRouter(ui: React.ReactElement) {
 	// Setup userEvent with optimal settings
 	const user = userEvent.setup({
 		delay: null, // No delay for faster tests
-		advanceTimers: jest.advanceTimersByTime
+		advanceTimers: jest.advanceTimersByTime,
 	});
 
 	// Render the component
@@ -405,13 +405,13 @@ describe("Page Navigation Integration Tests", () => {
 		jest.clearAllMocks();
 		jest.clearAllTimers();
 		mockHomePageElements();
-		
+
 		// Reset router mocks
 		mockRouterPush.mockClear();
 		mockRouterPrefetch.mockClear();
 		mockScrollIntoView.mockClear();
 	});
-	
+
 	afterEach(() => {
 		// Clean up any remaining timers
 		jest.clearAllTimers();
@@ -424,7 +424,7 @@ describe("Page Navigation Integration Tests", () => {
 		// Act - Find and click the event link
 		const navigation = screen.getByRole("navigation");
 		const eventLink = within(navigation).getByRole("link", { name: /event/i });
-		
+
 		await act(async () => {
 			await user.click(eventLink);
 			// Run timers to complete user actions
@@ -443,7 +443,7 @@ describe("Page Navigation Integration Tests", () => {
 		// Act - Find and click the resources link
 		const navigation = screen.getByRole("navigation");
 		const resourcesLink = within(navigation).getByRole("link", { name: /resources/i });
-		
+
 		await act(async () => {
 			await user.click(resourcesLink);
 			// Run timers to complete user actions
@@ -462,7 +462,7 @@ describe("Page Navigation Integration Tests", () => {
 		// Act - Find and click the last year link
 		const navigation = screen.getByRole("navigation");
 		const lastYearLink = within(navigation).getByRole("link", { name: /last year/i });
-		
+
 		await act(async () => {
 			await user.click(lastYearLink);
 			// Run timers to complete user actions
@@ -481,7 +481,7 @@ describe("Page Navigation Integration Tests", () => {
 		// Act - Find and click the FAQ link (an anchor link)
 		const navigation = screen.getByRole("navigation");
 		const faqLink = within(navigation).getByRole("link", { name: /faq/i });
-		
+
 		await act(async () => {
 			await user.click(faqLink);
 			// Run timers to complete user actions
@@ -501,18 +501,18 @@ describe("Page Navigation Integration Tests", () => {
 		const navigation = screen.getByRole("navigation");
 		const homeLink = within(navigation).getByRole("link", { name: /home/i });
 		homeLink.focus();
-		
+
 		// Press Tab to move focus to the next link (Event)
 		await act(async () => {
 			await user.tab();
 			// Run timers to complete user actions
 			jest.runAllTimers();
 		});
-		
+
 		// Now the Event link should be focused
 		const eventLink = within(navigation).getByRole("link", { name: /event/i });
 		expect(document.activeElement).toBe(eventLink);
-		
+
 		// Press Enter to activate the Event link
 		await act(async () => {
 			await user.keyboard("{Enter}");
@@ -524,24 +524,24 @@ describe("Page Navigation Integration Tests", () => {
 		expect(mockRouterPush).toHaveBeenCalledWith("/event");
 		expect(mockRouterPush).toHaveBeenCalledTimes(1);
 	});
-	
+
 	it("should handle browser back and forward navigation", async () => {
 		// This would require mocking history navigation
 		// For simplicity, we'll just verify the router hooks are properly set up
 		const { user } = renderWithRouter(<Home />);
-		
+
 		// Check that the navigation elements exist
 		const navigation = screen.getByRole("navigation");
 		expect(navigation).toBeInTheDocument();
-		
+
 		// Verify we can click links properly
 		const eventLink = within(navigation).getByRole("link", { name: /event/i });
-		
+
 		await act(async () => {
 			await user.click(eventLink);
 			jest.runAllTimers();
 		});
-		
+
 		expect(mockRouterPush).toHaveBeenCalledWith("/event");
 	});
 

@@ -63,19 +63,19 @@ export function renderWithProviders(
 	options: ExtendedRenderOptions = {},
 ): RenderResult & { user: ReturnType<typeof userEvent.setup> } {
 	// Setup fake timers before user events if requested
-	if (options.useFakeTimers && typeof jest.useFakeTimers === 'function') {
+	if (options.useFakeTimers && typeof jest.useFakeTimers === "function") {
 		jest.useFakeTimers();
 	}
 
 	// Setup user event with optimal settings for test reliability
 	const user = userEvent.setup({
 		delay: null, // No delay in tests for faster execution
-		pointerEventsCheck: 0, 
+		pointerEventsCheck: 0,
 		advanceTimers: jest.advanceTimersByTime,
 		// Configure skipHover to true to avoid hover-related issues in tests
 		skipHover: true,
 		// Skip auto-waiting which can cause test flakiness
-		skipAutoClose: true
+		skipAutoClose: true,
 	});
 
 	// Set up route-specific mocks if provided
@@ -115,7 +115,7 @@ export function renderWithProviders(
 export function resetAllMocks() {
 	jest.clearAllMocks();
 	jest.clearAllTimers();
-	
+
 	// Reset router mocks
 	mockRouterPush.mockClear();
 	mockRouterPrefetch.mockClear();
@@ -157,9 +157,9 @@ export function mockHomePageElements() {
 			offsetWidth: { configurable: true, value: 800 },
 			clientHeight: { configurable: true, value: 200 },
 			clientWidth: { configurable: true, value: 800 },
-			scrollIntoView: { 
-				configurable: true, 
-				value: mockScrollIntoView 
+			scrollIntoView: {
+				configurable: true,
+				value: mockScrollIntoView,
 			},
 			// Add getBoundingClientRect for more accurate element positioning
 			getBoundingClientRect: {
@@ -172,9 +172,9 @@ export function mockHomePageElements() {
 					width: 800,
 					height: 200,
 					x: 0,
-					y: 100
-				})
-			}
+					y: 100,
+				}),
+			},
 		});
 
 		return element;
@@ -194,7 +194,7 @@ export function setWindowDimensions(width: number, height: number = 800) {
 	// Store original dimensions
 	const originalWidth = window.innerWidth;
 	const originalHeight = window.innerHeight;
-	
+
 	// Set new dimensions
 	Object.defineProperty(window, "innerWidth", {
 		writable: true,
@@ -204,11 +204,11 @@ export function setWindowDimensions(width: number, height: number = 800) {
 		writable: true,
 		value: height,
 	});
-	
+
 	// Create resize event with proper event initialization
-	const resizeEvent = new Event('resize');
+	const resizeEvent = new Event("resize");
 	window.dispatchEvent(resizeEvent);
-	
+
 	// Return function to restore original dimensions
 	return () => {
 		Object.defineProperty(window, "innerWidth", {
@@ -219,7 +219,7 @@ export function setWindowDimensions(width: number, height: number = 800) {
 			writable: true,
 			value: originalHeight,
 		});
-		window.dispatchEvent(new Event('resize'));
+		window.dispatchEvent(new Event("resize"));
 	};
 }
 
@@ -235,7 +235,7 @@ export function mockFormEvent(formData?: Record<string, any>) {
 			reportValidity: jest.fn(),
 			reset: jest.fn(),
 			elements: {},
-			...formData
+			...formData,
 		},
 		// Add currentTarget for form event consistency
 		currentTarget: {
@@ -243,21 +243,18 @@ export function mockFormEvent(formData?: Record<string, any>) {
 			reportValidity: jest.fn(),
 			reset: jest.fn(),
 			elements: {},
-			...formData
-		}
+			...formData,
+		},
 	};
-	
+
 	// Add formData support for modern forms
 	if (formData) {
 		mockEvent.target.elements = Object.fromEntries(
-			Object.entries(formData).map(([key, value]) => [
-				key, 
-				{ value, name: key, id: key }
-			])
+			Object.entries(formData).map(([key, value]) => [key, { value, name: key, id: key }]),
 		);
 		mockEvent.currentTarget.elements = mockEvent.target.elements;
 	}
-	
+
 	return mockEvent;
 }
 
@@ -318,7 +315,7 @@ export const createMockElement = {
  */
 export function checkAccessibility(element: HTMLElement) {
 	// Check for common accessibility issues
-	
+
 	// All interactive elements should have accessible names
 	const buttons = within(element).queryAllByRole("button");
 	buttons.forEach((button) => {
@@ -340,7 +337,7 @@ export function checkAccessibility(element: HTMLElement) {
 	images.forEach((img) => {
 		expect(img).toHaveAttribute("alt");
 	});
-	
+
 	// All form elements should have associated labels
 	const formElements = [
 		...within(element).queryAllByRole("textbox"),
@@ -348,11 +345,11 @@ export function checkAccessibility(element: HTMLElement) {
 		...within(element).queryAllByRole("radio"),
 		...within(element).queryAllByRole("combobox"),
 	];
-	
+
 	formElements.forEach((formElement) => {
 		expect(formElement).toHaveAccessibleName();
 	});
-	
+
 	// All headings should be in a logical order
 	const headings = within(element).queryAllByRole("heading");
 	if (headings.length > 1) {

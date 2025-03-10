@@ -232,7 +232,7 @@ describe("Home Page Integration", () => {
 	beforeEach(() => {
 		// Enable fake timers for this test file
 		jest.useFakeTimers();
-		
+
 		resetAllMocks();
 		mockHomePageElements();
 
@@ -362,7 +362,7 @@ describe("Home Page Integration", () => {
 			// Find and click the FAQ link
 			const navBar = screen.getByRole("navigation", { name: "Main Navigation" });
 			const faqLink = within(navBar).getByRole("link", { name: /faq/i });
-			
+
 			// Wrap user actions in act and properly advance timers
 			await act(async () => {
 				await user.click(faqLink);
@@ -375,7 +375,7 @@ describe("Home Page Integration", () => {
 
 			// Find and click the About link
 			const aboutLink = within(navBar).getByRole("link", { name: /about/i });
-			
+
 			await act(async () => {
 				await user.click(aboutLink);
 				// Run timers after user actions

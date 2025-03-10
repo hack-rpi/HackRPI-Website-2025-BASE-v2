@@ -35,21 +35,21 @@ Example:
 ```typescript
 // Example unit test for a utility function
 describe("calculateDeltaTime", () => {
-  it("returns zero values when end time is earlier than current time", () => {
-    // Arrange
-    const currentTime = new Date("2025-01-02");
-    const endTime = new Date("2025-01-01");
-    
-    // Act
-    const result = calculateDeltaTime(currentTime, endTime);
-    
-    // Assert
-    expect(result.seconds).toBe(0);
-    expect(result.minutes).toBe(0);
-    expect(result.hours).toBe(0);
-    expect(result.days).toBe(0);
-    expect(result.months).toBe(0);
-  });
+	it("returns zero values when end time is earlier than current time", () => {
+		// Arrange
+		const currentTime = new Date("2025-01-02");
+		const endTime = new Date("2025-01-01");
+
+		// Act
+		const result = calculateDeltaTime(currentTime, endTime);
+
+		// Assert
+		expect(result.seconds).toBe(0);
+		expect(result.minutes).toBe(0);
+		expect(result.hours).toBe(0);
+		expect(result.days).toBe(0);
+		expect(result.months).toBe(0);
+	});
 });
 ```
 
@@ -66,31 +66,31 @@ Example:
 ```typescript
 // Example component test
 it("renders speaker information when available", () => {
-  render(<EventCard 
+  render(<EventCard
     event={{
       id: "123",
       title: "Workshop",
       speaker: "Jane Doe",
       location: "Room 101"
       // ...other props
-    }} 
+    }}
   />);
-  
+
   // Check for speaker info
   expect(screen.getByText("Room 101 • Jane Doe")).toBeInTheDocument();
 });
 
 it("omits speaker bullet point when no speaker is provided", () => {
-  render(<EventCard 
+  render(<EventCard
     event={{
       id: "123",
       title: "Workshop",
       speaker: "",
       location: "Room 101"
       // ...other props
-    }} 
+    }}
   />);
-  
+
   // Check location without bullet point
   expect(screen.getByText("Room 101")).toBeInTheDocument();
   expect(screen.queryByText("Room 101 •")).not.toBeInTheDocument();
@@ -110,14 +110,14 @@ Example:
 // Example integration test
 it("navigates to event page when event link is clicked", async () => {
   const { user } = renderWithProviders(<Home />);
-  
+
   // Find and click the event link
   const eventLink = screen.getByRole("link", { name: /event/i });
   await act(async () => {
     await user.click(eventLink);
     jest.runAllTimers();
   });
-  
+
   // Verify navigation
   expect(mockRouterPush).toHaveBeenCalledWith("/event");
 });
@@ -136,16 +136,16 @@ Example:
 // Example accessibility test
 it("maintains proper focus management for keyboard users", async () => {
   const { user } = renderWithProviders(<NavBar />);
-  
+
   // Tab through navigation
   const firstLink = screen.getByRole("link", { name: /home/i });
   firstLink.focus();
-  
+
   await act(async () => {
     await user.tab();
     jest.runAllTimers();
   });
-  
+
   // Second link should now have focus
   const secondLink = screen.getByRole("link", { name: /event/i });
   expect(document.activeElement).toBe(secondLink);

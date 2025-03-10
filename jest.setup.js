@@ -8,15 +8,21 @@ if (typeof TextEncoder === "undefined") {
 
 // Filter deprecation warnings - add this block
 const originalWarn = console.warn;
-console.warn = function(...args) {
+console.warn = function (...args) {
 	// Filter out punycode deprecation warnings
-	if (args[0] && typeof args[0] === 'string' && 
-			args[0].includes('[DEP0040] DeprecationWarning: The `punycode` module is deprecated')) {
+	if (
+		args[0] &&
+		typeof args[0] === "string" &&
+		args[0].includes("[DEP0040] DeprecationWarning: The `punycode` module is deprecated")
+	) {
 		return;
 	}
 	// Also filter out fake timer warnings since we've enabled them globally
-	if (args[0] && typeof args[0] === 'string' && 
-			args[0].includes('A function to advance timers was called but the timers APIs are not replaced with fake timers')) {
+	if (
+		args[0] &&
+		typeof args[0] === "string" &&
+		args[0].includes("A function to advance timers was called but the timers APIs are not replaced with fake timers")
+	) {
 		return;
 	}
 	originalWarn.apply(console, args);
@@ -24,17 +30,17 @@ console.warn = function(...args) {
 
 // Original console error function
 const originalError = console.error;
-console.error = function(...args) {
+console.error = function (...args) {
 	// Filter out certain expected errors during testing
 	if (
-			typeof args[0] === "string" &&
-			(args[0].includes("Not implemented: navigation") ||
-			 args[0].includes("Error: Uncaught") ||
-			 args[0].includes("Warning:") ||
-			 args[0].includes("React does not recognize the") ||
-			 // Filter out expected API errors in tests
-			 (args[0].includes("Error fetching leaderboard:") && process.env.NODE_ENV === 'test') ||
-			 (args[0].includes("Error checking game status:") && process.env.NODE_ENV === 'test'))
+		typeof args[0] === "string" &&
+		(args[0].includes("Not implemented: navigation") ||
+			args[0].includes("Error: Uncaught") ||
+			args[0].includes("Warning:") ||
+			args[0].includes("React does not recognize the") ||
+			// Filter out expected API errors in tests
+			(args[0].includes("Error fetching leaderboard:") && process.env.NODE_ENV === "test") ||
+			(args[0].includes("Error checking game status:") && process.env.NODE_ENV === "test"))
 	) {
 		return;
 	}
@@ -68,14 +74,14 @@ global.IntersectionObserver = class IntersectionObserver {
 		this.callback = callback;
 		this.entries = new Map();
 	}
-	
+
 	observe(element) {
 		this.entries.set(element, {
 			isIntersecting: false,
 			target: element,
-			intersectionRatio: 0
+			intersectionRatio: 0,
 		});
-		
+
 		// Schedule a call to simulate intersection
 		setTimeout(() => {
 			const entry = {
@@ -85,25 +91,25 @@ global.IntersectionObserver = class IntersectionObserver {
 				boundingClientRect: element.getBoundingClientRect(),
 				intersectionRect: element.getBoundingClientRect(),
 				rootBounds: null,
-				time: Date.now()
+				time: Date.now(),
 			};
 			this.entries.set(element, entry);
 			this.callback([entry], this);
 		}, 50);
 	}
-	
+
 	unobserve(element) {
 		this.entries.delete(element);
 	}
-	
+
 	disconnect() {
 		this.entries.clear();
 	}
-	
+
 	// Method to manually trigger intersection
 	triggerIntersection(element, isIntersecting = true) {
 		if (!this.entries.has(element)) return;
-		
+
 		const entry = {
 			isIntersecting,
 			target: element,
@@ -111,9 +117,9 @@ global.IntersectionObserver = class IntersectionObserver {
 			boundingClientRect: element.getBoundingClientRect(),
 			intersectionRect: isIntersecting ? element.getBoundingClientRect() : new DOMRect(),
 			rootBounds: null,
-			time: Date.now()
+			time: Date.now(),
 		};
-		
+
 		this.entries.set(element, entry);
 		this.callback([entry], this);
 	}

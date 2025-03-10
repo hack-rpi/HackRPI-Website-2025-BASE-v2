@@ -2,12 +2,12 @@ import { calculateDeltaTime, DeltaTime } from "@/utils/timer";
 
 // Helper for creating test dates with predictable values
 const createDate = (
-	year: number, 
-	month: number, 
-	day: number, 
-	hours: number = 0, 
-	minutes: number = 0, 
-	seconds: number = 0
+	year: number,
+	month: number,
+	day: number,
+	hours: number = 0,
+	minutes: number = 0,
+	seconds: number = 0,
 ): Date => new Date(year, month - 1, day, hours, minutes, seconds);
 
 describe("Timer Utility", () => {
@@ -185,13 +185,13 @@ describe("Timer Utility", () => {
 				// Given the implementation, we need to adapt our expectations:
 				// In this case, let's just check that the time difference is represented somehow
 				// We don't care exactly how the implementation handles it, just that it's not all zeros
-				const hasNonZeroValue = 
-					result.months !== 0 || 
-					result.days !== 0 || 
-					result.hours !== 0 || 
-					result.minutes !== 0 || 
+				const hasNonZeroValue =
+					result.months !== 0 ||
+					result.days !== 0 ||
+					result.hours !== 0 ||
+					result.minutes !== 0 ||
 					result.seconds !== 0;
-				
+
 				expect(hasNonZeroValue).toBe(true);
 				expect(result.seconds).toBe(59); // This should be consistent
 			});
