@@ -4,12 +4,12 @@
 import React from "react";
 import { screen, within } from "@testing-library/react";
 import Home from "@/app/page";
-import { 
-	renderWithProviders, 
-	resetAllMocks, 
-	mockHomePageElements, 
+import {
+	renderWithProviders,
+	resetAllMocks,
+	mockHomePageElements,
 	mockScrollIntoView,
-	setWindowWidth
+	setWindowWidth,
 } from "../test-utils";
 
 // Define a mock function we can access later for testing
@@ -18,7 +18,11 @@ const mockHandleFAQClick = jest.fn();
 // Mock the components used in the Home page with proper ARIA roles
 jest.mock("@/components/footer/footer", () => {
 	return function MockFooter() {
-		return <footer data-testid="footer" role="contentinfo">Footer Component</footer>;
+		return (
+			<footer data-testid="footer" role="contentinfo">
+				Footer Component
+			</footer>
+		);
 	};
 });
 
@@ -37,13 +41,21 @@ jest.mock("@/components/nav-bar/nav-bar", () => {
 	// Return a function that creates a mock NavBar
 	return jest.fn(({ showOnScroll }) => (
 		<nav data-testid="nav-bar" data-show-on-scroll={showOnScroll} role="navigation" aria-label="Main Navigation">
-			<a href="/" role="link" aria-label="Home">Home</a>
-			<a href="/event" role="link" aria-label="Event">Event</a>
-			<a href="/resources" role="link" aria-label="Resources">Resources</a>
-			<a href="#about" role="link" aria-label="About">About</a>
-			<a 
-				href="#faq" 
-				role="link" 
+			<a href="/" role="link" aria-label="Home">
+				Home
+			</a>
+			<a href="/event" role="link" aria-label="Event">
+				Event
+			</a>
+			<a href="/resources" role="link" aria-label="Resources">
+				Resources
+			</a>
+			<a href="#about" role="link" aria-label="About">
+				About
+			</a>
+			<a
+				href="#faq"
+				role="link"
 				aria-label="FAQ"
 				onClick={(e) => {
 					e.preventDefault();
@@ -58,7 +70,11 @@ jest.mock("@/components/nav-bar/nav-bar", () => {
 
 jest.mock("@/components/title-components/title", () => {
 	return function MockTitle() {
-		return <header data-testid="title" role="banner">Title Component</header>;
+		return (
+			<header data-testid="title" role="banner">
+				Title Component
+			</header>
+		);
 	};
 });
 
@@ -131,17 +147,17 @@ describe("Home Page Integration", () => {
 		// Assert - Check if all main components are rendered with proper roles
 		expect(screen.getByRole("navigation")).toBeInTheDocument();
 		expect(screen.getByRole("banner")).toBeInTheDocument();
-		
+
 		// Get all regions and check their labels
 		const regions = screen.getAllByRole("region");
 		expect(regions.length).toBeGreaterThanOrEqual(4); // At least about, faq, sponsors, team
-		
+
 		// Verify specific regions by their aria-labelledby
 		expect(screen.getByLabelText(/about hackrpi/i)).toBeInTheDocument();
 		expect(screen.getByLabelText(/frequently asked questions/i)).toBeInTheDocument();
 		expect(screen.getByLabelText(/our sponsors/i)).toBeInTheDocument();
 		expect(screen.getByLabelText(/our team/i)).toBeInTheDocument();
-		
+
 		// Check footer
 		expect(screen.getByRole("contentinfo")).toBeInTheDocument();
 	});
@@ -153,7 +169,7 @@ describe("Home Page Integration", () => {
 		// Assert
 		const navBar = screen.getByRole("navigation");
 		expect(navBar).toHaveAttribute("data-show-on-scroll", "true");
-		
+
 		// Verify navigation links are present (important for accessibility)
 		const navLinks = within(navBar).getAllByRole("link");
 		expect(navLinks.length).toBeGreaterThanOrEqual(3); // At least home, event, resources
@@ -194,12 +210,12 @@ describe("Home Page Integration", () => {
 		// Arrange
 		const { user } = renderWithProviders(<Home />);
 		mockHandleFAQClick.mockClear();
-		
+
 		// Act - Find and click the FAQ link
 		const navigation = screen.getByRole("navigation");
 		const faqLink = within(navigation).getByRole("link", { name: /faq/i });
 		await user.click(faqLink);
-		
+
 		// Assert - Verify the mock handler was called
 		expect(mockHandleFAQClick).toHaveBeenCalledTimes(1);
 	});

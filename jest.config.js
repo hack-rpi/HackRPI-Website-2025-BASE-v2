@@ -2,10 +2,10 @@
 const config = {
 	testEnvironment: "jsdom",
 	testPathIgnorePatterns: [
-		"<rootDir>/node_modules/", 
-		"<rootDir>/.next/", 
+		"<rootDir>/node_modules/",
+		"<rootDir>/.next/",
 		"<rootDir>/amplify/",
-		"<rootDir>/__tests__/test-utils.tsx"
+		"<rootDir>/__tests__/test-utils.tsx",
 	],
 	moduleNameMapper: {
 		// Handle module aliases

@@ -5,7 +5,7 @@ import { renderWithProviders, resetAllMocks, setWindowWidth } from "../test-util
 
 /**
  * NavBar Component Tests
- * 
+ *
  * Following 2025 React testing best practices:
  * - Using semantic queries with ARIA roles
  * - Testing accessibility features
@@ -17,8 +17,8 @@ import { renderWithProviders, resetAllMocks, setWindowWidth } from "../test-util
 jest.mock("@/components/nav-bar/desktop/nav-bar-desktop", () => {
 	return function MockDesktopNavBar({ links }: { links: any[] }) {
 		return (
-			<div 
-				data-testid="desktop-nav" 
+			<div
+				data-testid="desktop-nav"
 				data-links={JSON.stringify(links)}
 				role="navigation"
 				aria-label="Desktop Navigation"
@@ -32,12 +32,7 @@ jest.mock("@/components/nav-bar/desktop/nav-bar-desktop", () => {
 jest.mock("@/components/nav-bar/mobile/nav-bar-mobile", () => {
 	return function MockMobileNavBar({ links }: { links: any[] }) {
 		return (
-			<div 
-				data-testid="mobile-nav" 
-				data-links={JSON.stringify(links)}
-				role="navigation"
-				aria-label="Mobile Navigation"
-			>
+			<div data-testid="mobile-nav" data-links={JSON.stringify(links)} role="navigation" aria-label="Mobile Navigation">
 				Mobile NavBar Component
 			</div>
 		);
@@ -47,11 +42,7 @@ jest.mock("@/components/nav-bar/mobile/nav-bar-mobile", () => {
 jest.mock("@/components/mlh-banner/mlh-banner", () => {
 	return function MockMlhBanner() {
 		return (
-			<div 
-				data-testid="mlh-banner"
-				role="banner"
-				aria-label="MLH Banner"
-			>
+			<div data-testid="mlh-banner" role="banner" aria-label="MLH Banner">
 				MLH Banner Component
 			</div>
 		);
@@ -144,17 +135,17 @@ describe("NavBar Component", () => {
 	it("should have the appropriate responsive design for both desktop and mobile", async () => {
 		// Arrange - Start with desktop view
 		setWindowWidth(1024);
-		
+
 		// Act - Render the component
 		const { rerender } = renderWithProviders(<NavBar showOnScroll={true} />);
-		
+
 		// Assert - Verify desktop view is present
 		expect(screen.getByRole("navigation", { name: /desktop navigation/i })).toBeInTheDocument();
-		
+
 		// Act - Change to mobile view and rerender
 		setWindowWidth(500);
 		rerender(<NavBar showOnScroll={true} />);
-		
+
 		// Assert - Verify mobile view is now present
 		expect(screen.getByRole("navigation", { name: /mobile navigation/i })).toBeInTheDocument();
 	});
