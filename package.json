@@ -7,9 +7,9 @@
 		"build": "next build",
 		"start": "next start",
 		"lint": "next lint",
-		"test": "jest",
-		"test:watch": "jest --watch",
-		"test:ci": "jest --ci --coverage"
+		"test": "node --no-deprecation ./node_modules/.bin/jest",
+		"test:watch": "node --no-deprecation ./node_modules/.bin/jest --watch",
+		"test:ci": "node --no-deprecation ./node_modules/.bin/jest --ci --coverage"
 	},
 	"dependencies": {
 		"@2toad/profanity": "^3.0.1",
