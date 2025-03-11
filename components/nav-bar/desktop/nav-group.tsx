@@ -4,11 +4,11 @@ import Link from "next/link";
 
 export default function NavGroup({ name, links }: { name: string; links: lin[] }) {
 	return (
-		<div className="dropdown dropdown-hover mx-2 whitespace-nowrap">
+		<div className="dropdown dropdown-hover mx-2 whitespace-nowrap text-lg xl:text-xl bg-[length:0%_2px] bg-no-repeat bg-left-bottom transition-all duration-200 bg-gradient-to-r from-hackrpi-yellow to-hackrpi-pink hover:bg-[length:100%_2px]">
 			<div
 				tabIndex={0}
 				role="button"
-				className="text-lg xl:text-xl bg-[length:0%_2px] bg-no-repeat bg-left-bottom transition-all duration-200 bg-gradient-to-r from-hackrpi-yellow to-hackrpi-yellow hover:bg-[length:100%_2px] focus:bg-[length:100%_4px] "
+				className="text-lg xl:text-xl bg-[length:0%_2px] bg-no-repeat bg-left-bottom transition-all duration-200 bg-gradient-to-r from-hackrpi-yellow to-hackrpi-yellow hover:bg-[length:100%_2px] focus:bg-[length:100%_4px]"
 			>
 				<Link href={links[0].href}>{name}</Link>
 			</div>
