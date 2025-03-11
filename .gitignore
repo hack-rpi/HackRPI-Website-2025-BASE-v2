@@ -44,3 +44,7 @@ amplify_outputs.json
 .amplify
 amplify_outputs*
 amplifyconfiguration*
+
+# cursor rules
+.cursor/
+.cursorrules
