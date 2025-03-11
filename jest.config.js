@@ -7,14 +7,24 @@ const config = {
 		"<rootDir>/amplify/",
 		"<rootDir>/__tests__/test-utils.tsx",
 	],
+	// Switch to V8 coverage provider for better performance and compatibility
+	coverageProvider: "v8",
 	moduleNameMapper: {
 		// Handle module aliases
 		"^@/(.*)$": "<rootDir>/$1",
+
 		// Handle CSS imports (with CSS modules)
 		"^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy",
+		
 		// Handle CSS imports (without CSS modules)
 		"^.+\\.(css|sass|scss)$": "<rootDir>/__mocks__/styleMock.js",
-		// Handle image imports
+		
+		// Target specific directories and file patterns first for better precision
+		"^@/public/(.+)\\.(jpg|jpeg|png|gif|webp|avif|svg)$": "<rootDir>/__mocks__/fileMock.js",
+		"^@/assets/(.+)\\.(jpg|jpeg|png|gif|webp|avif|svg)$": "<rootDir>/__mocks__/fileMock.js",
+		"^@/images/(.+)\\.(jpg|jpeg|png|gif|webp|avif|svg)$": "<rootDir>/__mocks__/fileMock.js",
+		
+		// Generic fallback for any other image imports
 		"^.+\\.(jpg|jpeg|png|gif|webp|avif|svg)$": "<rootDir>/__mocks__/fileMock.js",
 	},
 	transform: {
