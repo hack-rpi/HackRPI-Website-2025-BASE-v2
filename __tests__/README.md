@@ -66,34 +66,38 @@ Example:
 ```typescript
 // Example component test
 it("renders speaker information when available", () => {
-  render(<EventCard
-    event={{
-      id: "123",
-      title: "Workshop",
-      speaker: "Jane Doe",
-      location: "Room 101"
-      // ...other props
-    }}
-  />);
+	render(
+		<EventCard
+			event={{
+				id: "123",
+				title: "Workshop",
+				speaker: "Jane Doe",
+				location: "Room 101",
+				// ...other props
+			}}
+		/>,
+	);
 
-  // Check for speaker info
-  expect(screen.getByText("Room 101 • Jane Doe")).toBeInTheDocument();
+	// Check for speaker info
+	expect(screen.getByText("Room 101 • Jane Doe")).toBeInTheDocument();
 });
 
 it("omits speaker bullet point when no speaker is provided", () => {
-  render(<EventCard
-    event={{
-      id: "123",
-      title: "Workshop",
-      speaker: "",
-      location: "Room 101"
-      // ...other props
-    }}
-  />);
+	render(
+		<EventCard
+			event={{
+				id: "123",
+				title: "Workshop",
+				speaker: "",
+				location: "Room 101",
+				// ...other props
+			}}
+		/>,
+	);
 
-  // Check location without bullet point
-  expect(screen.getByText("Room 101")).toBeInTheDocument();
-  expect(screen.queryByText("Room 101 •")).not.toBeInTheDocument();
+	// Check location without bullet point
+	expect(screen.getByText("Room 101")).toBeInTheDocument();
+	expect(screen.queryByText("Room 101 •")).not.toBeInTheDocument();
 });
 ```
 
@@ -109,17 +113,17 @@ Example:
 ```typescript
 // Example integration test
 it("navigates to event page when event link is clicked", async () => {
-  const { user } = renderWithProviders(<Home />);
+	const { user } = renderWithProviders(<Home />);
 
-  // Find and click the event link
-  const eventLink = screen.getByRole("link", { name: /event/i });
-  await act(async () => {
-    await user.click(eventLink);
-    jest.runAllTimers();
-  });
+	// Find and click the event link
+	const eventLink = screen.getByRole("link", { name: /event/i });
+	await act(async () => {
+		await user.click(eventLink);
+		jest.runAllTimers();
+	});
 
-  // Verify navigation
-  expect(mockRouterPush).toHaveBeenCalledWith("/event");
+	// Verify navigation
+	expect(mockRouterPush).toHaveBeenCalledWith("/event");
 });
 ```
 
@@ -135,20 +139,20 @@ Example:
 ```typescript
 // Example accessibility test
 it("maintains proper focus management for keyboard users", async () => {
-  const { user } = renderWithProviders(<NavBar />);
+	const { user } = renderWithProviders(<NavBar />);
 
-  // Tab through navigation
-  const firstLink = screen.getByRole("link", { name: /home/i });
-  firstLink.focus();
+	// Tab through navigation
+	const firstLink = screen.getByRole("link", { name: /home/i });
+	firstLink.focus();
 
-  await act(async () => {
-    await user.tab();
-    jest.runAllTimers();
-  });
+	await act(async () => {
+		await user.tab();
+		jest.runAllTimers();
+	});
 
-  // Second link should now have focus
-  const secondLink = screen.getByRole("link", { name: /event/i });
-  expect(document.activeElement).toBe(secondLink);
+	// Second link should now have focus
+	const secondLink = screen.getByRole("link", { name: /event/i });
+	expect(document.activeElement).toBe(secondLink);
 });
 ```
 
