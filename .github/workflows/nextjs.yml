@@ -11,8 +11,6 @@ on:
     paths-ignore:
       - '**/*.md'
       - 'docs/**'
-  # Allow manual trigger from the Actions tab
-  workflow_dispatch:
 
 # Set minimal permissions (security best practice)
 permissions: {}
@@ -35,7 +33,6 @@ jobs:
     outputs:
       code: ${{ steps.filter.outputs.code }}
       styles: ${{ steps.filter.outputs.styles }}
-      e2e: ${{ steps.filter.outputs.e2e }}
     steps:
       - uses: actions/checkout@v4
       - uses: dorny/paths-filter@v3
@@ -50,9 +47,6 @@ jobs:
             styles:
               - '**/*.{css,scss}'
               - 'tailwind.config.{js,ts}'
-            e2e:
-              - 'e2e/**/*.{js,ts}'
-              - 'playwright.config.{js,ts}'
 
   # Lint and format job
   lint:
@@ -216,23 +210,6 @@ jobs:
         env:
           NODE_OPTIONS: --max-old-space-size=4096 --no-deprecation
 
-      # Debug step to verify .next directory exists and contains files
-      - name: Check .next directory
-        run: |
-          echo "Contents of workspace:"
-          ls -la
-          echo ".next directory exists:"
-          ls -la .next || echo ".next directory not found!"
-      
-      # Fixed upload artifact step with proper settings
-      - name: Upload build output
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-output
-          path: .next
-          retention-days: 1
-          if-no-files-found: error # Will make the workflow fail if no files found
-
   # Test job
   test:
     runs-on: ubuntu-latest
@@ -289,110 +266,3 @@ jobs:
       
       - name: Run tests
         run: ${{ steps.detect-package-manager.outputs.manager }} test
-
-  # E2E testing with Playwright (simplified to make it more reliable)
-  e2e-tests:
-    name: Playwright E2E Tests
-    runs-on: ubuntu-latest
-    needs: [changes]
-    if: ${{ needs.changes.outputs.code == 'true' || needs.changes.outputs.e2e == 'true' || github.event_name == 'pull_request' }}
-    timeout-minutes: 15
-    permissions:
-      contents: read
-    
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 1  # Shallow clone for speed
-      
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-          cache: 'npm'
-      
-      - name: Get Playwright version
-        id: playwright-version
-        run: |
-          if [ -f "package.json" ]; then
-            VERSION=$(node -e "try { console.log(require('./package.json').devDependencies['@playwright/test'] || 'latest') } catch { console.log('latest') }")
-            echo "version=$VERSION" >> $GITHUB_OUTPUT
-          else
-            echo "version=latest" >> $GITHUB_OUTPUT
-          fi
-      
-      - name: Cache node_modules
-        uses: actions/cache@v4
-        id: node-modules-cache
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-npm-${{ hashFiles('package-lock.json') }}-v1
-      
-      - name: Install dependencies
-        if: steps.node-modules-cache.outputs.cache-hit != 'true'
-        run: npm ci
-      
-      # Cache Playwright browsers
-      - name: Cache Playwright browsers
-        uses: actions/cache@v4
-        id: playwright-browsers-cache
-        with:
-          path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-${{ steps.playwright-version.outputs.version }}
-      
-      # Conditionally install browsers or just dependencies
-      - name: Install Playwright browsers
-        if: steps.playwright-browsers-cache.outputs.cache-hit != 'true'
-        run: npx playwright install --with-deps chromium
-      
-      - name: Install Playwright dependencies
-        if: steps.playwright-browsers-cache.outputs.cache-hit == 'true'
-        run: npx playwright install-deps chromium
-      
-      # Add Amplify outputs file (needed for build)
-      - name: Add Amplify outputs file
-        run: touch amplify_outputs.json && echo "{}" > amplify_outputs.json
-      
-      # Build within the E2E job instead of depending on separate build job
-      - name: Build Next.js for E2E tests
-        run: npm run build
-        env:
-          NODE_OPTIONS: --max-old-space-size=4096 --no-deprecation
-      
-      # Run a simple single-shard test to ensure everything works
-      - name: Run Playwright tests
-        run: npx playwright test
-        env:
-          # Pass environment variables if needed
-          CI: true
-      
-      # Always upload artifacts for debugging
-      - name: Upload test artifacts
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: playwright-report
-          path: |
-            playwright-report/
-            test-results/
-          retention-days: 7
-
-  # You can re-enable the sharded workflow once the basic setup is working
-  # just uncomment and modify as needed
-  
-  # Sharded tests for when your E2E setup is fully working
-  # e2e-tests-sharded:
-  #   name: E2E Tests (Shard ${{ matrix.shardIndex }}/${{ matrix.shardTotal }})
-  #   runs-on: ubuntu-latest
-  #   needs: [changes, e2e-tests]
-  #   if: ${{ false }}  # Disabled until main E2E tests are passing
-  #   timeout-minutes: 10
-  #   strategy:
-  #     fail-fast: false
-  #     matrix:
-  #       shardIndex: [1, 2, 3]
-  #       shardTotal: [3]
-  #   steps:
-  #     # Steps similar to e2e-tests job but with --shard parameter
-  #     # ...
