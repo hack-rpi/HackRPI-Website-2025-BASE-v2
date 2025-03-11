@@ -25,21 +25,25 @@ As of March 2025, E2E tests are **excluded from the CI pipeline** and should be 
 ### Running E2E Tests Locally
 
 1. **Start the development server** (if not already running):
+
    ```bash
    npm run dev
    ```
 
 2. **In a separate terminal, run all E2E tests**:
+
    ```bash
    npm run test:e2e
    ```
 
 3. **Run tests with UI mode** (recommended for debugging):
+
    ```bash
    npx playwright test --ui
    ```
 
 4. **Run specific test files**:
+
    ```bash
    npx playwright test e2e/smoke.spec.ts
    ```
