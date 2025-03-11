@@ -21,16 +21,15 @@ echo "🔧 Fixing specific issues in files..."
 # Fix specific files with known issues
 echo "📝 Fixing app/event/page.tsx (unused import)..."
 if grep -q "import GoogleMapsWidget" app/event/page.tsx; then
-  sed -i.bak '/import GoogleMapsWidget/d' app/event/page.tsx && rm -f app/event/page.tsx.bak
-  echo "  ✅ Removed unused GoogleMapsWidget import"
+  # Comment out the import instead of removing it
+  sed -i.bak 's/import GoogleMapsWidget/\/\/ import GoogleMapsWidget/' app/event/page.tsx && rm -f app/event/page.tsx.bak
+  echo "  ✅ Commented out GoogleMapsWidget import for future use"
 fi
 
 # Fix interactive map unused variable
-echo "📝 Fixing components/interactive-map/interactive-map.tsx (unused variable)..."
-if grep -q "const links" components/interactive-map/interactive-map.tsx; then
-  sed -i.bak 's/const links/const _links/' components/interactive-map/interactive-map.tsx && rm -f components/interactive-map/interactive-map.tsx.bak
-  echo "  ✅ Prefixed unused variable with _ to avoid lint error"
-fi
+echo "📝 Checking interactive-map/interactive-map.tsx..."
+# Don't rename 'links' to '_links' as it might be used elsewhere
+echo "  ✅ Preserving 'links' variable in interactive-map.tsx"
 
 # Add React Hook dependencies in 2048/page.tsx
 echo "📝 Adding eslint-disable comment for React Hook in 2048/page.tsx..."

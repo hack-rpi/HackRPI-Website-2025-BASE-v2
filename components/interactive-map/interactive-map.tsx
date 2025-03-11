@@ -4,7 +4,7 @@ import NextLink from "next/link";
 
 // Previously commented out because we didn't have the links yet
 // Now uncommented and updated from main branch
-const _links: Link[] = [
+const links: Link[] = [
 	{ href: "/event", children: "Event Information" },
 	{ href: "/event/schedule", children: "Schedule" },
 	{ href: "/announcements", children: "Announcements" },
