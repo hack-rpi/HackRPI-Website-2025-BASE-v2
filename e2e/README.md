@@ -18,6 +18,39 @@
 
 </div>
 
+## ⚠️ Important: Manual E2E Testing Only ⚠️
+
+As of March 2025, E2E tests are **excluded from the CI pipeline** and should be run manually by developers before submitting pull requests. This decision was made to avoid conflicts between Jest and Playwright test runners, and to give developers more control over test execution.
+
+### Running E2E Tests Locally
+
+1. **Start the development server** (if not already running):
+   ```bash
+   npm run dev
+   ```
+
+2. **In a separate terminal, run all E2E tests**:
+   ```bash
+   npm run test:e2e
+   ```
+
+3. **Run tests with UI mode** (recommended for debugging):
+   ```bash
+   npx playwright test --ui
+   ```
+
+4. **Run specific test files**:
+   ```bash
+   npx playwright test e2e/smoke.spec.ts
+   ```
+
+5. **Run tests in a specific browser**:
+   ```bash
+   npx playwright test --project=chromium
+   ```
+
+Please run these tests locally before submitting PRs to ensure your changes don't break critical user flows.
+
 ## Table of Contents
 
 1. [Introduction](#introduction)

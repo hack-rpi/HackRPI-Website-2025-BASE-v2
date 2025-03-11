@@ -6,6 +6,7 @@ const config = {
 		"<rootDir>/.next/",
 		"<rootDir>/amplify/",
 		"<rootDir>/__tests__/test-utils.tsx",
+		"<rootDir>/e2e/", // Explicitly exclude all Playwright E2E tests to avoid conflicts
 	],
 	// Switch to V8 coverage provider for better performance and compatibility
 	coverageProvider: "v8",
