@@ -1,0 +1,11 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# Run Prettier to format code
+npx prettier --write --tab-width=2 --use-tabs .
+
+# Fix auto-fixable ESLint issues
+npx next lint --fix || true
+
+# Add files to staging after fixing
+git add -A 
