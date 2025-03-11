@@ -48,3 +48,6 @@ amplifyconfiguration*
 # cursor rules
 .cursor/
 .cursorrules
+
+# windsurf rules
+.windsurfrules

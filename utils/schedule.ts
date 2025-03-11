@@ -5,9 +5,9 @@ export function arrangeEvents(events: Event[]): Event[][] {
 		return [];
 	}
 
-	let eventsToPlace = [...events];
+	const eventsToPlace = [...events];
 
-	let placedEvents: Event[][] = [[]];
+	const placedEvents: Event[][] = [[]];
 
 	while (eventsToPlace.length > 0) {
 		let eventToPlace = eventsToPlace.shift();
@@ -17,7 +17,7 @@ export function arrangeEvents(events: Event[]): Event[][] {
 
 		for (let i = 0; i < placedEvents.length; i++) {
 			const column = placedEvents[i];
-			let conflict = findConflict(eventToPlace!, column);
+			const conflict = findConflict(eventToPlace!, column);
 			if (!conflict) {
 				// If there are no conflicts, place the event in the column
 				column.push(eventToPlace);
@@ -25,7 +25,7 @@ export function arrangeEvents(events: Event[]): Event[][] {
 				break;
 			}
 
-			let longerEvent: Event =
+			const longerEvent: Event =
 				eventToPlace.endTime - eventToPlace.startTime > conflict.endTime - conflict.startTime ? eventToPlace : conflict;
 
 			if (longerEvent === conflict) {

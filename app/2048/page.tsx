@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+// eslint-disable-next-line react-hooks/exhaustive-deps
 import { useEffect } from "react";
 import NavBar from "@/components/nav-bar/nav-bar";
 import Board from "@/components/game/board";
@@ -149,32 +150,32 @@ export default function Page() {
 			}
 
 			switch (e.key) {
-			case "ArrowUp":
-				// eslint-disable-next-line
+				case "ArrowUp":
+					// eslint-disable-next-line
 					const upGrid = moveUp(newGrid);
-				moved = JSON.stringify(upGrid) !== JSON.stringify(newGrid);
-				newGrid = upGrid;
-				break;
-			case "ArrowDown":
-				// eslint-disable-next-line
+					moved = JSON.stringify(upGrid) !== JSON.stringify(newGrid);
+					newGrid = upGrid;
+					break;
+				case "ArrowDown":
+					// eslint-disable-next-line
 					const downGrid = moveDown(newGrid);
-				moved = JSON.stringify(downGrid) !== JSON.stringify(newGrid);
-				newGrid = downGrid;
-				break;
-			case "ArrowLeft":
-				// eslint-disable-next-line
+					moved = JSON.stringify(downGrid) !== JSON.stringify(newGrid);
+					newGrid = downGrid;
+					break;
+				case "ArrowLeft":
+					// eslint-disable-next-line
 					const leftGrid = moveLeft(newGrid);
-				moved = JSON.stringify(leftGrid) !== JSON.stringify(newGrid);
-				newGrid = leftGrid;
-				break;
-			case "ArrowRight":
-				// eslint-disable-next-line
+					moved = JSON.stringify(leftGrid) !== JSON.stringify(newGrid);
+					newGrid = leftGrid;
+					break;
+				case "ArrowRight":
+					// eslint-disable-next-line
 					const rightGrid = moveRight(newGrid);
-				moved = JSON.stringify(rightGrid) !== JSON.stringify(newGrid);
-				newGrid = rightGrid;
-				break;
-			default:
-				return prevGrid;
+					moved = JSON.stringify(rightGrid) !== JSON.stringify(newGrid);
+					newGrid = rightGrid;
+					break;
+				default:
+					return prevGrid;
 			}
 
 			if (moved) {
@@ -346,6 +347,7 @@ export default function Page() {
 	};
 	const [gameReady, setGameReady] = useState(false);
 
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	useEffect(() => {
 		const checkGameReady = async () => {
 			const response = await is_game_ready();
@@ -426,3 +428,4 @@ export default function Page() {
 		</div>
 	);
 }
+// eslint-disable

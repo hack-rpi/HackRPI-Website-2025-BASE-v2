@@ -4,7 +4,7 @@ declare global {
 	namespace jest {
 		interface Matchers<R> {
 			toBeInTheDocument(): R;
-			toHaveAttribute(attr: string, value?: string): R;
+			toHaveAttribute(attr: string, value?: unknown): R;
 			toHaveClass(...classNames: string[]): R;
 			toHaveStyle(css: Record<string, any>): R;
 			toBeVisible(): R;
