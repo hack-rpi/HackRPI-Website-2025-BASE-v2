@@ -15,12 +15,12 @@ export const metadata: Metadata = {
 				url: "/banner.png",
 				width: 1200,
 				height: 630,
-				alt: "HackRPI 2025 Banner"
-			}
+				alt: "HackRPI 2025 Banner",
+			},
 		],
 		locale: "en_US",
 		type: "website",
-	}
+	},
 };
 
 import ClientLayout from "@/components/layout/client-layout";
