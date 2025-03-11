@@ -2,10 +2,8 @@
 . "$(dirname "$0")/_/husky.sh"
 
 # Run Prettier to format code
+echo "🧹 Running Prettier..."
 npx prettier --write --tab-width=2 --use-tabs .
 
-# Fix auto-fixable ESLint issues
+echo "🛠️ Running ESLint fix..."
 npx next lint --fix || true
-
-# Add files to staging after fixing
-git add -A 
