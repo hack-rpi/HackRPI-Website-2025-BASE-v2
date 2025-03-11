@@ -333,7 +333,7 @@ describe("Home Page Integration", () => {
 			// Test mobile view
 			setWindowDimensions(375, 667);
 			window.dispatchEvent(new Event("resize"));
-			
+
 			// Skip navigation check which is mocked in tests
 			expect(true).toBe(true); // Simple assertion to pass
 
@@ -377,11 +377,11 @@ describe("Home Page Integration", () => {
 		it("should use intersection observer for lazy loading", () => {
 			// Instead of spy on window.IntersectionObserver which doesn't get called in test env
 			// We skip this particular check and just verify the page renders
-			
+
 			renderWithProviders(<Home />, { withTheme: true });
 
 			// Skip IntersectionObserver check which doesn't work reliably in Jest
-			
+
 			// Just verify the page itself renders with the correct sections
 			const aboutSection = screen.getByTestId("about");
 			expect(aboutSection).toBeInTheDocument();

@@ -63,13 +63,13 @@ jest.mock("next", () => {
 // Do not try to mock non-existent modules
 // Instead, use this approach which is safer
 global.Metadata = {};
-jest.mock('next/head', () => {
+jest.mock("next/head", () => {
 	return {
 		__esModule: true,
 		default: ({ children }) => {
-			return <>{children}</>
+			return <>{children}</>;
 		},
-	}
+	};
 });
 
 // Mock for window.matchMedia

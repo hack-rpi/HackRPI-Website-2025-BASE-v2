@@ -6,7 +6,7 @@ export const metadata: Metadata = {
 	title: "HackRPI 2025",
 	description:
 		"HackRPI is RPI&apos;s annual intercollegiate hackathon hosted by students for students. Get swag and free food as you compete for exciting prizes! With a broad range of workshops and mentors on-site, there's no experience necessary to attend.",
-	...(process.env.NODE_ENV !== 'test' && {
+	...(process.env.NODE_ENV !== "test" && {
 		openGraph: {
 			title: "HackRPI 2025",
 			description: "HackRPI is RPI's annual intercollegiate hackathon hosted by students for students.",
