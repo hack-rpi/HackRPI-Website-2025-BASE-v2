@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { navigateMainSections } from "../utils/test-helpers/playwright";
 
 /**
  * Navigation tests for the HackRPI website
@@ -96,5 +97,11 @@ test.describe("Navigation", () => {
 			const nav = page.getByRole("navigation");
 			await expect(nav).toBeVisible();
 		}
+	});
+
+	// Using our shared utility function for main section navigation
+	test("should navigate to all main sections using shared utility", async ({ page }) => {
+		// Use the shared navigation utility
+		await navigateMainSections(page);
 	});
 });
