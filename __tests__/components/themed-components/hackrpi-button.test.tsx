@@ -26,10 +26,10 @@ describe("HackRPIButton Component", () => {
 
 	test("calls onClick handler when clicked", () => {
 		const handleClick = jest.fn();
-		
+
 		render(<HackRPIButton onClick={handleClick}>Clickable Button</HackRPIButton>);
 		const button = screen.getByRole("button", { name: /Clickable Button/i });
-		
+
 		fireEvent.click(button);
 		expect(handleClick).toHaveBeenCalledTimes(1);
 	});
@@ -56,7 +56,7 @@ describe("HackRPIButton Component", () => {
 		render(<HackRPIButton>Default Button</HackRPIButton>);
 		const button = screen.getByRole("button", { name: /Default Button/i });
 		const svg = button.querySelector("svg");
-		
+
 		expect(svg).toBeInTheDocument();
 		expect(svg).toHaveClass("fill-hackrpi-pink");
 		expect(svg).not.toHaveClass("fill-hackrpi-orange");
@@ -66,9 +66,9 @@ describe("HackRPIButton Component", () => {
 		render(<HackRPIButton active={true}>Active Button</HackRPIButton>);
 		const button = screen.getByRole("button", { name: /Active Button/i });
 		const svg = button.querySelector("svg");
-		
+
 		expect(svg).toBeInTheDocument();
 		expect(svg).toHaveClass("fill-hackrpi-orange");
 		expect(svg).not.toHaveClass("fill-hackrpi-pink");
 	});
-}); 
+});

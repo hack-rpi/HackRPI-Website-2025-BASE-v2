@@ -33,12 +33,12 @@ describe("Timer Utility", () => {
 		it("returns correct delta when end time is exactly one day ahead", () => {
 			const currentTime = createDate(2025, 10, 24, 14, 0, 0);
 			const endTime = createDate(2025, 10, 25, 14, 0, 0);
-			
+
 			// Using shared helper to format date in test output
 			console.log(`Testing from ${formatTestDate(currentTime)} to ${formatTestDate(endTime)}`);
 
 			const result = calculateDeltaTime(currentTime, endTime);
-			
+
 			// Update the expected result to match the actual implementation behavior
 			// The implementation uses a countdown style format (23:59:59) rather than days
 			const expected: DeltaTime = {
