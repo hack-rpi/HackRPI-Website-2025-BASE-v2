@@ -6,10 +6,12 @@
 /* eslint-disable quotes */
 /* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 
-// Add type declaration comment to handle missing Playwright types
-// @ts-expect-error - Playwright types are only available in E2E test environment
-import { Page, Locator, expect } from "@playwright/test";
+// Import Playwright types conditionally
+import type { Page, Locator } from "@playwright/test";
+// Use the actual implementation in test environments
+import { expect } from "@playwright/test";
 import { generateTestUser, sleep } from "./common";
 
 /**
