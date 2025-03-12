@@ -15,11 +15,11 @@ export async function fillRegistrationForm(page: Page, userData = {}) {
 	const user = generateTestUser(userData);
 
 	// Fill out the form
-	await page.fill("input[name=\"firstName\"]", user.firstName);
-	await page.fill("input[name=\"lastName\"]", user.lastName);
-	await page.fill("input[name=\"email\"]", user.email);
-	await page.fill("input[name=\"phoneNumber\"]", user.phoneNumber);
-	await page.fill("input[name=\"school\"]", user.school);
+	await page.fill('input[name="firstName"]', user.firstName);
+	await page.fill('input[name="lastName"]', user.lastName);
+	await page.fill('input[name="email"]', user.email);
+	await page.fill('input[name="phoneNumber"]', user.phoneNumber);
+	await page.fill('input[name="school"]', user.school);
 
 	return user;
 }
@@ -31,7 +31,7 @@ export async function fillRegistrationForm(page: Page, userData = {}) {
  * @param timeout Optional timeout in milliseconds
  */
 export async function expectToastMessage(page: Page, messageText: string, timeout = 5000) {
-	const toast = page.locator(".toast, [role=\"alert\"]").filter({ hasText: messageText });
+	const toast = page.locator('.toast, [role="alert"]').filter({ hasText: messageText });
 	await expect(toast).toBeVisible({ timeout });
 }
 
