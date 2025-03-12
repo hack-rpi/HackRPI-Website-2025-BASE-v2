@@ -1,15 +1,22 @@
 /**
  * Playwright-specific test helpers for E2E testing
+ * @module utils/test-helpers/playwright
  */
+
+/* eslint-disable quotes */
+/* eslint-disable prettier/prettier */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 // Add type declaration comment to handle missing Playwright types
-// @ts-ignore - Playwright types are only available in E2E test environment
+// @ts-expect-error - Playwright types are only available in E2E test environment
 import { Page, Locator, expect } from "@playwright/test";
 import { generateTestUser, sleep } from "./common";
 
 /**
- * Fills out the registration form with test data
+ * Fills out the registration form with generated or provided user data
  * @param page The Playwright Page object
  * @param userData Optional user data overrides
+ * @returns The user data used to fill the form
  */
 export async function fillRegistrationForm(page: Page, userData = {}) {
 	const user = generateTestUser(userData);
@@ -25,7 +32,7 @@ export async function fillRegistrationForm(page: Page, userData = {}) {
 }
 
 /**
- * Waits for and verifies a toast notification message
+ * Wait for and verify a toast message
  * @param page The Playwright Page object
  * @param messageText Expected text content of the toast
  * @param timeout Optional timeout in milliseconds

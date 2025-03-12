@@ -3,6 +3,9 @@
  * These utilities can be used by both Jest unit tests and Playwright E2E tests
  */
 
+/* eslint-disable quotes */
+/* eslint-disable prettier/prettier */
+
 /**
  * Formats date strings consistently across tests
  * @param date Date to format

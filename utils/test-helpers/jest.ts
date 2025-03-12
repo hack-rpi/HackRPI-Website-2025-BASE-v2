@@ -1,6 +1,10 @@
 /**
  * Jest-specific test helpers for unit and component testing
  */
+
+/* eslint-disable quotes */
+/* eslint-disable prettier/prettier */
+
 import React, { ReactElement } from "react";
 import { render, screen, within, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
