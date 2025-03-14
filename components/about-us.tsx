@@ -14,12 +14,13 @@ export default function AboutUs() {
 						HackRPI 2025 is Rensselaer Polytechnic Institute&apos;s 12th annual intercollegiate hackathon hosted by
 						students for students. Starting at noon on Saturday, November 15th, teams of 1-4 people have 24 hours to
 						build and submit projects relating to our theme,{" "}
-						<span className="text-hackrpi-light-purple font-bold">Retro vs. Modern</span>. After submitting their projects,
-						participants demonstrate their projects in front of a panel of professors, industry professionals, and
-						fellow students.
+						<span className="text-hackrpi-light-purple font-bold">Retro vs. Modern</span>. After submitting their
+						projects, participants demonstrate their projects in front of a panel of professors, industry professionals,
+						and fellow students.
 					</p>
 					<p className="pb-3">
-						<span className="text-hackrpi-light-purple font-bold">Retro vs. Modern</span> is DESCRIPTION OF RETRO VS MODERN
+						<span className="text-hackrpi-light-purple font-bold">Retro vs. Modern</span> is DESCRIPTION OF RETRO VS
+						MODERN
 					</p>
 					<p className="pb-3">
 						Our goal is to inspire and challenge innovators, creators, developers, and entrepreneurs in New York&apos;s
