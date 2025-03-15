@@ -8,6 +8,7 @@ import React, { ReactElement } from "react";
 import { render, RenderOptions, RenderResult, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useSearchParams, useParams, usePathname, useRouter } from "next/navigation";
+import { commonAccessibilityChecks as commonChecks, createMockFormEvent } from "./__mocks__/mockRegistry";
 
 // Mock Next.js router
 export const mockRouterPush = jest.fn();
@@ -225,37 +226,10 @@ export function setWindowDimensions(width: number, height: number = 800) {
 
 /**
  * Mock a form submission event with comprehensive event properties
+ * @deprecated Use createMockFormEvent from mockRegistry instead
  */
 export function mockFormEvent(formData?: Record<string, any>) {
-	const mockEvent = {
-		preventDefault: jest.fn(),
-		stopPropagation: jest.fn(),
-		target: {
-			checkValidity: jest.fn().mockReturnValue(true),
-			reportValidity: jest.fn(),
-			reset: jest.fn(),
-			elements: {},
-			...formData,
-		},
-		// Add currentTarget for form event consistency
-		currentTarget: {
-			checkValidity: jest.fn().mockReturnValue(true),
-			reportValidity: jest.fn(),
-			reset: jest.fn(),
-			elements: {},
-			...formData,
-		},
-	};
-
-	// Add formData support for modern forms
-	if (formData) {
-		mockEvent.target.elements = Object.fromEntries(
-			Object.entries(formData).map(([key, value]) => [key, { value, name: key, id: key }]),
-		);
-		mockEvent.currentTarget.elements = mockEvent.target.elements;
-	}
-
-	return mockEvent;
+	return createMockFormEvent(formData);
 }
 
 /**
@@ -312,57 +286,130 @@ export const createMockElement = {
 
 /**
  * Comprehensive accessibility testing helper
+ * @deprecated Use commonAccessibilityChecks from mockRegistry instead
  */
 export function checkAccessibility(element: HTMLElement) {
-	// Check for common accessibility issues
-
-	// All interactive elements should have accessible names
-	const buttons = within(element).queryAllByRole("button");
-	buttons.forEach((button) => {
-		expect(button).toHaveAccessibleName();
-	});
-
-	const links = within(element).queryAllByRole("link");
-	links.forEach((link) => {
-		expect(link).toHaveAccessibleName();
-	});
-
-	const inputs = within(element).queryAllByRole("textbox");
-	inputs.forEach((input) => {
-		expect(input).toHaveAccessibleName();
-	});
-
-	// All images should have alt text
-	const images = within(element).queryAllByRole("img");
-	images.forEach((img) => {
-		expect(img).toHaveAttribute("alt");
-	});
-
-	// All form elements should have associated labels
-	const formElements = [
-		...within(element).queryAllByRole("textbox"),
-		...within(element).queryAllByRole("checkbox"),
-		...within(element).queryAllByRole("radio"),
-		...within(element).queryAllByRole("combobox"),
-	];
-
-	formElements.forEach((formElement) => {
-		expect(formElement).toHaveAccessibleName();
-	});
-
-	// All headings should be in a logical order
-	const headings = within(element).queryAllByRole("heading");
-	if (headings.length > 1) {
-		let previousLevel = 0;
-		headings.forEach((heading) => {
-			const level = parseInt(heading.tagName.charAt(1));
-			// Heading levels should only increase by one
-			if (previousLevel > 0) {
-				expect(level - previousLevel).toBeLessThanOrEqual(1);
-			}
-			previousLevel = level;
-		});
-	}
+	// Forward to the centralized implementation
+	commonChecks(element);
 }
+
+/**
+ * Test utilities for extracting content from components' data structures.
+ * This helps tests be more resilient to changes in the content displayed.
+ */
+
+// Define a constant set of FAQ data that mirrors the structure in the component
+// This allows tests to be more maintainable by referencing this data instead of hardcoded strings
+export interface FAQItem {
+	title: string;
+	content: string | React.ReactNode;
+}
+
+export const TEST_FAQ_DATA: FAQItem[] = [
+	{
+		title: "What is HackRPI?",
+		content: "Teams of 1-4 have 24 hours to build a project relating to our theme",
+	},
+	{
+		title: "When is HackRPI?",
+		content: "HackRPI takes place on November 15th and 16th, 2025. Arrival and check-in takes place",
+	},
+	{
+		title: "Where is HackRPI?",
+		content: "HackRPI takes place at Rensselaer Polytechnic Institute, in the Darrin Communication Center",
+	},
+];
+
+/**
+ * Returns the content of a FAQ by its title
+ * @param title The title of the FAQ item
+ * @returns The content of the FAQ item as string or null if not found
+ */
+export const getFaqContentByTitle = (title: string): string | React.ReactNode | null => {
+	const faq = TEST_FAQ_DATA.find((item) => item.title === title);
+	return faq ? faq.content : null;
+};
+
+/**
+ * Returns a regex pattern that matches the start of the FAQ content
+ * This is more resilient to content changes than exact matching
+ * @param title The title of the FAQ item
+ * @returns A RegExp that matches the start of the content
+ */
+export const getFaqContentPattern = (title: string): RegExp | null => {
+	const content = getFaqContentByTitle(title);
+	if (!content || typeof content !== "string") return null;
+
+	// Get first 10 words of content to create a regex pattern
+	const words = content.split(" ").slice(0, 10).join(" ");
+	return new RegExp(words.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i");
+};
+
+/**
+ * Gets the year from the current theme
+ * @returns The current year being used in the about component
+ */
+export const getCurrentHackrpiYear = (): string => {
+	return "2025"; // Could be pulled from config or env variable in a real app
+};
+
+/**
+ * Gets the expected month for the HackRPI event
+ * @returns The month name when HackRPI is held
+ */
+export const getHackrpiMonth = (): string => {
+	return "November"; // Could be pulled from config or env variable
+};
+
+/**
+ * Creates a flexible regex pattern for matching date strings that might change
+ * @param month Optional month override (defaults to HackRPI month)
+ * @param year Optional year override (defaults to HackRPI year)
+ * @returns A RegExp that matches date patterns like "November 15-16, 2025"
+ */
+export const getDatePattern = (month?: string, year?: string): RegExp => {
+	const eventMonth = month || getHackrpiMonth();
+	const eventYear = year || getCurrentHackrpiYear();
+	return new RegExp(`${eventMonth} \\d+-\\d+, ${eventYear}`);
+};
+
+/**
+ * Generates consistent data-testid attributes following project conventions
+ * This helps standardize the way we select elements in tests
+ */
+export const generateTestId = {
+	/**
+	 * Generate a section test ID
+	 * @param name The section name (e.g., 'about', 'faq')
+	 * @returns A test ID string like 'about-section'
+	 */
+	section: (name: string): string => `${name.toLowerCase()}-section`,
+
+	/**
+	 * Generate a component test ID
+	 * @param component The component name (e.g., 'button', 'card')
+	 * @param variant Optional variant (e.g., 'primary', 'outline')
+	 * @returns A test ID string like 'primary-button'
+	 */
+	component: (component: string, variant?: string): string => (variant ? `${variant}-${component}` : component),
+
+	/**
+	 * Generate a list item test ID
+	 * @param list The list name (e.g., 'faq', 'event')
+	 * @param index The item index
+	 * @returns A test ID string like 'faq-item-0'
+	 */
+	listItem: (list: string, index: number): string => `${list}-item-${index}`,
+
+	/**
+	 * Generate a content test ID
+	 * @param type The content type (e.g., 'title', 'description')
+	 * @param parent The parent component name
+	 * @param index Optional index for lists
+	 * @returns A test ID string like 'event-title' or 'faq-content-0'
+	 */
+	content: (type: string, parent: string, index?: number): string =>
+		index !== undefined ? `${parent}-${type}-${index}` : `${parent}-${type}`,
+};
 
 export default {};

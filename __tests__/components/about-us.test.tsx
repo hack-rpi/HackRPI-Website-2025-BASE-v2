@@ -1,7 +1,13 @@
 import React from "react";
 import { screen, within } from "@testing-library/react";
 import AboutUs from "@/components/about-us";
-import { renderWithProviders, resetAllMocks, checkAccessibility } from "../test-utils";
+import {
+	renderWithProviders,
+	resetAllMocks,
+	checkAccessibility,
+	getCurrentHackrpiYear,
+	getDatePattern,
+} from "../test-utils";
 
 // Mock the RegistrationLink component
 jest.mock("@/components/themed-components/registration-link", () => {
@@ -13,6 +19,10 @@ jest.mock("@/components/themed-components/registration-link", () => {
 		);
 	};
 });
+
+// Define the current theme and year for better test maintainability
+const CURRENT_THEME = "Retro vs. Modern";
+const HACKRPI_YEAR = getCurrentHackrpiYear();
 
 describe("AboutUs Component", () => {
 	beforeEach(() => {
@@ -42,51 +52,57 @@ describe("AboutUs Component", () => {
 	it("renders the theme information with correct styling", () => {
 		renderWithProviders(<AboutUs />);
 
-		// 2025 best practice: Test for the theme information
-		const themeElements = screen.getAllByText("Urban Upgrades");
-		expect(themeElements.length).toBeGreaterThan(0);
+		// Use data-testid for reliable element selection
+		const themeTitle = screen.getByTestId("theme-title");
+		const themeDescription = screen.getByTestId("theme-description");
+
+		// Verify theme text content matches our expected theme
+		expect(themeTitle.textContent).toBe(CURRENT_THEME);
+		expect(themeDescription.textContent).toBe(CURRENT_THEME);
 
 		// Check styling with more robust assertions
-		const firstThemeElement = themeElements[0];
-		expect(firstThemeElement).toHaveClass("text-hackrpi-orange");
-		expect(firstThemeElement).toHaveClass("font-bold");
+		expect(themeTitle).toHaveClass("text-hackrpi-light-purple");
+		expect(themeTitle).toHaveClass("font-bold");
+		expect(themeDescription).toHaveClass("text-hackrpi-light-purple");
+		expect(themeDescription).toHaveClass("font-bold");
 
 		// 2025 best practice: Find a paragraph that contains the theme element
-		const paragraphWithTheme = firstThemeElement.closest("p");
+		const paragraphWithTheme = themeTitle.closest("p");
 		expect(paragraphWithTheme).not.toBeNull();
 		// The paragraph should contain text before or after the theme element
-		expect(paragraphWithTheme?.textContent?.length).toBeGreaterThan(firstThemeElement.textContent?.length || 0);
+		expect(paragraphWithTheme?.textContent?.length).toBeGreaterThan(themeTitle.textContent?.length || 0);
 	});
 
 	it("renders the date and location information correctly", () => {
 		renderWithProviders(<AboutUs />);
 
 		// 2025 best practice: Test how the information is structured for users
-		const dateElement = screen.getByText("November 15-16, 2025");
-		expect(dateElement).toBeInTheDocument();
+		// Use data-testid attributes for reliable element selection
+		const dateElement = screen.getByTestId("event-date");
+		const locationElement = screen.getByTestId("event-location");
+		const venueElement = screen.getByTestId("event-venue");
 
-		// Test that location info is properly grouped - get the exact text content
-		const rpiElement = screen.getAllByText(/Rensselaer Polytechnic Institute/)[1]; // Get the second occurrence (location section)
-		expect(rpiElement).toBeInTheDocument();
+		// Use flexible date pattern from utility
+		expect(dateElement.textContent).toMatch(getDatePattern());
+		expect(locationElement.textContent).toBe("Rensselaer Polytechnic Institute");
+		expect(venueElement.textContent).toBe("Darrin Communications Center");
 
-		// Find the parent div that contains all location info
-		const locationSection = rpiElement.closest("div");
-		expect(locationSection).not.toBeNull();
-
-		// Check that both location elements are within the same container
-		expect(within(locationSection as HTMLElement).getByText("Darrin Communications Center")).toBeInTheDocument();
+		// Check they share the same parent container for proper grouping
+		const parentContainer = dateElement.parentElement;
+		expect(parentContainer).toContainElement(locationElement);
+		expect(parentContainer).toContainElement(venueElement);
 	});
 
 	it("renders the registration link with correct styling", () => {
 		// 2025 best practice: Render the component and get the container
 		const { container } = renderWithProviders(<AboutUs />);
 
-		// 2025 best practice: Use role-based queries
-		const registrationLink = screen.getByRole("link", { name: /Registration Link/i });
+		// 2025 best practice: Use data-testid for more reliable selection
+		const registrationLink = screen.getByTestId("registration-link");
 		expect(registrationLink).toBeInTheDocument();
 		expect(registrationLink).toHaveClass("text-xl");
 
-		// 2025 best practice: Find the REGISTER NOW text separately
+		// 2025 best practice: Find the REGISTER NOW text using a pattern
 		const registerNowText = screen.getByText(/REGISTER NOW!/i);
 		expect(registerNowText).toBeInTheDocument();
 
@@ -98,33 +114,32 @@ describe("AboutUs Component", () => {
 	it('renders the scrolling "REGISTER NOW!" text with correct styling', () => {
 		const { container } = renderWithProviders(<AboutUs />);
 
-		// 2025 best practice: Test animation container and content
-		const registerText = screen.getByText(/REGISTER NOW!/i);
-		expect(registerText).toBeInTheDocument();
+		// 2025 best practice: Test animation container using data-testid
+		const registerBanner = screen.getByTestId("register-now-banner");
+		expect(registerBanner).toBeInTheDocument();
+		expect(registerBanner.textContent).toContain("REGISTER NOW!");
 
-		// Find the dark purple div and check styling and content
-		const darkPurpleDiv = container.querySelector(".bg-hackrpi-dark-purple");
-		expect(darkPurpleDiv).toBeInTheDocument();
-		expect(darkPurpleDiv).toHaveClass("text-black");
-		expect(darkPurpleDiv?.textContent).toContain("REGISTER NOW!");
-
-		// 2025 best practice: Check if it has styling for scrolling text
-		expect(darkPurpleDiv).toHaveClass("overflow-hidden");
-		expect(darkPurpleDiv).toHaveClass("whitespace-nowrap");
+		// Check styling directly on the element with data-testid
+		expect(registerBanner).toHaveClass("bg-hackrpi-dark-purple");
+		expect(registerBanner).toHaveClass("text-black");
+		expect(registerBanner).toHaveClass("overflow-hidden");
+		expect(registerBanner).toHaveClass("whitespace-nowrap");
 	});
 
 	it("renders the about description with key information", () => {
 		renderWithProviders(<AboutUs />);
 
-		// 2025 best practice: Test for key content that users need
-		const introText = screen.getByText(/HackRPI 2024 is Rensselaer Polytechnic Institute/i);
+		// Use more flexible patterns that focus on key content patterns rather than exact text
+		// Use the year constant to make the test more maintainable
+		const introRegex = new RegExp(`HackRPI ${HACKRPI_YEAR} is Rensselaer Polytechnic Institute`, "i");
+		const introText = screen.getByText(introRegex);
 		expect(introText).toBeInTheDocument();
 
 		const goalText = screen.getByText(/Our goal is to inspire and challenge innovators/i);
 		expect(goalText).toBeInTheDocument();
 
-		// 2025 best practice: Test that important information is highlighted
-		const highlightedInfo = screen.getAllByText(/Urban Upgrades/i);
+		// Test that important information is highlighted with more flexible matching
+		const highlightedInfo = screen.getAllByText(new RegExp(CURRENT_THEME, "i"));
 		expect(highlightedInfo.length).toBeGreaterThan(0);
 	});
 

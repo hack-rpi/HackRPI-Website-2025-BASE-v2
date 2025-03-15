@@ -12,6 +12,7 @@ import {
 	setWindowDimensions,
 	checkAccessibility,
 } from "../test-utils";
+import { MockIntersectionObserver } from "../__mocks__/mockRegistry";
 
 // 2025 Best Practice: More organized setup with clear purpose
 const mockHandleFAQClick = jest.fn();
@@ -154,120 +155,56 @@ jest.mock("@/components/faq/faq", () => {
 	};
 });
 
-// 2025 Best Practice: Better intersection observer mock with more functionality
-class MockIntersectionObserver implements IntersectionObserver {
-	// Adding required properties to match IntersectionObserver interface
-	readonly root: Element | Document | null = null;
-	readonly rootMargin: string = "";
-	readonly thresholds: ReadonlyArray<number> = [0];
+// Replace the custom MockIntersectionObserver with the centralized one
+const originalIntersectionObserver = window.IntersectionObserver;
 
-	private callback: IntersectionObserverCallback;
-	private elements = new Map<Element, boolean>();
+beforeEach(() => {
+	// Save and replace the global IntersectionObserver
+	window.IntersectionObserver = MockIntersectionObserver;
 
-	constructor(callback: IntersectionObserverCallback, options?: IntersectionObserverInit) {
-		this.callback = callback;
-		if (options) {
-			this.root = options.root || null;
-			this.rootMargin = options.rootMargin || "0px";
-			this.thresholds = Array.isArray(options.threshold) ? options.threshold : [options.threshold || 0];
+	// Enable fake timers for this test file
+	jest.useFakeTimers();
+
+	resetAllMocks();
+	mockHomePageElements();
+
+	// 2025 Best Practice: More realistic getBoundingClientRect mock
+	const mockGetBoundingClientRect = jest.fn().mockImplementation(function (this: Element) {
+		// Return different values based on element type for more realistic behavior
+		if (this.tagName === "NAV") {
+			return { top: 0, left: 0, right: 800, bottom: 60, width: 800, height: 60 };
 		}
-	}
 
-	observe(element: Element): void {
-		this.elements.set(element, true);
-
-		// Simulate intersection immediately for test purposes
-		const entries: IntersectionObserverEntry[] = [
-			{
-				isIntersecting: true,
-				target: element,
-				boundingClientRect: element.getBoundingClientRect(),
-				intersectionRatio: 1,
-				intersectionRect: element.getBoundingClientRect(),
-				rootBounds: null,
-				time: Date.now(),
-			} as IntersectionObserverEntry,
-		];
-
-		this.callback(entries, this as IntersectionObserver);
-	}
-
-	unobserve(element: Element): void {
-		this.elements.delete(element);
-	}
-
-	disconnect(): void {
-		this.elements.clear();
-	}
-
-	// Helper for tests to simulate intersection events
-	simulateIntersection(element: Element, isIntersecting: boolean): void {
-		if (this.elements.has(element)) {
-			const entries: IntersectionObserverEntry[] = [
-				{
-					isIntersecting,
-					target: element,
-					boundingClientRect: element.getBoundingClientRect(),
-					intersectionRatio: isIntersecting ? 1 : 0,
-					intersectionRect: isIntersecting ? element.getBoundingClientRect() : new DOMRect(),
-					rootBounds: null,
-					time: Date.now(),
-				} as IntersectionObserverEntry,
-			];
-
-			this.callback(entries, this as IntersectionObserver);
+		if (this.id === "about") {
+			return { top: 800, left: 0, right: 800, bottom: 1200, width: 800, height: 400 };
 		}
-	}
 
-	takeRecords(): IntersectionObserverEntry[] {
-		return [];
-	}
-}
+		if (this.id === "faq") {
+			return { top: 1200, left: 0, right: 800, bottom: 1600, width: 800, height: 400 };
+		}
 
-global.IntersectionObserver = MockIntersectionObserver as unknown as typeof IntersectionObserver;
+		// Default fallback
+		return { top: 100, left: 0, right: 800, bottom: 200, width: 800, height: 100 };
+	});
 
-// 2025 Best Practice: Better organized tests with descriptive blocks
+	Element.prototype.getBoundingClientRect = mockGetBoundingClientRect;
+
+	// Clear all mock function calls
+	mockHandleFAQClick.mockClear();
+	mockHandleAboutClick.mockClear();
+	mockHandleHomeClick.mockClear();
+});
+
+afterEach(() => {
+	// Restore the original implementation
+	window.IntersectionObserver = originalIntersectionObserver;
+
+	// Clean up by restoring real timers
+	jest.useRealTimers();
+});
+
+// 2025 Best Practice: More organized tests with descriptive blocks
 describe("Home Page Integration", () => {
-	// Setup before each test
-	beforeEach(() => {
-		// Enable fake timers for this test file
-		jest.useFakeTimers();
-
-		resetAllMocks();
-		mockHomePageElements();
-
-		// 2025 Best Practice: More realistic getBoundingClientRect mock
-		const mockGetBoundingClientRect = jest.fn().mockImplementation(function (this: Element) {
-			// Return different values based on element type for more realistic behavior
-			if (this.tagName === "NAV") {
-				return { top: 0, left: 0, right: 800, bottom: 60, width: 800, height: 60 };
-			}
-
-			if (this.id === "about") {
-				return { top: 800, left: 0, right: 800, bottom: 1200, width: 800, height: 400 };
-			}
-
-			if (this.id === "faq") {
-				return { top: 1200, left: 0, right: 800, bottom: 1600, width: 800, height: 400 };
-			}
-
-			// Default fallback
-			return { top: 100, left: 0, right: 800, bottom: 200, width: 800, height: 100 };
-		});
-
-		Element.prototype.getBoundingClientRect = mockGetBoundingClientRect;
-
-		// Clear all mock function calls
-		mockHandleFAQClick.mockClear();
-		mockHandleAboutClick.mockClear();
-		mockHandleHomeClick.mockClear();
-	});
-
-	afterEach(() => {
-		// Clean up by restoring real timers
-		jest.useRealTimers();
-	});
-
 	describe("Page Structure and Layout", () => {
 		it("should render all main sections with proper accessibility attributes", async () => {
 			// 2025 Best Practice: Use renderWithProviders with theme support

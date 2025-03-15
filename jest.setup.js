@@ -93,62 +93,10 @@ window.scrollTo = jest.fn();
 // Mock for Element.prototype.scrollIntoView
 Element.prototype.scrollIntoView = jest.fn();
 
-// Enhanced IntersectionObserver mock that better simulates real behavior
-global.IntersectionObserver = class IntersectionObserver {
-	constructor(callback) {
-		this.callback = callback;
-		this.entries = new Map();
-	}
+import { MockIntersectionObserver } from "./__tests__/__mocks__/mockRegistry";
 
-	observe(element) {
-		this.entries.set(element, {
-			isIntersecting: false,
-			target: element,
-			intersectionRatio: 0,
-		});
-
-		// Schedule a call to simulate intersection
-		setTimeout(() => {
-			const entry = {
-				isIntersecting: true,
-				target: element,
-				intersectionRatio: 1,
-				boundingClientRect: element.getBoundingClientRect(),
-				intersectionRect: element.getBoundingClientRect(),
-				rootBounds: null,
-				time: Date.now(),
-			};
-			this.entries.set(element, entry);
-			this.callback([entry], this);
-		}, 50);
-	}
-
-	unobserve(element) {
-		this.entries.delete(element);
-	}
-
-	disconnect() {
-		this.entries.clear();
-	}
-
-	// Method to manually trigger intersection
-	triggerIntersection(element, isIntersecting = true) {
-		if (!this.entries.has(element)) return;
-
-		const entry = {
-			isIntersecting,
-			target: element,
-			intersectionRatio: isIntersecting ? 1 : 0,
-			boundingClientRect: element.getBoundingClientRect(),
-			intersectionRect: isIntersecting ? element.getBoundingClientRect() : new DOMRect(),
-			rootBounds: null,
-			time: Date.now(),
-		};
-
-		this.entries.set(element, entry);
-		this.callback([entry], this);
-	}
-};
+// Replace the existing IntersectionObserver mock with the centralized version
+global.IntersectionObserver = MockIntersectionObserver;
 
 // More complete router mock
 jest.mock("next/navigation", () => ({
