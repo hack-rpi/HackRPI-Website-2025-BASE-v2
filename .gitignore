@@ -9,6 +9,12 @@
 
 # testing
 /coverage
+/playwright-report/
+/test-results/
+/e2e-results/
+/.playwright/
+/playwright/.cache/
+playwright-results.xml
 
 # next.js
 /.next/
@@ -44,3 +50,14 @@ amplify_outputs.json
 .amplify
 amplify_outputs*
 amplifyconfiguration*
+
+# cursor rules
+.cursor/
+.cursorrules
+
+# windsurf rules
+.windsurfrules
+
+# Additional build caches
+.swc/
+.turbo/

@@ -38,6 +38,7 @@ function SponsorUsPage() {
 						<HackRPILink
 							className="w-5/6 md:w-1/2 text-nowrap text-center text-2xl my-4"
 							href="https://tinyurl.com/hackrpi-donation"
+							target="_blank"
 						>
 							Donate Here!
 						</HackRPILink>

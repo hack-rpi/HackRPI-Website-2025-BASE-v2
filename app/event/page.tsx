@@ -5,7 +5,7 @@ import "@/app/globals.css";
 import Footer from "../../components/footer/footer";
 import NavBar from "@/components/nav-bar/nav-bar";
 import MapsDCCLow from "@/components/maps/maps";
-import GoogleMapsWidget from "@/components/maps/google_maps";
+// import GoogleMapsWidget from "@/components/maps/google_maps"; // Commenting out for now, may be used in the future
 import HackRPILink from "@/components/themed-components/hackrpi-link";
 import Image from "next/image";
 
@@ -101,6 +101,7 @@ function EventPage() {
 							<HackRPILink
 								href="https://discord.gg/7b2zc8fe26"
 								className="hover:bg-gradient-to-br hover:from-[#5865F2] hover:to-[#7289da] hover:bg-transparent hover:border-[#5865F2] w-20 h-20 flex items-center justify-center"
+								target="_blank"
 							>
 								<Image src="/social/discord.svg" alt="Discord Logo" width={50} height={50} />
 							</HackRPILink>
@@ -165,6 +166,7 @@ function EventPage() {
 							<HackRPILink
 								href="https://hackrpi2024.devpost.com/"
 								className="text-3xl mt-4 text-center text-hackrpi-orange"
+								target="_blank"
 							>
 								DEVPOST
 							</HackRPILink>
