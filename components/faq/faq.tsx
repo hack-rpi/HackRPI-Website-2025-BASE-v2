@@ -16,7 +16,7 @@ const faqs: FAQ[] = [
 	{
 		title: "When is HackRPI?",
 		content:
-			"HackRPI takes place on November 9th and 10th, 2024. Arrival and check-in takes place from 9-10 AM. Our opening ceremony starts at 10 AM, and hacking begins at 11am. Your projects must be on Devpost by 10 AM Sunday, and all coding must stop at 11 AM Sunday. Teams will present, and the event will end around 4PM on Sunday. We are excited to see you there!",
+			"HackRPI takes place on November 15th and 16th, 2025. Arrival and check-in takes place from 9-10 AM. Our opening ceremony starts at 10 AM, and hacking begins at 11am. Your projects must be on Devpost by 10 AM Sunday, and all coding must stop at 11 AM Sunday. Teams will present, and the event will end around 4PM on Sunday. We are excited to see you there!",
 	},
 	{
 		title: "Where is HackRPI?",
@@ -116,9 +116,9 @@ const FAQPage = () => {
 				{faqs.map((faq, index) => (
 					<div
 						key={index}
-						className={`collapse collapse-arrow custom-arrow bg-retro-purple-dark p-1 text-2xl border-t-2 ${
+						className={`collapse collapse-arrow custom-arrow bg-retro-purple-dark p-1 text-2xl border-t-4 ${
 							index === faqs.length - 1 ? "border-b-2" : ""
-						} border-retro-orange rounded-none`}
+						} border-hackrpi-light-purple border-rounded-r-xl border-double`}
 					>
 						<input
 							type="checkbox"
@@ -126,8 +126,8 @@ const FAQPage = () => {
 							checked={expandedIndex === index}
 							onChange={() => handleToggle(index)}
 						/>
-						<div className="font-modern collapse-title font-bold text-2xl text-retro-orange">{faq.title}</div>
-						<div className="font-neutral collapse-content">{faq.content}</div>
+						<div className="font-modern collapse-title font-medium text-2xl text-retro-orange">{faq.title}</div>
+						<div className="font-neutral2 collapse-content">{faq.content}</div>
 					</div>
 				))}
 			</div>
