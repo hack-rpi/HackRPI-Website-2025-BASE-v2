@@ -1,5 +1,9 @@
 // Learn more: https://github.com/testing-library/jest-dom
 import "@testing-library/jest-dom";
+import { MockIntersectionObserver, registerCustomMatchers } from "./__tests__/__mocks__/mockRegistry";
+
+// Register custom matchers automatically when jest setup runs
+registerCustomMatchers();
 
 // Polyfill for TextEncoder which is required by some dependencies
 if (typeof TextEncoder === "undefined") {
@@ -93,8 +97,6 @@ window.scrollTo = jest.fn();
 // Mock for Element.prototype.scrollIntoView
 Element.prototype.scrollIntoView = jest.fn();
 
-import { MockIntersectionObserver } from "./__tests__/__mocks__/mockRegistry";
-
 // Replace the existing IntersectionObserver mock with the centralized version
 global.IntersectionObserver = MockIntersectionObserver;
 
@@ -160,3 +162,39 @@ jest.mock("aws-amplify/api", () => ({
 		},
 	}),
 }));
+
+// 2025 Best Practice: Enable automatic fake timers for all tests by default
+// This makes tests more predictable and faster
+jest.useFakeTimers();
+
+// 2025 Best Practice: Configure user-event globally for consistent behavior
+window.HTMLElement.prototype.scrollIntoView = jest.fn();
+
+// 2025 Best Practice: Improve error detection for common React issues
+const originalConsoleError = console.error;
+console.error = function (message) {
+	// Fail tests on common React errors that might otherwise be missed
+	if (
+		/Warning:.*Cannot update a component/.test(message) ||
+		/Warning:.*Cannot update during an existing state transition/.test(message) ||
+		/Warning:.*Maximum update depth exceeded/.test(message) ||
+		/Warning:.*Can't perform a React state update on an unmounted component/.test(message)
+	) {
+		throw new Error(`React warning treated as error: ${message}`);
+	}
+	originalConsoleError.apply(console, arguments);
+};
+
+// 2025 Best Practice: Better DOM event simulation for user-event
+// This creates more realistic user interaction tests
+const eventProperties = ["bubbles", "cancelable", "composed"];
+const originalCreateEvent = window.document.createEvent;
+window.document.createEvent = function (type) {
+	const event = originalCreateEvent.call(document, type);
+	eventProperties.forEach((property) => {
+		if (!(property in event)) {
+			Object.defineProperty(event, property, { value: true });
+		}
+	});
+	return event;
+};

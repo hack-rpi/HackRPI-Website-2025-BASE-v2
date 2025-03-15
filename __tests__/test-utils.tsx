@@ -8,7 +8,16 @@ import React, { ReactElement } from "react";
 import { render, RenderOptions, RenderResult, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useSearchParams, useParams, usePathname, useRouter } from "next/navigation";
-import { commonAccessibilityChecks as commonChecks, createMockFormEvent } from "./__mocks__/mockRegistry";
+import {
+	commonAccessibilityChecks as commonChecks,
+	navigationAccessibilityChecks,
+	formAccessibilityChecks,
+	createMockFormEvent,
+	registerCustomMatchers,
+} from "./__mocks__/mockRegistry";
+
+// Register custom matchers automatically when test-utils is imported
+registerCustomMatchers();
 
 // Mock Next.js router
 export const mockRouterPush = jest.fn();
@@ -54,18 +63,58 @@ interface ExtendedRenderOptions extends Omit<RenderOptions, "wrapper"> {
 	searchParams?: URLSearchParams;
 	// Add fakeTimers option to control Jest's fake timers during rendering
 	useFakeTimers?: boolean;
+	// New for 2025: Add mobile/desktop/tablet viewport simulation
+	viewport?: "mobile" | "tablet" | "desktop" | { width: number; height: number };
+	// New for 2025: Add theme mode simulation
+	colorScheme?: "light" | "dark" | "system";
 }
 
 /**
  * Custom render function with comprehensive provider setup
+ * Enhanced for 2025 with improved viewport and theme simulation
  */
 export function renderWithProviders(
 	ui: ReactElement,
 	options: ExtendedRenderOptions = {},
-): RenderResult & { user: ReturnType<typeof userEvent.setup> } {
+): RenderResult & { user: ReturnType<typeof userEvent.setup>; cleanup: () => void } {
 	// Setup fake timers before user events if requested
 	if (options.useFakeTimers && typeof jest.useFakeTimers === "function") {
 		jest.useFakeTimers();
+	}
+
+	// Setup viewport dimensions based on preset or custom values
+	let cleanupViewport: (() => void) | undefined;
+	if (options.viewport) {
+		if (typeof options.viewport === "string") {
+			const viewportSizes = {
+				mobile: { width: 375, height: 667 },
+				tablet: { width: 768, height: 1024 },
+				desktop: { width: 1200, height: 800 },
+			};
+			const { width, height } = viewportSizes[options.viewport];
+			cleanupViewport = setWindowDimensions(width, height);
+		} else {
+			cleanupViewport = setWindowDimensions(options.viewport.width, options.viewport.height);
+		}
+	}
+
+	// Setup color scheme preference
+	let originalColorScheme: string | null = null;
+	if (options.colorScheme) {
+		originalColorScheme = window.matchMedia?.("(prefers-color-scheme: dark)")?.media;
+		Object.defineProperty(window, "matchMedia", {
+			writable: true,
+			value: jest.fn().mockImplementation((query) => ({
+				matches: options.colorScheme === "dark" || (options.colorScheme === "system" && query.includes("dark")),
+				media: query,
+				onchange: null,
+				addListener: jest.fn(),
+				removeListener: jest.fn(),
+				addEventListener: jest.fn(),
+				removeEventListener: jest.fn(),
+				dispatchEvent: jest.fn(),
+			})),
+		});
 	}
 
 	// Setup user event with optimal settings for test reliability
@@ -104,9 +153,38 @@ export function renderWithProviders(
 		return wrapped;
 	};
 
+	const result = render(ui, { wrapper: AllTheProviders, ...options });
+
+	// Return a combined result with user-event and custom cleanup
 	return {
+		...result,
 		user,
-		...render(ui, { wrapper: AllTheProviders, ...options }),
+		cleanup: () => {
+			// Clean up viewport changes
+			if (cleanupViewport) {
+				cleanupViewport();
+			}
+
+			// Clean up color scheme changes
+			if (originalColorScheme !== null) {
+				Object.defineProperty(window, "matchMedia", {
+					writable: true,
+					value: jest.fn().mockImplementation((query) => ({
+						matches: query === originalColorScheme,
+						media: query,
+						onchange: null,
+						addListener: jest.fn(),
+						removeListener: jest.fn(),
+						addEventListener: jest.fn(),
+						removeEventListener: jest.fn(),
+						dispatchEvent: jest.fn(),
+					})),
+				});
+			}
+
+			// Run standard cleanup
+			result.unmount();
+		},
 	};
 }
 
@@ -292,6 +370,77 @@ export function checkAccessibility(element: HTMLElement) {
 	// Forward to the centralized implementation
 	commonChecks(element);
 }
+
+/**
+ * Navigation-specific accessibility testing helper
+ */
+export function checkNavigationAccessibility(element: HTMLElement) {
+	navigationAccessibilityChecks(element);
+}
+
+/**
+ * Form-specific accessibility testing helper
+ */
+export function checkFormAccessibility(element: HTMLElement) {
+	formAccessibilityChecks(element);
+}
+
+/**
+ * Helper to simulate user interactions with animations
+ * New in 2025: Improved handling of animation testing
+ */
+export const simulateAnimations = {
+	/**
+	 * Simulates the completion of CSS transitions
+	 */
+	transitionEnd: (element: Element, propertyName: string = "transform") => {
+		const event = new Event("transitionend", { bubbles: true });
+		Object.defineProperty(event, "propertyName", {
+			get: () => propertyName,
+		});
+		element.dispatchEvent(event);
+	},
+
+	/**
+	 * Simulates the completion of CSS animations
+	 */
+	animationEnd: (element: Element) => {
+		const event = new Event("animationend", { bubbles: true });
+		element.dispatchEvent(event);
+	},
+
+	/**
+	 * Waits for element to appear in the DOM with animation
+	 * Useful for testing components that animate in
+	 */
+	waitForElementToAnimate: async (
+		getElement: () => HTMLElement | null,
+		options: { timeout?: number; interval?: number } = {},
+	) => {
+		const { timeout = 1000, interval = 50 } = options;
+		const startTime = Date.now();
+
+		return new Promise<HTMLElement>((resolve, reject) => {
+			const check = () => {
+				const element = getElement();
+				if (element) {
+					// Element found, trigger animation end and resolve
+					simulateAnimations.animationEnd(element);
+					simulateAnimations.transitionEnd(element);
+					resolve(element);
+				} else if (Date.now() - startTime > timeout) {
+					// Timeout exceeded
+					reject(new Error(`Element did not appear within ${timeout}ms`));
+				} else {
+					// Check again after interval
+					setTimeout(check, interval);
+				}
+			};
+
+			check();
+		});
+	},
+};
 
 /**
  * Test utilities for extracting content from components' data structures.

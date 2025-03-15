@@ -9,7 +9,11 @@ import {
 	getDatePattern,
 } from "../test-utils";
 
-// Mock the RegistrationLink component
+// Define the current theme and year for better test maintainability
+const CURRENT_THEME = "Retro vs. Modern";
+const HACKRPI_YEAR = getCurrentHackrpiYear();
+
+// Mock the RegistrationLink component using an inline mock
 jest.mock("@/components/themed-components/registration-link", () => {
 	return function MockRegistrationLink({ className }: { className?: string }) {
 		return (
@@ -19,10 +23,6 @@ jest.mock("@/components/themed-components/registration-link", () => {
 		);
 	};
 });
-
-// Define the current theme and year for better test maintainability
-const CURRENT_THEME = "Retro vs. Modern";
-const HACKRPI_YEAR = getCurrentHackrpiYear();
 
 describe("AboutUs Component", () => {
 	beforeEach(() => {
@@ -47,6 +47,9 @@ describe("AboutUs Component", () => {
 		const aboutSection = container.querySelector("#about");
 		expect(aboutSection).toBeInTheDocument();
 		expect(within(aboutSection as HTMLElement).getByRole("heading", { name: /About HackRPI/i })).toBeInTheDocument();
+
+		// Use custom matcher for heading structure
+		expect(container).toHaveProperHeadingStructure();
 	});
 
 	it("renders the theme information with correct styling", () => {
@@ -159,5 +162,28 @@ describe("AboutUs Component", () => {
 
 		// Check that the component has a logical structure
 		expect(container.querySelector("#about")).not.toBeNull();
+
+		// Use the centralized accessibility checks
+		checkAccessibility(container);
+	});
+
+	// 2025 best practice: Test responsive behavior
+	it("displays correctly on different screen sizes", () => {
+		// Test mobile viewport
+		const { cleanup } = renderWithProviders(<AboutUs />, { viewport: "mobile" });
+
+		// Check that key elements are still visible on mobile
+		expect(screen.getByRole("heading", { name: /About HackRPI/i })).toBeInTheDocument();
+		expect(screen.getByTestId("registration-link")).toBeInTheDocument();
+
+		// Clean up mobile test and set up desktop test
+		cleanup();
+
+		// Test desktop viewport
+		renderWithProviders(<AboutUs />, { viewport: "desktop" });
+
+		// Verify desktop layout elements
+		expect(screen.getByRole("heading", { name: /About HackRPI/i })).toBeInTheDocument();
+		expect(screen.getByTestId("registration-link")).toBeInTheDocument();
 	});
 });
