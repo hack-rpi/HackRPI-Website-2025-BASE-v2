@@ -1,5 +1,5 @@
 import React from "react";
-import { screen, within } from "@testing-library/react";
+import { screen, within, cleanup } from "@testing-library/react";
 import AboutUs from "@/components/about-us";
 import {
 	renderWithProviders,
@@ -8,21 +8,32 @@ import {
 	getCurrentHackrpiYear,
 	getDatePattern,
 } from "../test-utils";
+import "@testing-library/jest-dom";
+
+// Mock necessary components and hooks
+jest.mock("next/navigation", () => ({
+	useRouter: () => ({
+		push: jest.fn(),
+		prefetch: jest.fn(),
+		pathname: "/",
+	}),
+	usePathname: () => "/",
+}));
+
+jest.mock("@/components/themed-components/registration-link", () => {
+	return {
+		__esModule: true,
+		default: ({ children, className }: { children?: React.ReactNode; className?: string }) => (
+			<div data-testid="registration-link" className={className} role="link" aria-label="Registration Link">
+				{children || "Registration Link"}
+			</div>
+		),
+	};
+});
 
 // Define the current theme and year for better test maintainability
 const CURRENT_THEME = "Retro vs. Modern";
 const HACKRPI_YEAR = getCurrentHackrpiYear();
-
-// Mock the RegistrationLink component using an inline mock
-jest.mock("@/components/themed-components/registration-link", () => {
-	return function MockRegistrationLink({ className }: { className?: string }) {
-		return (
-			<div data-testid="registration-link" className={className} role="link" aria-label="Registration Link">
-				Registration Link
-			</div>
-		);
-	};
-});
 
 describe("AboutUs Component", () => {
 	beforeEach(() => {

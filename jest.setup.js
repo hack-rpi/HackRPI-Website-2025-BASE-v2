@@ -1,9 +1,10 @@
-// Learn more: https://github.com/testing-library/jest-dom
+// Import testing utilities
 import "@testing-library/jest-dom";
-import { MockIntersectionObserver, registerCustomMatchers } from "./__tests__/__mocks__/mockRegistry";
+import { MockIntersectionObserver } from "./__tests__/__mocks__/mockRegistry";
+import { setupCustomMatchers } from "./__tests__/setup/customMatchers";
 
-// Register custom matchers automatically when jest setup runs
-registerCustomMatchers();
+// Initialize custom matchers - 2025 best practice
+setupCustomMatchers();
 
 // Polyfill for TextEncoder which is required by some dependencies
 if (typeof TextEncoder === "undefined") {
