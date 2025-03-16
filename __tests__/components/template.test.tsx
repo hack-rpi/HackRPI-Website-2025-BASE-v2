@@ -7,19 +7,19 @@
  */
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { renderWithProviders, checkAccessibility } from "../test-utils";
+import { renderWithProviders, checkAccessibility, checkAutomatedA11y, checkBasicAccessibility } from "../test-utils";
 import { MockRegistrationLink } from "../__mocks__/mockRegistry";
 
 // Import your component here:
-// import YourComponent from "@/components/your-component";
+// import TestComponent from "@/components/your-component";
 
 // Use mocks from the centralized registry
 jest.mock("@/components/themed-components/registration-link", () => MockRegistrationLink);
 
 // Define constants used in tests (helps with test maintenance)
-const COMPONENT_TITLE = "Example Component";
+const COMPONENT_TITLE = "TestComponent";
 
-describe("YourComponent", () => {
+describe("TestComponent", () => {
 	// Reset mocks and setup before each test
 	beforeEach(() => {
 		jest.clearAllMocks();
@@ -28,7 +28,7 @@ describe("YourComponent", () => {
 	it("renders the component with correct heading and structure", () => {
 		// Use renderWithProviders to ensure consistent test environment
 		const { container } = renderWithProviders(
-			// <YourComponent prop1="value1" prop2="value2" />
+			// <TestComponent prop1="value1" prop2="value2" />
 			<div role="region" aria-label={COMPONENT_TITLE}>
 				<h2>{COMPONENT_TITLE}</h2>
 				<p>Component content goes here</p>
@@ -46,7 +46,7 @@ describe("YourComponent", () => {
 	it("handles user interactions correctly", async () => {
 		// Include user-event for interaction testing
 		const { user } = renderWithProviders(
-			// <YourComponent onAction={mockActionHandler} />
+			// <TestComponent onAction={mockActionHandler} />
 			<div role="region" aria-label={COMPONENT_TITLE}>
 				<button>Click Me</button>
 			</div>,
@@ -63,7 +63,7 @@ describe("YourComponent", () => {
 	it("adapts to different screen sizes", () => {
 		// Test mobile viewport
 		const { cleanup } = renderWithProviders(
-			// <YourComponent />
+			// <TestComponent />
 			<div role="region" aria-label={COMPONENT_TITLE}></div>,
 			{ viewport: "mobile" },
 		);
@@ -75,7 +75,7 @@ describe("YourComponent", () => {
 		cleanup();
 
 		renderWithProviders(
-			// <YourComponent />
+			// <TestComponent />
 			<div role="region" aria-label={COMPONENT_TITLE}></div>,
 			{ viewport: "desktop" },
 		);
@@ -86,7 +86,7 @@ describe("YourComponent", () => {
 
 	it("is accessible with proper ARIA attributes", () => {
 		const { container } = render(
-			// <YourComponent />
+			// <TestComponent />
 			<div role="region" aria-label={COMPONENT_TITLE}>
 				<button aria-label="Action button">Click Me</button>
 				<a href="#" aria-label="Example link">
@@ -98,4 +98,58 @@ describe("YourComponent", () => {
 		// Use centralized accessibility checks
 		checkAccessibility(container);
 	});
+
+	// 2025 Best Practice: Basic accessibility testing
+	it("passes basic accessibility checks", () => {
+		const { container } = renderWithProviders(
+			// <TestComponent />
+			<div role="region" aria-label={COMPONENT_TITLE}>
+				<h2 id="title">{COMPONENT_TITLE}</h2>
+				<button aria-labelledby="title">Click Me</button>
+				<a href="#" aria-label="Example link">
+					Link
+				</a>
+				<img src="placeholder.jpg" alt="Descriptive alt text" />
+				<form>
+					<label htmlFor="test-input">Input field</label>
+					<input id="test-input" type="text" />
+				</form>
+			</div>,
+		);
+
+		// Run simplified accessibility checks
+		checkBasicAccessibility(container);
+	});
+
+	// 2025 Best Practice: Automated accessibility testing with jest-axe
+	// This test is commented out because axe-core can be slow in some environments
+	// Uncomment and run individually if needed
+	/*
+	it("passes automated accessibility checks", async () => {
+		// Set a longer timeout for this specific test
+		jest.setTimeout(60000);
+		
+		try {
+			const { container } = renderWithProviders(
+				// <TestComponent />
+				<div role="region" aria-label={COMPONENT_TITLE}>
+					<h2 id="title">{COMPONENT_TITLE}</h2>
+					<button aria-labelledby="title">Click Me</button>
+					<a href="#" aria-label="Example link">Link</a>
+					<img src="placeholder.jpg" alt="Descriptive alt text" />
+					<form>
+						<label htmlFor="test-input">Input field</label>
+						<input id="test-input" type="text" />
+					</form>
+				</div>,
+			);
+
+			// Run automated accessibility tests using jest-axe
+			await checkAutomatedA11y(container);
+		} finally {
+			// Reset timeout to default
+			jest.setTimeout(15000);
+		}
+	}, 60000); // Add explicit timeout parameter to the test
+	*/
 });

@@ -15,9 +15,13 @@ import {
 	createMockFormEvent,
 	registerCustomMatchers,
 } from "./__mocks__/mockRegistry";
+import { axe, toHaveNoViolations } from "jest-axe";
 
 // Register custom matchers automatically when test-utils is imported
 registerCustomMatchers();
+
+// Add jest-axe matcher
+expect.extend(toHaveNoViolations);
 
 // Mock Next.js router
 export const mockRouterPush = jest.fn();
@@ -560,5 +564,100 @@ export const generateTestId = {
 	content: (type: string, parent: string, index?: number): string =>
 		index !== undefined ? `${parent}-${type}-${index}` : `${parent}-${type}`,
 };
+
+/**
+ * Run automated accessibility tests using jest-axe
+ * @param container The container element to test
+ * @param options Optional configuration options for axe
+ * @returns Promise that resolves when the test is complete
+ */
+export async function checkAutomatedA11y(container: Element, options = {}) {
+	try {
+		// Add a higher timeout for axe testing
+		jest.setTimeout(30000);
+
+		// Create a new clean document to avoid "Axe is already running" errors
+		// when running multiple tests in parallel
+		const cleanContainer = container.cloneNode(true) as Element;
+
+		const results = await axe(cleanContainer, {
+			rules: {
+				// Disable rules that might not apply in a testing environment
+				"color-contrast": { enabled: false }, // Unreliable in JSDOM
+				"document-title": { enabled: false }, // Test components, not whole page
+				"html-has-lang": { enabled: false }, // Test components, not whole page
+				"landmark-one-main": { enabled: false }, // Test components, not whole page
+				...((options as any)?.rules || {}),
+			},
+			...options,
+		});
+
+		// This will fail the test if there are any violations
+		expect(results).toHaveNoViolations();
+
+		return results;
+	} finally {
+		// Reset the timeout
+		jest.setTimeout(15000);
+	}
+}
+
+/**
+ * Simplified accessibility check that doesn't use axe-core
+ * This is a fallback for environments where axe-core is too slow or unreliable
+ * @param container The container element to test
+ */
+export function checkBasicAccessibility(container: Element) {
+	// Check for images without alt text
+	const images = container.querySelectorAll("img");
+	images.forEach((img) => {
+		expect(img).toHaveAttribute("alt");
+	});
+
+	// Check for buttons and links with accessible names
+	const buttons = container.querySelectorAll("button");
+	buttons.forEach((button) => {
+		const hasAccessibleName =
+			button.hasAttribute("aria-label") ||
+			button.hasAttribute("aria-labelledby") ||
+			(button.textContent?.trim().length ?? 0) > 0;
+
+		expect(hasAccessibleName).toBe(true);
+	});
+
+	const links = container.querySelectorAll('a, [role="link"]');
+	links.forEach((link) => {
+		const hasAccessibleName =
+			link.hasAttribute("aria-label") ||
+			link.hasAttribute("aria-labelledby") ||
+			(link.textContent?.trim().length ?? 0) > 0;
+
+		expect(hasAccessibleName).toBe(true);
+	});
+
+	// Check for form elements with labels
+	const formElements = container.querySelectorAll("input, select, textarea");
+	formElements.forEach((element) => {
+		const id = element.getAttribute("id");
+		const hasLabel = id ? container.querySelector(`label[for="${id}"]`) !== null : false;
+		const hasAriaLabel = element.hasAttribute("aria-label");
+		const hasAriaLabelledBy = element.hasAttribute("aria-labelledby");
+
+		expect(hasLabel || hasAriaLabel || hasAriaLabelledBy).toBe(true);
+	});
+
+	// Check heading structure
+	const headings = Array.from(container.querySelectorAll("h1, h2, h3, h4, h5, h6"));
+	if (headings.length > 0) {
+		// Check that headings are in order (no skipping levels)
+		for (let i = 0; i < headings.length - 1; i++) {
+			const currentLevel = parseInt(headings[i].tagName.substring(1));
+			const nextLevel = parseInt(headings[i + 1].tagName.substring(1));
+
+			// Allow same level or one level deeper, but not skipping (e.g., h2 to h4)
+			expect(nextLevel - currentLevel).toBeLessThanOrEqual(1);
+		}
+	}
+}
 
 export default {};

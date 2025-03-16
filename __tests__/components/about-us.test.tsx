@@ -7,6 +7,8 @@ import {
 	checkAccessibility,
 	getCurrentHackrpiYear,
 	getDatePattern,
+	checkAutomatedA11y,
+	checkBasicAccessibility,
 } from "../test-utils";
 import "@testing-library/jest-dom";
 
@@ -197,4 +199,31 @@ describe("AboutUs Component", () => {
 		expect(screen.getByRole("heading", { name: /About HackRPI/i })).toBeInTheDocument();
 		expect(screen.getByTestId("registration-link")).toBeInTheDocument();
 	});
+
+	// 2025 Best Practice: Add automated accessibility testing
+	it("passes basic accessibility checks", () => {
+		const { container } = renderWithProviders(<AboutUs />);
+
+		// Run simplified accessibility checks that don't rely on axe-core
+		checkBasicAccessibility(container);
+	});
+
+	// This test is commented out because axe-core is too slow in this environment
+	// Uncomment and run individually if needed
+	/*
+	it("passes automated accessibility checks", async () => {
+		// Set a longer timeout for this specific test
+		jest.setTimeout(60000);
+		
+		try {
+			const { container } = renderWithProviders(<AboutUs />);
+			
+			// Run automated accessibility tests with jest-axe
+			await checkAutomatedA11y(container);
+		} finally {
+			// Reset timeout to default
+			jest.setTimeout(15000);
+		}
+	}, 60000); // Add explicit timeout parameter to the test
+	*/
 });
