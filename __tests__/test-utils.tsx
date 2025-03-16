@@ -611,7 +611,8 @@ export function checkBasicAccessibility(container: Element) {
 	// Check for images without alt text
 	const images = container.querySelectorAll("img");
 	images.forEach((img) => {
-		expect(img).toHaveAttribute("alt");
+		// Using any type assertion to avoid TypeScript error with Jest DOM matchers
+		expect(img as any).toHaveAttribute("alt");
 	});
 
 	// Check for buttons and links with accessible names
