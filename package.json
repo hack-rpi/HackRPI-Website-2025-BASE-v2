@@ -16,7 +16,7 @@
 		"test": "node --no-deprecation ./node_modules/.bin/jest",
 		"test:watch": "node --no-deprecation ./node_modules/.bin/jest --watch",
 		"test:ci": "node --no-deprecation ./node_modules/.bin/jest --ci --coverage",
-		"test:a11y": "node --no-deprecation ./node_modules/.bin/jest --testPathPattern=.*\\.a11y\\.test\\.(js|jsx|ts|tsx)$",
+		"test:a11y": "node --no-deprecation ./node_modules/.bin/jest \".*\\.a11y\\.test\\.(js|jsx|ts|tsx)$\"",
 		"test:e2e": "playwright test",
 		"test:e2e:ui": "playwright test --ui",
 		"test:e2e:debug": "playwright test --debug",
