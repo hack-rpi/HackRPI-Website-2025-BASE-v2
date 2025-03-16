@@ -46,16 +46,16 @@ describe("AboutUs Component Accessibility", () => {
 	// Use the checkBasicAccessibility function instead of the full axe-core check
 	it("passes basic accessibility checks", () => {
 		const { container } = renderWithProviders(<AboutUs />);
-		
+
 		// Use your existing simpler function instead of the heavy axe-core one
 		checkBasicAccessibility(container);
-		
+
 		// Add some manual checks too
 		const images = container.querySelectorAll("img");
 		images.forEach((img) => {
 			expect(img).toHaveAttribute("alt");
 		});
-		
+
 		const links = container.querySelectorAll("a");
 		links.forEach((link) => {
 			expect(link.textContent || link.getAttribute("aria-label")).toBeTruthy();
