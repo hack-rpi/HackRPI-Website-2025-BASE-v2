@@ -5,7 +5,7 @@ import "@/app/globals.css";
 import Footer from "../../components/footer/footer";
 import NavBar from "@/components/nav-bar/nav-bar";
 import MapsDCCLow from "@/components/maps/maps";
-import GoogleMapsWidget from "@/components/maps/google_maps";
+// import GoogleMapsWidget from "@/components/maps/google_maps"; // Commenting out for now, may be used in the future
 import HackRPILink from "@/components/themed-components/hackrpi-link";
 import Image from "next/image";
 
@@ -17,10 +17,10 @@ function EventPage() {
 			<div className="justify-center flex w-full flex-col  bg-hackrpi-dark-blue pt-24 desktop:pt-16">
 				<div className="px-4 flex flex-wrap items-start justify-center mb-8">
 					<div className="w-full desktop:w-1/2 p-4 min-w-[350px] sm:min-w-[450px]">
-						<h1 className="font-semibold text-4xl text-hackrpi-orange mb-4 font-neutral">Location</h1>
+						<h1 className="font-semibold text-5xl text-hackrpi-orange mb-4 font-neutral">Location:</h1>
 						<div className="text-2xl mb-10">
-							<h3 className="text-hackrpi-orange text-2xl font-bold">📍 Darrin Communications Center</h3>
-							<h3 className="text-hackrpi-yellow">Rensselaer Polytechnic Institute</h3>
+							<h3 className="text-hackrpi-orange text-3xl font-bold">📍 Darrin Communications Center 📍</h3>
+							<h3 className="text-hackrpi-yellow font-bold"> Rensselaer Polytechnic Institute</h3>
 							<p className="text-hackrpi-yellow">
 								Address:{" "}
 								<a
@@ -101,6 +101,7 @@ function EventPage() {
 							<HackRPILink
 								href="https://discord.gg/7b2zc8fe26"
 								className="hover:bg-gradient-to-br hover:from-[#5865F2] hover:to-[#7289da] hover:bg-transparent hover:border-[#5865F2] w-20 h-20 flex items-center justify-center"
+								target="_blank"
 							>
 								<Image src="/social/discord.svg" alt="Discord Logo" width={50} height={50} />
 							</HackRPILink>
@@ -109,45 +110,45 @@ function EventPage() {
 				</div>
 
 				<div className="flex flex-col items-start justify-start w-full" id="project-submission">
-					<h1 className="p-4 text-4xl font-bold text-hackrpi-orange">Project Submission and Judging</h1>
+					<h1 className="p-4 text-4xl font-modern text-hackrpi-yellow">Project Submission and Judging</h1>
 					<div className="flex flex-col md:flex-row">
 						<div className="container p-4">
-							<h1 className="font-semibold text-3xl mb-4 text-hackrpi-orange">JUDGING CRITERIA</h1>
-							<p className="mb-2 text-hackrpi-yellow">
+							<h1 className="font-semibold text-3xl mb-4 text-hackrpi-light-purple">JUDGING CRITERIA</h1>
+							<p className="mb-2 text-hackrpi-light-purple">
 								After coding ends, at noon on Sunday, you will have the opportunity to present your project to a panel
 								of judges. These judges are industry professionals, professors, alumni, and fellow students who will
 								evaluate your project based on the following criteria:
 							</p>
 							<ul className="text-lg list-disc list-inside text-hackrpi-yellow">
-								<li className=" border-b border-gray-400 mb-2">
-									<strong className="text-hackrpi-orange">Practicality & Utility</strong> What problem do you want to
+								<li className=" border-b border-gray-400 mb-2 text-hackrpi-pink">
+									<strong className="text-hackrpi-pink">Practicality & Utility:</strong> What problem do you want to
 									solve? How applicable is your hack to problems we&apos;re facing today? Any future plans?
 								</li>
-								<li className=" border-b border-gray-400 mb-2">
-									<strong className="text-hackrpi-orange">Creativity:</strong> How original is your hack? Is this a
+								<li className=" border-b border-gray-400 mb-2 text-hackrpi-light-purple">
+									<strong className="text-hackrpi-light-purple">Creativity:</strong> How original is your hack? Is this a
 									novel idea or something that many people have come across?
 								</li>
-								<li className=" border-b border-gray-400 mb-2">
-									<strong className="text-hackrpi-orange">Technical Difficulty:</strong> How technically challenging is
+								<li className=" border-b border-gray-400 mb-2 text-hackrpi-pink">
+									<strong className="text-hackrpi-pink">Technical Difficulty:</strong> How technically challenging is
 									it? Which technologies did you use?
 								</li>
-								<li className=" border-b border-gray-400 mb-2">
-									<strong className="text-hackrpi-orange">Effort:</strong> Did the team genuinely commit time and effort
+								<li className=" border-b border-gray-400 mb-2 text-hackrpi-light-purple">
+									<strong className="text-hackrpi-light-purple">Effort:</strong> Did the team genuinely commit time and effort
 									to this product?
 								</li>
-								<li className=" border-b border-gray-400 mb-2">
-									<strong className="text-hackrpi-orange">User Experience:</strong> What impression do you get from the
+								<li className=" border-b border-gray-400 mb-2 text-hackrpi-pink">
+									<strong className="text-hackrpi-pink">User Experience:</strong> What impression do you get from the
 									hack? Does it provide for a smooth user experience?
 								</li>
-								<li className=" border-b border-gray-400 mb-2">
-									<strong className="text-hackrpi-orange">Collaboration & Learning:</strong> Did the team work well
+								<li className=" border-b border-gray-400 mb-2 text-hackrpi-light-purple">
+									<strong className="text-hackrpi-light-purple">Collaboration & Learning:</strong> Did the team work well
 									together and split up work? Did they learn from the experience?
 								</li>
 							</ul>
 						</div>
 
-						<div className="flex flex-col p-4 text-hackrpi-yellow">
-							<h1 className="font-semibold text-3xl mb-4 text-hackrpi-orange">PROJECT SUBMISSION</h1>
+						<div className="flex flex-col p-4 text-hackrpi-pink">
+							<h1 className="font-semibold text-3xl mb-4 text-hackrpi-pink">PROJECT SUBMISSION</h1>
 							<p className="text-lg mb-2">
 								HackRPI uses Devpost to manage project submissions. You will need to create a Devpost account and submit
 								your project to the HackRPI 2024 hackathon page. Make sure to include a title, description, demo video,
@@ -165,6 +166,7 @@ function EventPage() {
 							<HackRPILink
 								href="https://hackrpi2024.devpost.com/"
 								className="text-3xl mt-4 text-center text-hackrpi-orange"
+								target="_blank"
 							>
 								DEVPOST
 							</HackRPILink>
