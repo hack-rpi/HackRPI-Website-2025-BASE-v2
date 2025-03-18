@@ -14,7 +14,7 @@ const config: Config = {
 			modern: ["Audiowide", "serif"],
 			neutral: ["Turret Road", "serif"],
 			neutral2: ["Aldrich", "serif"],
-			neutral3: ["Jersey 15", "serif"],
+			broken: ["Jersey 15", "serif"],
 			pix: ["Pixelify Sans", "sans-serif"],
 		},
 		extend: {
