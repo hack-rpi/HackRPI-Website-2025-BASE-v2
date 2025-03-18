@@ -16,7 +16,7 @@ const faqs: FAQ[] = [
 	{
 		title: "When is HackRPI?",
 		content:
-			"HackRPI takes place on November 9th and 10th, 2024. Arrival and check-in takes place from 9-10 AM. Our opening ceremony starts at 10 AM, and hacking begins at 11am. Your projects must be on Devpost by 10 AM Sunday, and all coding must stop at 11 AM Sunday. Teams will present, and the event will end around 4PM on Sunday. We are excited to see you there!",
+			"HackRPI takes place on November 15th and 16th, 2025. Arrival and check-in takes place from 9-10 AM. Our opening ceremony starts at 10 AM, and hacking begins at 11am. Your projects must be on Devpost by 10 AM Sunday, and all coding must stop at 11 AM Sunday. Teams will present, and the event will end around 4PM on Sunday. We are excited to see you there!",
 	},
 	{
 		title: "Where is HackRPI?",
@@ -108,6 +108,7 @@ const FAQPage = () => {
 		<div
 			className="h-auto mb-8 flex flex-col items-center text-white bg-base-100 w-5/6 desktop:w-full pl-8 desktop:pl-0"
 			id="faq"
+			data-testid="faq-section"
 		>
 			<div className="flex w-full desktop:w-2/3">
 				<h1 className="font-modern text-white text-left text-4xl text-shadow-md pb-4">FAQs</h1>
@@ -116,25 +117,43 @@ const FAQPage = () => {
 				{faqs.map((faq, index) => (
 					<div
 						key={index}
-						className={`collapse collapse-arrow custom-arrow bg-retro-purple-dark p-1 text-2xl border-t-2 ${
+						className={`collapse collapse-arrow custom-arrow bg-retro-purple-dark p-1 text-2xl border-t-4 ${
 							index === faqs.length - 1 ? "border-b-2" : ""
-						} border-retro-orange rounded-none`}
+						} border-hackrpi-light-purple border-rounded-r-xl border-double`}
+						data-testid={`faq-item-${index}`}
 					>
 						<input
 							type="checkbox"
 							className="w-auto h-auto"
 							checked={expandedIndex === index}
 							onChange={() => handleToggle(index)}
+							data-testid={`faq-checkbox-${index}`}
+							aria-label={`Toggle ${faq.title}`}
+							aria-expanded={expandedIndex === index}
+							aria-controls={`faq-content-${index}`}
 						/>
-						<div className="font-modern collapse-title font-bold text-2xl text-retro-orange">{faq.title}</div>
-						<div className="font-neutral collapse-content">{faq.content}</div>
+						<div
+							className="font-modern collapse-title font-medium text-2xl text-retro-orange"
+							data-testid={`faq-title-${index}`}
+							id={`faq-title-${index}`}
+						>
+							{faq.title}
+						</div>
+						<div
+							className="font-neutral2 collapse-content"
+							data-testid={`faq-content-${index}`}
+							id={`faq-content-${index}`}
+							aria-labelledby={`faq-title-${index}`}
+						>
+							{faq.content}
+						</div>
 					</div>
 				))}
 			</div>
 			<div className="w-full desktop:w-2/3">
-				<h2 id="sponsors" className="font-poppins text-2xl text-center pt-10">
+				<h2 id="sponsors" className="font-poppins text-2xl text-center pt-10" data-testid="faq-contact-section">
 					Feel free to contact us with any other questions at{" "}
-					<a href="mailto:hackrpi@rpi.edu" className="text-hackrpi-primary-blue">
+					<a href="mailto:hackrpi@rpi.edu" className="text-hackrpi-primary-blue" data-testid="contact-email">
 						hackrpi@rpi.edu!
 					</a>
 				</h2>
