@@ -15,7 +15,8 @@ export default function NavGroup({ name, links }: { name: string; links: lin[] }
 			</div>
 			<ul
 				tabIndex={0}
-				className="dropdown-content z-10 p-2 w-52 bg-hackrpi-dark-blue h-fit box border-r-2 border-b-2 border-l-2 border-hackrpi-yellow translate-y-5"
+				className="dropdown-content p-2 w-52 bg-hackrpi-dark-blue h-fit box border-r-2 border-b-2 border-l-2 border-hackrpi-yellow translate-y-3"
+				style={{ zIndex: -1 }}
 			>
 				{links.map((link) => (
 					<li key={link.href} className="my-1">
