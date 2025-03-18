@@ -94,10 +94,11 @@ function EventPage() {
 						<div className="container flex flex-col items-start p-4">
 							<h2 className="font-semibold text-2xl mb-4 text-white">EVENT DISCORD</h2>
 							<p className="text-xl mb-8 text-white">
-								Join the HackRPI 2024 Discord server to stay connected and make the most of your hackathon experience!
+								Join the HackRPI 2025 Discord server to stay connected and make the most of your hackathon experience!
 								Have questions for the staff? Want to chat with other participants? Looking for a team? Join the
 								conversation on Discord and get the support you need to succeed at HackRPI.
 							</p>
+							{/* //TODO: Change the discord link to 2025 HackRPI Discord */}
 							<HackRPILink
 								href="https://discord.gg/7b2zc8fe26"
 								className="hover:bg-gradient-to-br hover:from-[#5865F2] hover:to-[#7289da] hover:bg-transparent hover:border-[#5865F2] w-20 h-20 flex items-center justify-center"
@@ -150,7 +151,7 @@ function EventPage() {
 						<div className="flex flex-col p-4 text-hackrpi-yellow">
 							<h1 className="font-semibold text-3xl mb-4 text-hackrpi-orange">PROJECT SUBMISSION</h1>
 							<p className="text-lg mb-2">
-								HackRPI uses Devpost to manage project submissions. You will need to {" "}
+								HackRPI uses Devpost to manage project submissions. You will need to{" "}
 								<a
 									href="https://secure.devpost.com/users/register?ref_content=signup_global_nav&ref_feature=signup&ref_medium=button"
 									target="_blank"
@@ -158,10 +159,9 @@ function EventPage() {
 									className="text-blue-500 hover:underline"
 								>
 									create a Devpost account
-								</a>
-								{" "}and submit
-								your project to the HackRPI 2025 hackathon page. Make sure to include a title, description, demo video,
-								and any other relevant information about your project.
+								</a>{" "}
+								and submit your project to the HackRPI 2025 hackathon page. Make sure to include a title, description,
+								demo video, and any other relevant information about your project.
 							</p>
 							<p className="text-lg mb-2">
 								You can submit your project at any time before 11:00 AM on Sunday. You must have a Devpost submission to
@@ -183,7 +183,6 @@ function EventPage() {
 					</div>
 				</div>
 			</div>
-
 		</>
 	);
 }
