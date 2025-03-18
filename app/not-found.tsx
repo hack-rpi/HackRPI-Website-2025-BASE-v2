@@ -20,7 +20,6 @@ export default function Custom404() {
 			</div>
 			<div className="mt-40"></div>
 			<div className="absolute bottom-0 w-full">
-				<Footer />
 			</div>
 		</div>
 	);

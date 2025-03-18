@@ -558,6 +558,7 @@ jest.mock("@/components/footer/footer", () => {
 	};
 });
 
+
 jest.mock("@/components/title-components/title", () => {
 	return function MockTitle() {
 		return (

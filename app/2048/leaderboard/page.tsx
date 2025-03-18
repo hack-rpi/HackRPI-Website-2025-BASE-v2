@@ -89,7 +89,6 @@ export default function Page() {
 			<div className="flex-grow mt-24"></div>
 
 			<div className="absolute-bottom-0 w-full">
-				<Footer />
 			</div>
 		</div>
 	);
