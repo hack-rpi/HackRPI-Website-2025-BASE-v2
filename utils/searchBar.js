@@ -15,6 +15,14 @@ $(function () {
       }
    });
 
+   // Add Enter key functionality
+   $("#tags").on("keydown", function (event) {
+      if (event.key === "Enter") {
+         var inputText = $(this).val().trim(); // Get the entered text
+         redirectUser(inputText); // Directly call redirectUser
+      }
+   });
+
    function redirectUser(selectedItem) {
       // Normalize the input to lowercase
       selectedItem = selectedItem.trim().toLowerCase();
@@ -28,5 +36,12 @@ $(function () {
 
       // Get the URL for the selected item
       var url = redirectUrls[selectedItem];
+
+      // Redirect the user if the URL exists
+      if (url) {
+         window.location.href = url;
+      } else {
+         alert("No redirect URL found for '" + selectedItem + "'");
+      }
    }
 });
