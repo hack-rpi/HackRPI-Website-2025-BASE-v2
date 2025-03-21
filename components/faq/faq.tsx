@@ -111,7 +111,7 @@ const FAQPage = () => {
 			data-testid="faq-section"
 		>
 			<div className="flex w-full desktop:w-2/3">
-				<h1 className="font-modern text-white text-left text-4xl text-shadow-md pb-4">FAQs</h1>
+				<h1 className="font-modern text-retro-orange text-left text-4xl text-shadow-md pb-4">FAQs</h1>
 			</div>
 			<div className="w-full desktop:w-2/3">
 				{faqs.map((faq, index) => (
@@ -151,7 +151,7 @@ const FAQPage = () => {
 				))}
 			</div>
 			<div className="w-full desktop:w-2/3">
-				<h2 id="sponsors" className="font-poppins text-2xl text-center pt-10" data-testid="faq-contact-section">
+				<h2 id="sponsors" className="font-pix font-regular text-2xl text-center pt-10" data-testid="faq-contact-section">
 					Feel free to contact us with any other questions at{" "}
 					<a href="mailto:hackrpi@rpi.edu" className="text-hackrpi-primary-blue" data-testid="contact-email">
 						hackrpi@rpi.edu!
