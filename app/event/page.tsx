@@ -94,10 +94,11 @@ function EventPage() {
 						<div className="container flex flex-col items-start p-4">
 							<h2 className="font-semibold text-2xl mb-4 text-white">EVENT DISCORD</h2>
 							<p className="text-xl mb-8 text-white">
-								Join the HackRPI 2024 Discord server to stay connected and make the most of your hackathon experience!
+								Join the HackRPI 2025 Discord server to stay connected and make the most of your hackathon experience!
 								Have questions for the staff? Want to chat with other participants? Looking for a team? Join the
 								conversation on Discord and get the support you need to succeed at HackRPI.
 							</p>
+							{/* //TODO: Change the discord link to 2025 HackRPI Discord */}
 							<HackRPILink
 								href="https://discord.gg/7b2zc8fe26"
 								className="hover:bg-gradient-to-br hover:from-[#5865F2] hover:to-[#7289da] hover:bg-transparent hover:border-[#5865F2] w-20 h-20 flex items-center justify-center"
