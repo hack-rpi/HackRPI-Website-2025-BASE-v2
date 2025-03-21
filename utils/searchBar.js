@@ -1,19 +1,14 @@
 $(function () {
-   var availableTags = [
-      "apple",
-      "banana",
-      "grape",
-      "orange",
-   ];
+	var availableTags = ["apple", "banana", "grape", "orange"];
 
-   $("#tags").autocomplete({
-      source: availableTags,
-      select: function (event, ui) {
-         // Redirect the user based on the selected item
-         var selectedItem = ui.item.value;
-         redirectUser(selectedItem);
-      }
-   });
+	$("#tags").autocomplete({
+		source: availableTags,
+		select: function (event, ui) {
+			// Redirect the user based on the selected item
+			var selectedItem = ui.item.value;
+			redirectUser(selectedItem);
+		},
+	});
 
    // Add Enter key functionality
    $("#tags").on("keydown", function (event) {
