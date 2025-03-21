@@ -16,11 +16,17 @@
 		"test": "node --no-deprecation ./node_modules/.bin/jest",
 		"test:watch": "node --no-deprecation ./node_modules/.bin/jest --watch",
 		"test:ci": "node --no-deprecation ./node_modules/.bin/jest --ci --coverage",
-		"test:a11y": "node --no-deprecation ./node_modules/.bin/jest --testPathPattern=.*\\.a11y\\.test\\.(js|jsx|ts|tsx)$",
+		"test:a11y": "node --no-deprecation ./node_modules/.bin/jest \".*\\.a11y\\.test\\.(js|jsx|ts|tsx)$\"",
 		"test:e2e": "playwright test",
 		"test:e2e:ui": "playwright test --ui",
 		"test:e2e:debug": "playwright test --debug",
 		"test:e2e:report": "playwright show-report",
+		"test:coverage": "node --no-deprecation ./node_modules/.bin/jest --coverage",
+		"test:update": "node --no-deprecation ./node_modules/.bin/jest -u",
+		"test:components": "node --no-deprecation ./node_modules/.bin/jest --testPathPattern='.*/components/.*'",
+		"test:integration": "node --no-deprecation ./node_modules/.bin/jest --testPathPattern='.*/integration/.*'",
+		"test:unit": "node --no-deprecation ./node_modules/.bin/jest --testPathPattern='.*/unit/.*'",
+		"generate:test": "node scripts/generate-test.js",
 		"update-deps": "npx npm-check-updates -u --dep dev --target minor && npm install"
 	},
 	"dependencies": {

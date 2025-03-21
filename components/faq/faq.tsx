@@ -108,6 +108,7 @@ const FAQPage = () => {
 		<div
 			className="h-auto mb-8 flex flex-col items-center text-white bg-base-100 w-5/6 desktop:w-full pl-8 desktop:pl-0"
 			id="faq"
+			data-testid="faq-section"
 		>
 			<div className="flex w-full desktop:w-2/3">
 				<h1 className="font-modern text-retro-orange text-left text-4xl text-shadow-md pb-4">FAQs</h1>
@@ -119,22 +120,40 @@ const FAQPage = () => {
 						className={`collapse collapse-arrow custom-arrow bg-retro-purple-dark p-1 text-2xl border-t-4 ${
 							index === faqs.length - 1 ? "border-b-2" : ""
 						} border-hackrpi-light-purple border-rounded-r-xl border-double`}
+						data-testid={`faq-item-${index}`}
 					>
 						<input
 							type="checkbox"
 							className="w-auto h-auto"
 							checked={expandedIndex === index}
 							onChange={() => handleToggle(index)}
+							data-testid={`faq-checkbox-${index}`}
+							aria-label={`Toggle ${faq.title}`}
+							aria-expanded={expandedIndex === index}
+							aria-controls={`faq-content-${index}`}
 						/>
-						<div className="font-modern collapse-title font-medium text-2xl text-retro-orange">{faq.title}</div>
-						<div className="font-neutral2 collapse-content">{faq.content}</div>
+						<div
+							className="font-modern collapse-title font-medium text-2xl text-retro-orange"
+							data-testid={`faq-title-${index}`}
+							id={`faq-title-${index}`}
+						>
+							{faq.title}
+						</div>
+						<div
+							className="font-neutral2 collapse-content"
+							data-testid={`faq-content-${index}`}
+							id={`faq-content-${index}`}
+							aria-labelledby={`faq-title-${index}`}
+						>
+							{faq.content}
+						</div>
 					</div>
 				))}
 			</div>
 			<div className="w-full desktop:w-2/3">
-				<h2 id="sponsors" className="font-pix font-regular text-2xl text-center pt-10">
+				<h2 id="sponsors" className="font-pix font-regular text-2xl text-center pt-10" data-testid="faq-contact-section">
 					Feel free to contact us with any other questions at{" "}
-					<a href="mailto:hackrpi@rpi.edu" className="text-hackrpi-primary-blue">
+					<a href="mailto:hackrpi@rpi.edu" className="text-hackrpi-primary-blue" data-testid="contact-email">
 						hackrpi@rpi.edu!
 					</a>
 				</h2>
