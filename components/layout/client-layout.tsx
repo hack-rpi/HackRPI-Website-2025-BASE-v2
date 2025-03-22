@@ -8,6 +8,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
 		<>
 			<NavBar showOnScroll={true} />
 			<main>{children}</main>
+      <Footer />
 		</>
 	);
 }

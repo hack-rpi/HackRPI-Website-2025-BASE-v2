@@ -96,7 +96,6 @@ export default function Home() {
 						top: lineEnd - 20 + "px",
 					}}
 				></div>
-				<Footer />
 			</div>
 		</>
 	);
