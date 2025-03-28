@@ -151,7 +151,11 @@ const FAQPage = () => {
 				))}
 			</div>
 			<div className="w-full desktop:w-2/3">
-				<h2 id="sponsors" className="font-pix font-regular text-2xl text-center pt-10" data-testid="faq-contact-section">
+				<h2
+					id="sponsors"
+					className="font-pix font-regular text-2xl text-center pt-10"
+					data-testid="faq-contact-section"
+				>
 					Feel free to contact us with any other questions at{" "}
 					<a href="mailto:hackrpi@rpi.edu" className="text-hackrpi-primary-blue" data-testid="contact-email">
 						hackrpi@rpi.edu!
