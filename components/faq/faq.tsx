@@ -107,12 +107,12 @@ const FAQPage = () => {
 
 	return (
 		<div
-			className="h-auto mb-8 flex flex-col items-center text-white bg-base-100 w-5/6 desktop:w-full pl-8 desktop:pl-0"
+			className="h-auto mb-8 flex flex-col items-center text-hackrpi-pink bg-base-100 w-5/6 desktop:w-full pl-8 desktop:pl-0"
 			id="faq"
 			data-testid="faq-section"
 		>
 			<div className="flex w-full desktop:w-2/3">
-				<h1 className="font-modern text-retro-orange text-left text-4xl text-shadow-md pb-4">FAQs</h1>
+				<h1 className="font-mokoto font-normal text-hackrpi-orange text-left text-4xl text-shadow-md pb-4">FAQs</h1>
 			</div>
 			<div className="w-full desktop:w-2/3">
 				{faqs.map((faq, index) => (
