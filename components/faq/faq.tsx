@@ -11,7 +11,7 @@ const faqs: FAQ[] = [
 	{
 		title: "What is HackRPI?",
 		content:
-			"Teams of 1-4 have 24 hours to build a project relating to our theme Urban Upgrades. Teams will then present their projects, and the best projects win prizes!",
+			"Teams of 1-4 have 24 hours to build a project relating to our theme Retro vs Modern. Teams will then present their projects, and the best projects win prizes!",
 	},
 	{
 		title: "When is HackRPI?",
@@ -71,8 +71,9 @@ const faqs: FAQ[] = [
 	},
 	{
 		title: "What is the theme?",
+		//TODO: Change the description
 		content:
-			"The theme for HackRPI 2024 is Urban Upgrades. This theme is all about enhancing the infrastructure, services, and quality of life in our cities. From smart transportation systems and sustainable energy solutions to improved public safety and inclusive community spaces, this theme challenges you to develop ideas and technologies that make cities more livable, efficient, and enjoyable for everyone.",
+			"The theme for HackRPI 2024 is Retro vs Modern. This theme is ENTER RETRO vs MODERN THEME DESCRIPTION HERE",
 	},
 	{
 		title: "Is it okay if I am late to the event?",
@@ -151,7 +152,11 @@ const FAQPage = () => {
 				))}
 			</div>
 			<div className="w-full desktop:w-2/3">
-				<h2 id="sponsors" className="font-pix font-regular text-2xl text-center pt-10" data-testid="faq-contact-section">
+				<h2
+					id="sponsors"
+					className="font-pix font-regular text-2xl text-center pt-10"
+					data-testid="faq-contact-section"
+				>
 					Feel free to contact us with any other questions at{" "}
 					<a href="mailto:hackrpi@rpi.edu" className="text-hackrpi-primary-blue" data-testid="contact-email">
 						hackrpi@rpi.edu!
