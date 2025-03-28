@@ -3,6 +3,14 @@ import sponsorsJson from "@/public/sponsors/sponsors.json";
 import { SponsorsJSON, sponsorTiers } from "@/types/sponsorsType";
 import NextImage from "next/image";
 
+const tierColors: Record<sponsorTiers, string> = {
+	OBSIDIAN: "bg-gray-900 text-white",
+	GOLD: "bg-yellow-500 text-black",
+	SILVER: "bg-gray-300 text-black",
+	BRONZE: "bg-orange-600 text-white",
+	COLLABORATORS: " text-white",
+};
+
 const Sponsors = () => {
 	const tierList: sponsorTiers[] = ["OBSIDIAN", "GOLD", "SILVER", "BRONZE", "COLLABORATORS"];
 	const [sponsors] = useState<SponsorsJSON>(sponsorsJson);
@@ -18,8 +26,13 @@ const Sponsors = () => {
 					if (sponsors[tier].length === 0) return null;
 					return (
 						<div className="w-11/12" key={tier}>
-							<h3 className="text-white font-modern font-normal text-left text-4xl">{tier}</h3>
-							<hr className="border-b-4 border-hackrpi-light-purple border-rounded-r-xl border-double"></hr>
+							<div
+								className={`px-1 py-1 border-4 border-dashed border-white inline-block mt-4 font-retro font-bold text-xl ${tierColors[tier]}`}
+							>
+								{tier}
+							</div>
+							<hr className="border-b-4 border-hackrpi-light-purple border-rounded-r-xl border-double mt-2"></hr>
+
 							<div className="flex flex-row flex-wrap justify-around items-center">
 								{sponsors[tier].map((sponsor) => {
 									return (
