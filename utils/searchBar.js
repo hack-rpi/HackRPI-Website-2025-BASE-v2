@@ -1,5 +1,21 @@
 $(function () {
-	var availableTags = ["apple", "banana", "grape", "orange"];
+	var availableTags = [
+      "Home",
+      "Events",
+      "Schedule",
+      "Announcements",
+      "Prizes",
+      "Resources",
+      "HackRPI XI",
+      "Sponsors",
+      "Winners",
+      "Join Us",
+      "Help",
+      "Volunteer",
+      "MLH",
+      "Leaderboard",
+      "Code of Conduct",
+   ];
 
 	$("#tags").autocomplete({
 		source: availableTags,
@@ -23,10 +39,21 @@ $(function () {
       selectedItem = selectedItem.trim().toLowerCase();
       // Define the URLs or actions based on the selected item
       var redirectUrls = {
-         "apple": "http://example/apple.html",
-         "banana": "http://example/banana.html",
-         "grape": "http://example/grape.html",
-         "orange": "http://example/orange.html",
+         "Home": "http://example/orange.html",
+      "Events": "http://example/orange.html",
+      "Schedule": "http://example/orange.html",
+      "Announcements": "http://example/orange.html",
+      "Prizes": "http://example/orange.html",
+      "Resources": "http://example/orange.html",
+      "HackRPI XI": "http://example/orange.html",
+      "Sponsors": "http://example/orange.html",
+      "Winners": "http://example/orange.html",
+      "Join Us": "http://example/orange.html",
+      "Help": "http://example/orange.html",
+      "Volunteer": "http://example/orange.html",
+      "MLH": "http://example/orange.html",
+      "Leaderboard": "http://example/orange.html",
+      "Code of Conduct": "http://example/orange.html",
       };
 
       // Get the URL for the selected item
