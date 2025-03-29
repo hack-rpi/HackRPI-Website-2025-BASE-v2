@@ -71,8 +71,9 @@ const faqs: FAQ[] = [
 	},
 	{
 		title: "What is the theme?",
+		//TODO: Change the description
 		content:
-			"The theme for HackRPI 2024 is Urban Upgrades. This theme is all about enhancing the infrastructure, services, and quality of life in our cities. From smart transportation systems and sustainable energy solutions to improved public safety and inclusive community spaces, this theme challenges you to develop ideas and technologies that make cities more livable, efficient, and enjoyable for everyone.",
+			"The theme for HackRPI 2024 is Retro vs Modern. This theme is ENTER RETRO vs MODERN THEME DESCRIPTION HERE",
 	},
 	{
 		title: "Is it okay if I am late to the event?",
@@ -106,12 +107,12 @@ const FAQPage = () => {
 
 	return (
 		<div
-			className="h-auto mb-8 flex flex-col items-center text-white bg-base-100 w-5/6 desktop:w-full pl-8 desktop:pl-0"
+			className="h-auto mb-8 flex flex-col items-center text-hackrpi-pink bg-base-100 w-5/6 desktop:w-full pl-8 desktop:pl-0"
 			id="faq"
 			data-testid="faq-section"
 		>
 			<div className="flex w-full desktop:w-2/3">
-				<h1 className="font-modern text-retro-orange text-left text-4xl text-shadow-md pb-4">FAQs</h1>
+				<h1 className="font-mokoto font-normal text-hackrpi-orange text-left text-4xl text-shadow-md pb-4">FAQs</h1>
 			</div>
 			<div className="w-full desktop:w-2/3">
 				{faqs.map((faq, index) => (
