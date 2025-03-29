@@ -11,7 +11,7 @@ const faqs: FAQ[] = [
 	{
 		title: "What is HackRPI?",
 		content:
-			"Teams of 1-4 have 24 hours to build a project relating to our theme Retro vs Modern. Teams will then present their projects, and the best projects win prizes!",
+			"Teams of 1-4 have 24 hours to build a project relating to our theme Retro V. Modern. Teams will then present their projects, and the best projects win prizes!",
 	},
 	{
 		title: "When is HackRPI?",

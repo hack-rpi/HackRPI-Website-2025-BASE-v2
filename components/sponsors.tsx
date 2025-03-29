@@ -31,7 +31,7 @@ const Sponsors = () => {
 							>
 								{tier}
 							</div>
-							<hr className="border-b-4 border-hackrpi-light-purple border-rounded-r-xl border-double mt-2"></hr>
+							<div className="border-b-4 border-hackrpi-white rounded-full border-double mt-2 h-6"></div>
 
 							<div className="flex flex-row flex-wrap justify-around items-center">
 								{sponsors[tier].map((sponsor) => {
