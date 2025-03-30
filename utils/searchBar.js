@@ -15,6 +15,16 @@ $(function () {
 		"MLH",
 		"Leaderboard",
 		"Code of Conduct",
+		"Homepage",
+		"Board",
+		"Join",
+		"Help Us",
+		"Main",
+		"Mainpage",
+		"Codes",
+		"Plan",
+		"Participants",
+		"Awards",
 	];
 
 	$("#tags").autocomplete({
@@ -54,6 +64,16 @@ $(function () {
 			MLH: "http://example/orange.html",
 			Leaderboard: "http://example/orange.html",
 			"Code of Conduct": "http://example/orange.html",
+			Homepage: "http://example/orange.html",
+			Board: "http://example/orange.html",
+			Join: "http://example/orange.html",
+			"Help Us": "http://example/orange.html",
+			Main: "http://example/orange.html",
+			Mainpage: "http://example/orange.html",
+			Codes: "http://example/orange.html",
+			Plan: "http://example/orange.html",
+			Participants: "http://example/orange.html",
+			Awards: "http://example/orange.html",
 		};
 
 		// Get the URL for the selected item
