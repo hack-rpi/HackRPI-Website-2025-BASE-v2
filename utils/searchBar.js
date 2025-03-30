@@ -23,7 +23,7 @@ $(function () {
 		"Mainpage",
 		"Codes",
 		"Plan",
-		"Participatns",
+		"Participants",
 		"Awards",
 	];
 
@@ -72,7 +72,7 @@ $(function () {
 			Mainpage: "http://example/orange.html",
 			Codes: "http://example/orange.html",
 			Plan: "http://example/orange.html",
-			Participatns: "http://example/orange.html",
+			Participants: "http://example/orange.html",
 			Awards: "http://example/orange.html",
 		};
 
