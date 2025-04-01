@@ -22,9 +22,11 @@ export default function AboutUs() {
 					</p>
 					<p className="pb-3 text-hackrpi-pink">
 						<span data-testid="theme-description" className="text-hackrpi-light-purple font-bold">
-							Retro vs. Modern
+							Retro vs. Modern:
 						</span>{" "}
-						is DESCRIPTION OF RETRO VS MODERN
+						In a world where nostalgia meets innovation, our 12th annual hackathon, Retro vs Modern, invites creators to
+						explore the contrasts and possibilities between the past and the future. Join us in shaping the future
+						through a creative lens that honors the old while embracing the new.
 					</p>
 					<p className="pb-3 text-hackrpi-light-purple">
 						Our goal is to inspire and challenge innovators, creators, developers, and entrepreneurs in New York&apos;s
