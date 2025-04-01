@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import "@/app/globals.css";
-import Footer from "@/components/footer/footer";
 import NavBar from "@/components/nav-bar/nav-bar";
 
 export default function Announcements() {
@@ -61,10 +60,7 @@ export default function Announcements() {
 								? "bg-hackrpi-yellow bg-opacity-20 border-hackrpi-orange"
 								: "bg-hackrpi-blue bg-opacity-30 border-hackrpi-yellow";
 							return (
-								<div
-									key={a._id}
-									className={`mt-6 p-4 border rounded-lg ${bgClass}`}
-								>
+								<div key={a._id} className={`mt-6 p-4 border rounded-lg ${bgClass}`}>
 									<h2 className="text-2xl font-semibold text-hackrpi-orange">{a.title}</h2>
 									<p className="text-hackrpi-yellow">{a.message}</p>
 									<p className="text-sm text-hackrpi-yellow mt-2">
