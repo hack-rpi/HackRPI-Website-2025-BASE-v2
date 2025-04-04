@@ -506,14 +506,14 @@ export default function Page() {
 			<NavBar showOnScroll={false}></NavBar>
 
 			<div className="flex-grow flex-shrink basis-auto">
-				<h1 className="mt-28 text-center text-4xl">2048 Leaderboard</h1>
+				<h1 className="mt-28 text-center text-4xl font-modern text-hackrpi-orange">2048 Leaderboard</h1>
 				<table className="min-w-[80vw] mt-10 justify-inbetween table-auto w-full table table-zebra">
 					<thead>
 						<tr>
-							<th className="w-1/4 px-4 py-2 text-center">Position</th>
-							<th className="w-1/3 px-4 py-2 text-center">Username</th>
-							<th className="w-1/3 px-4 py-2 text-center">Score</th>
-							{isDirector ? <th className="w-1/3 px-4 py-2">Delete</th> : null}
+							<th className="w-1/4 px-4 py-2 text-center font-retro text-hackrpi-yellow">Position</th>
+							<th className="w-1/3 px-4 py-2 text-center font-retro text-hackrpi-yellow">Username</th>
+							<th className="w-1/3 px-4 py-2 text-center font-retro text-hackrpi-yellow">Score</th>
+							{isDirector ? <th className="w-1/3 px-4 py-2 font-retro text-hackrpi-yellow">Delete</th> : null}
 						</tr>
 					</thead>
 
