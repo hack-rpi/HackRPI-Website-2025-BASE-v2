@@ -21,7 +21,7 @@ const faqs: FAQ[] = [
 	{
 		title: "Where is HackRPI?",
 		content:
-			"HackRPI takes place at Rensselaer Polytechnic Institute, in the Darrin Communication Center. Darrin Communications Center, 51 College Ave, Troy, NY 12180. See our event information page for more details. ",
+			"HackRPI takes place at Rensselaer Polytechnic Institute, in the Darrin Communication Center. Darrin Communications Center, 51 College Ave, Troy, NY 12180. See our event information page for more details.",
 	},
 	{
 		title: "Is HackRPI free to attend?",
@@ -73,12 +73,12 @@ const faqs: FAQ[] = [
 		title: "What is the theme?",
 		//TODO: Change the description
 		content:
-			"The theme for HackRPI 2024 is Retro vs Modern. This theme is ENTER RETRO vs MODERN THEME DESCRIPTION HERE",
+			"The theme for 2025's HackRPI is Retro vs Modern. In a world where nostalgia meets innovation, our 12th annual hackathon, Retro vs Modern, invites creators to explore the contrasts and possibilities between the past and the future. Join us in shaping the future through a creative lens that honors the old while embracing the new.",
 	},
 	{
 		title: "Is it okay if I am late to the event?",
 		content:
-			"Yes! You can arrive at any time during the event, but we recommend arriving before 11 AM on Saturday. Remember, the longer you are late, the less time you have to work on your project!",
+			"Yes! You can arrive at any time during the event, but we recommend arriving before 11 AM on Saturday. Remember, the later you are, the less time you have to work on your project!",
 	},
 	{
 		title: "When are submissions due?",
