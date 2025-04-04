@@ -5,6 +5,8 @@ import "@/app/globals.css";
 import Footer from "@/components/footer/footer";
 import NavBar from "@/components/nav-bar/nav-bar";
 
+
+
 export default function backendAnnouncements() {
 	const [announcements, setAnnouncements] = useState([]);
 
@@ -22,6 +24,10 @@ export default function backendAnnouncements() {
 		fetchAnnouncements();
 	}, []);
 
+	function addAnnouncement() {
+		alert("Test");
+	};
+
 	return (
 		<>
 			<NavBar showOnScroll={false} />
@@ -30,7 +36,21 @@ export default function backendAnnouncements() {
 				<div className="container mx-auto p-8">
 					<h1 className="text-4xl font-bold text-hackrpi-orange mb-4">Backend Announcements</h1>
 					<p className="text-hackrpi-yellow text-lg">Stay updated with the latest HackRPI announcements here.</p>
+					<button onClick={() => addAnnouncement()}>Test</button>
+					
+					<div className= "flex flex-col">
+					<h1 className="font-bold text-hackrpi-orange mb-1">Title Input</h1>
+					<input id = "titleInput"></input>
+					<h1 className="font-bold text-hackrpi-orange mb-1">Time Input</h1>
+					<input id = "timeInput"></input>
+					<h1 className="font-bold text-hackrpi-orange mb-1">Message Input</h1>
+					<textarea id = "messageInput"></textarea>
+					<h1 className="font-bold text-hackrpi-orange mb-1">Links Input</h1>
+					<input id = "linksInput"></input>
+					<h1 className="font-bold text-hackrpi-orange mb-1">Name Input</h1>
+					<input id = "nameInput"></input>
 
+		</div>
 					{/* Render Announcements */}
 					{announcements.map((a: any) => (
 						<div
