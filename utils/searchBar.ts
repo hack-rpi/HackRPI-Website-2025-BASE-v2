@@ -4,9 +4,9 @@ import 'jquery-ui/ui/widgets/autocomplete';
 export const initializeSearch = () => {
   const availableTags = [
     "Home", "Events", "Schedule", "Announcements", "Prizes", "Resources",
-    "HackRPI XI", "Sponsors", "Winners", "Join Us", "Help", "Volunteer",
+    "HackRPI XI", "Sponsors", "Winners", "Join Us", "Mentoring", "Volunteer",
     "MLH", "Leaderboard", "Code of Conduct", "Homepage", "Board", "Join",
-    "Help Us", "Main", "Mainpage", "Codes", "Plan", "Participatns", "Awards",
+    "Help Us", "Main", "Mainpage", "Codes", "Plan", "Participants", "Awards",
   ];
 
   $("#tags").autocomplete({
@@ -27,31 +27,31 @@ export const initializeSearch = () => {
   function redirectUser (selectedItem: string) {
     selectedItem = selectedItem.trim().toLowerCase();
     const redirectUrls: { [key: string]: string } = {
-      "home": "http://example/orange.html",
-      "events": "http://example/orange.html",
-      "schedule": "http://example/orange.html",
-      "announcements": "http://example/orange.html",
-      "prizes": "http://example/orange.html",
-      "resources": "http://example/orange.html",
-      "hackrpi xi": "http://example/orange.html",
-      "sponsors": "http://example/orange.html",
-      "winners": "http://example/orange.html",
-      "join us": "http://example/orange.html",
-      "help": "http://example/orange.html",
-      "volunteer": "http://example/orange.html",
-      "mlh": "http://example/orange.html",
-      "leaderboard": "http://example/orange.html",
-      "code of conduct": "http://example/orange.html",
-      "homepage": "http://example/orange.html",
-      "board": "http://example/orange.html",
-      "join": "http://example/orange.html",
-      "help us": "http://example/orange.html",
-      "main": "http://example/orange.html",
-      "mainpage": "http://example/orange.html",
-      "codes": "http://example/orange.html",
-      "plan": "http://example/orange.html",
-      "participatns": "http://example/orange.html",
-      "awards": "http://example/orange.html",
+      "home": "/",
+      "events": "../event",
+      "schedule": "../event/schedule",
+      "announcements": "../announcements",
+      "prizes": "../event/prizes",
+      "resources": "../resources",
+      "hackrpi xi": "/last-year",
+      "sponsors": "../sponsor-us",
+      "winners": "https://hackrpi2024.devpost.com/project-gallery",
+      "join us": "https://discord.com/invite/Pzmdt7FYnu",
+      "mentoring": "https://docs.google.com/forms/d/e/1FAIpQLSfUMo98ZzGPBg23ZmAI5jiX1rahg-fTGFrpKb6pzq7VZXxPnA/viewform",
+      "volunteer": "https://docs.google.com/forms/d/e/1FAIpQLScVUkw_LbnzlVlGOWKVw-_pP9LtGI10WoImrik9XSflmSgS8g/viewform",
+      "mlh": "https://mlh.io/seasons/2025/events",
+      "leaderboard": "../2048/leaderboard",
+      "code of conduct": "https://github.com/MLH/mlh-policies/blob/main/code-of-conduct.md",
+      "homepage": "../app/page.tsx",
+      "board": "../2048/leaderboard",
+      "join": "https://discord.com/invite/Pzmdt7FYnu",
+      "help us": "https://docs.google.com/forms/d/e/1FAIpQLSfUMo98ZzGPBg23ZmAI5jiX1rahg-fTGFrpKb6pzq7VZXxPnA/viewform",
+      "main": "/",
+      "mainpage": "/",
+      "codes": "https://github.com/MLH/mlh-policies/blob/main/code-of-conduct.md",
+      "plan": "../event/schedule",
+      "participants": "https://docs.google.com/forms/d/e/1FAIpQLScVUkw_LbnzlVlGOWKVw-_pP9LtGI10WoImrik9XSflmSgS8g/viewform",
+      "awards": "../event/prizes",
     };
 
     const url = redirectUrls[selectedItem];
