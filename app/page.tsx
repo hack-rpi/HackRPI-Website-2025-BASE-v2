@@ -1,10 +1,8 @@
 "use client";
 
-import Footer from "@/components/footer/footer";
 import FAQPage from "@/components/faq/faq";
-import NavBar from "@/components/nav-bar/nav-bar";
 import TitleComponent from "@/components/title-components/title";
-import "../app/globals.css";
+import Footer from "@/components/footer/footer";
 import AboutSection from "../components/about-us";
 import { useEffect, useState } from "react";
 import TeamComponent from "@/components/team/team";
@@ -44,7 +42,6 @@ export default function Home() {
       setSponsorsStart(document.getElementById("sponsors")!.offsetTop);
       setShowHighlightDot(window.scrollY > scrollThreshold);
     };
-
     window.addEventListener("resize", handleResize);
     window.addEventListener("scroll", handleResize);
     return () => {
