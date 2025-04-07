@@ -2,6 +2,7 @@
 
 import FAQPage from "@/components/faq/faq";
 import TitleComponent from "@/components/title-components/title";
+import NavBar from "@/components/nav-bar/nav-bar"
 import Footer from "@/components/footer/footer";
 import AboutSection from "../components/about-us";
 import { useEffect, useState } from "react";
