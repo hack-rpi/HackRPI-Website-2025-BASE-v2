@@ -23,7 +23,7 @@ const announcementSchema = new mongoose.Schema({
 	name: String,
 });
 
-const Announcement = mongoose.models.Announcement || mongoose.model("announcements", announcementSchema);
+const Announcement = mongoose.models.Announcement || mongoose.model("Announcement", announcementSchema);
 
 // Connect to MongoDB
 async function connectDB() {
