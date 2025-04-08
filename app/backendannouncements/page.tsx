@@ -9,6 +9,12 @@ import NavBar from "@/components/nav-bar/nav-bar";
 
 export default function backendAnnouncements() {
 	const [announcements, setAnnouncements] = useState([]);
+	const [title, setTitle] = useState("");
+	const [time, setTime] = useState("");
+	const [message, setMessage] = useState("");
+	const [links, setLinks] = useState("");
+	const [name, setName] = useState("");
+
 
 	useEffect(() => {
 		async function fetchAnnouncements() {
@@ -25,7 +31,9 @@ export default function backendAnnouncements() {
 	}, []);
 
 	function addAnnouncement() {
-		alert("Test");
+		if(title == "" || time == "" || message == "" || links == "" || name == "") {
+			alert("One or more inputs are blank.");
+		}
 	};
 
 	return (
@@ -40,15 +48,15 @@ export default function backendAnnouncements() {
 					
 					<div className= "flex flex-col">
 					<h1 className="font-bold text-hackrpi-orange mb-1">Title Input</h1>
-					<input id = "titleInput"></input>
+					<input id = "titleInput" value = {title} onChange={(e) => setTitle(e.target.value)}></input>
 					<h1 className="font-bold text-hackrpi-orange mb-1">Time Input</h1>
-					<input id = "timeInput"></input>
+					<input id = "timeInput" value = {time} onChange = {(e) => setTime(e.target.value)}></input>
 					<h1 className="font-bold text-hackrpi-orange mb-1">Message Input</h1>
-					<textarea id = "messageInput"></textarea>
+					<textarea id = "messageInput" value = {message} onChange = {(e) => setMessage(e.target.value)}></textarea>
 					<h1 className="font-bold text-hackrpi-orange mb-1">Links Input</h1>
-					<input id = "linksInput"></input>
+					<input id = "linksInput" value = {links} onChange = {(e) => setLinks(e.target.value)}></input>
 					<h1 className="font-bold text-hackrpi-orange mb-1">Name Input</h1>
-					<input id = "nameInput"></input>
+					<input id = "nameInput" value = {name} onChange = {(e) => setName(e.target.value)}></input>
 
 		</div>
 					{/* Render Announcements */}
