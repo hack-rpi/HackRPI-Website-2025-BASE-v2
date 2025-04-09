@@ -112,7 +112,7 @@ const FAQPage = () => {
 			data-testid="faq-section"
 		>
 			<div className="flex w-full desktop:w-2/3">
-				<h1 className="font-mokoto font-normal text-hackrpi-orange text-left text-4xl text-shadow-md pb-4">FAQs</h1>
+				<h1 className="font-modern text-hackrpi-orange text-left text-4xl text-shadow-md pb-4">FAQs</h1>
 			</div>
 			<div className="w-full desktop:w-2/3">
 				{faqs.map((faq, index) => (
