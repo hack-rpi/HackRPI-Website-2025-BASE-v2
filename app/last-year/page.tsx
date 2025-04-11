@@ -392,7 +392,12 @@ export default function PastYearProjects() {
 						</div>
 						<div className="col-span-4 grid grid-cols-2 gap-2 desktop:gap-5">
 							<div className="col-span-1">
-								<FadeInImage src="/lastYearPhotos/IMG_2257-Edit.jpg" alt="HackRPI X 2023 Photo" width={500} height={500} />
+								<FadeInImage
+									src="/lastYearPhotos/IMG_2257-Edit.jpg"
+									alt="HackRPI X 2023 Photo"
+									width={500}
+									height={500}
+								/>
 							</div>
 							<div className="col-span-1">
 								<FadeInImage src="/lastYearPhotos/IMG_2260.jpg" alt="HackRPI X 2023 Photo" width={500} height={500} />
