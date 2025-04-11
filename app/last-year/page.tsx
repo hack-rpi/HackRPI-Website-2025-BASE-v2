@@ -39,7 +39,7 @@ export default function PastYearProjects() {
 				<div className="flex items-center justify-center">
 					<div className="grid grid-cols-8 gap-2 desktop:gap-5 p-5">
 						<div className="col-span-4">
-							<FadeInImage src="/lastYearPhotos/IMG_1115.jpg" alt="HackRPI X 2023 Photo" width={1000} height={1000} />
+							<FadeInImage src="/lastYearPhotos/IMG_1115.jpg" alt="HackRPI X 2023 Photo" width={1000} height={1000}/>
 						</div>
 						<div className="col-span-4 grid grid-cols-2 gap-2 desktop:gap-5">
 							<div className="col-span-1">
