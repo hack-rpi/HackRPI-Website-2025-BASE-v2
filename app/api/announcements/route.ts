@@ -53,3 +53,24 @@ export async function GET() {
 		return NextResponse.json({ error: "Failed to fetch announcements" }, { status: 500 });
 	}
 }
+
+export async function POST(req: Request) {
+	try {
+		await connectDB();
+		const body = await req.json();
+		const {title, message, links, name} = body;
+		const duplicate = await Announcement.find({title: title})
+		if(!duplicate) {
+			const announcementToInsert =  new Announcement( {
+				title: title,
+				message: message,
+				links: links,
+				name: name
+			});
+			const saved = await announcementToInsert.save();
+			alert("New announcement Added");
+		}
+	} catch(error) {
+		alert("Error adding new announcement");
+	}
+}

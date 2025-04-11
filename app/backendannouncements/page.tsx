@@ -10,7 +10,6 @@ import NavBar from "@/components/nav-bar/nav-bar";
 export default function backendAnnouncements() {
 	const [announcements, setAnnouncements] = useState([]);
 	const [title, setTitle] = useState("");
-	const [time, setTime] = useState("");
 	const [message, setMessage] = useState("");
 	const [links, setLinks] = useState("");
 	const [name, setName] = useState("");
@@ -30,10 +29,32 @@ export default function backendAnnouncements() {
 		fetchAnnouncements();
 	}, []);
 
-	function addAnnouncement() {
-		if(title == "" || time == "" || message == "" || links == "" || name == "") {
+	async function addAnnouncement() {
+		if(title == "" || message == "" || links == "" || name == "") {
 			alert("One or more inputs are blank.");
+		} else {
+
+			const reqBody = {
+				title,
+				message,
+				links,
+				name,
+			};
+
+			try {
+				const res = await fetch("/api/announcements", {
+					method: "POST", headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify(reqBody)
+				});
+			} catch(err) {
+				alert("Could not connect to API");
+			}
+	
 		}
+
+
 	};
 
 	return (
@@ -49,8 +70,6 @@ export default function backendAnnouncements() {
 					<div className= "flex flex-col">
 					<h1 className="font-bold text-hackrpi-orange mb-1">Title Input</h1>
 					<input id = "titleInput" value = {title} onChange={(e) => setTitle(e.target.value)}></input>
-					<h1 className="font-bold text-hackrpi-orange mb-1">Time Input</h1>
-					<input id = "timeInput" value = {time} onChange = {(e) => setTime(e.target.value)}></input>
 					<h1 className="font-bold text-hackrpi-orange mb-1">Message Input</h1>
 					<textarea id = "messageInput" value = {message} onChange = {(e) => setMessage(e.target.value)}></textarea>
 					<h1 className="font-bold text-hackrpi-orange mb-1">Links Input</h1>
