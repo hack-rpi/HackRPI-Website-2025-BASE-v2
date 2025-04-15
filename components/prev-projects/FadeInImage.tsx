@@ -5,9 +5,10 @@ type FadeInImageValues = {
 	alt: string;
 	width: number;
 	height: number;
+	className?: string;
 };
 
-const FadeInImage: React.FC<FadeInImageValues> = ({ src, alt, width, height }) => {
+const FadeInImage: React.FC<FadeInImageValues> = ({ src, alt, width, height, className }) => {
 	const imgRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
@@ -28,8 +29,14 @@ const FadeInImage: React.FC<FadeInImageValues> = ({ src, alt, width, height }) =
 	}, []);
 
 	return (
-		<div ref={imgRef} className="opacity-0 translate-y-4 transition-all duration-1000 east-in-out">
-			<Image src={src} alt={alt} width={width} height={height} />
+		<div ref={imgRef} className="opacity-0 translate-y-4 transition-all duration-1000 east-in-out ">
+			<Image
+				src={src}
+				alt={alt}
+				width={width}
+				height={height}
+				className={`fade-in-effect rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 ${className}`}
+			/>
 		</div>
 	);
 };
