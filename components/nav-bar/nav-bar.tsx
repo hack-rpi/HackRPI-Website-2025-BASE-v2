@@ -62,6 +62,23 @@ export default function NavBar({ showOnScroll }: { showOnScroll: boolean }) {
 		};
 	}, []);
 
+  useEffect(() => {
+    const storedTheme = localStorage.getItem("theme");
+    if (storedTheme === "dark") {
+      document.documentElement.classList.add("dark");
+    }
+  }, []);
+  
+  const toggleDarkMode = () => {
+    if (document.documentElement.classList.contains("dark")) {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    } else {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    }
+  };
+
 	if (windowWidth < 860)
 		return (
 			<>
@@ -69,24 +86,6 @@ export default function NavBar({ showOnScroll }: { showOnScroll: boolean }) {
 				<MlhBanner />
 			</>
 		);
-		useEffect(() => {
-			const storedTheme = localStorage.getItem("theme");
-			if (storedTheme === "dark") {
-				document.documentElement.classList.add("dark");
-			}
-		}, []);
-		
-		const toggleDarkMode = () => {
-			if (document.documentElement.classList.contains("dark")) {
-				document.documentElement.classList.remove("dark");
-				localStorage.setItem("theme", "light");
-			} else {
-				document.documentElement.classList.add("dark");
-				localStorage.setItem("theme", "dark");
-			}
-		};
-		
-
 	return (
 		<>
 			<div className={`${showOnScroll ? (showNav ? "top-0" : "-top-24") : "top-0"} fixed transition-all w-full z-10`}>
