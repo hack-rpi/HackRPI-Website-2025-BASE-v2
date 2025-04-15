@@ -2,6 +2,8 @@ import NextImage from "next/image";
 import logo from "@/public/HackRPI_Logo_Yellow_Arrow.png";
 import SocialLinks from "../socials-links/social-links";
 import RegistrationLink from "../themed-components/registration-link";
+const currentYear = new Date().getFullYear();
+
 
 export default function Footer() {
 	return (
@@ -37,12 +39,11 @@ export default function Footer() {
 						</div>
 					</div>
 				</div>
-
 				<div className="flex flex-row items-start md:items-center justify-center space-x-2 w-fit pb-4 mb">
 					<p>
 						Made with <span className="text-red-600">❤️</span> by HackRPI.
 					</p>
-					<p>&copy; 2025 HackRPI</p>
+				  <p>&copy; {currentYear} HackRPI</p>
 				</div>
 			</div>
 		</div>

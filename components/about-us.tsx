@@ -21,7 +21,7 @@ export default function AboutUs() {
 						professors, industry professionals, and fellow students.
 					</p>
 					<p className="pb-3 text-hackrpi-pink">
-						<span data-testid="theme-description" className="text-hackrpi-light-purple font-bold">
+						<span data-testid="theme-description" className="text-hackrpi-primary-dark-purple font-bold">
 							Retro vs. Modern:
 						</span>{" "}
 						In a world where nostalgia meets innovation, our 12th annual hackathon, Retro vs Modern, invites creators to
@@ -40,7 +40,7 @@ export default function AboutUs() {
 			<div className="w-full lg:w-2/6 flex flex-col items-center lg:items-start mt-4 lg:mt-0 h-full lg:ml-4">
 				<div
 					data-testid="register-now-banner"
-					className="w-full lg:w-11/12 bg-hackrpi-dark-purple text-black text-xl h-fit overflow-hidden whitespace-nowrap font-bold lg:mt-16 pl-1 "
+					className="w-full lg:w-11/12 bg-hackrpi-secondary-orange text-black text-xl h-fit overflow-hidden whitespace-nowrap font-bold lg:mt-16 pl-1 "
 				>
 					REGISTER NOW! REGISTER NOW! REGISTER NOW! REGISTER NOW! REGISTER NOW! REGISTER NOW! REGISTER NOW!
 				</div>
