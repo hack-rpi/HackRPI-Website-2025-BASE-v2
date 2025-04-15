@@ -14,6 +14,7 @@ export default function Card(props: CardProps) {
 	return (
 		<a
 			href={props.link}
+			target="_blank"
 			aria-label={props.name}
 			className={`${props.classname} w-12 aspect-square max-w-20
 			bg-opacity-100 p-2 bg-transparent hover:bg-gradient-to-tr flex items-center justify-center
