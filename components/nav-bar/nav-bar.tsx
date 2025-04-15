@@ -16,28 +16,10 @@ export const links: NavGroup[] = [
 		],
 	},
 	{
-		name: "Event",
-		links: [
-			{ href: "/event", children: "Event Info" },
-			{ href: "/event/schedule", children: "Schedule" },
-			{ href: "/event/prizes", children: "Prizes" },
-		],
-	},
-	{
-		name: "HackRPI X",
+		name: "HackRPI XI",
 		links: [
 			{ href: "/last-year#winners", children: "Winners" },
 			{ href: "/last-year#photos", children: "Photos" },
-		],
-	},
-	{
-		name: "Resources",
-		links: [
-			{ href: "/resources#web-dev", children: "Web Development" },
-			{ href: "/resources#git", children: "Git and GitHub" },
-			{ href: "/resources#leaflet", children: "Mapping Data" },
-			{ href: "/resources#desktop-dev", children: "Desktop Development" },
-			{ href: "/resources#submissions", children: "Submitting Your Project" },
 		],
 	},
 ];

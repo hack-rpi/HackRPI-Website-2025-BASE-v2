@@ -20,8 +20,8 @@ export default function MobileNavBar({ links }: { links: NavGroup[] }) {
 	}, []);
 
 	return (
-		<>
-			<div className="w-screen h-24 flex items-center justify-center fixed top-0 bg-hackrpi-secondary-dark-blue z-20">
+		<nav role="navigation" className="mobile-navigation">
+			<div className="w-screen h-24 flex items-center justify-center fixed top-0 bg-gradient-to-r from-hackrpi-light-purple via-hackrpi-pink to-hackrpi-light-purple z-20">
 				<div className="flex items-center justify-start w-1/3">
 					<button onClick={() => setNavMenuOpen((prev) => !prev)} className="text-white text-4xl ml-8 ">
 						<NextImg alt="Hamburger Menu" src="/menu-icon.svg" width={40} height={40} priority={true} />
@@ -44,7 +44,7 @@ export default function MobileNavBar({ links }: { links: NavGroup[] }) {
 			<div
 				className={`fixed top-24 ${
 					navMenuOpen ? "left-0" : "-left-3/4"
-				} h-full bg-hackrpi-secondary-dark-blue w-3/4 z-20 transition-all overflow-y-auto`}
+				} h-full bg-hackrpi-dark-blue w-3/4 z-20 transition-all overflow-y-auto`}
 			>
 				<div className="flex flex-col items-center justify-start h-full ">
 					{links.map((link) => (
@@ -76,6 +76,6 @@ export default function MobileNavBar({ links }: { links: NavGroup[] }) {
 					</Link>
 				</div>
 			</div>
-		</>
+		</nav>
 	);
 }
