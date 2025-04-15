@@ -77,10 +77,10 @@ function EventPage() {
 					</div>
 				</div>
 				<div className="flex flex-row items-center justify-center bg-gradient-to-r from-hackrpi-pink via-hackrpi-light-purple to-hackrpi-pink w-full py-8">
-					<h1 className="text-4xl text-white font-bold ml-4">Need Help?</h1>
+					<h1 className="text-4xl text-white font-modern ml-4">Need Help?</h1>
 					<div className="w-full flex items-start justify-start flex-col md:flex-row">
 						<div className="container p-4">
-							<h2 className=" font-semibold text-2xl mb-4 text-white">MENTORING INFORMATION</h2>
+							<h2 className=" font-retro text-2xl mb-4 text-white">MENTORING INFORMATION</h2>
 							<p className=" text-xl text-white">
 								Mentors will be available throughout HackRPI to provide invaluable guidance and assistance to
 								participants. Whether you need help with coding, debugging, refining your project idea, or navigating
@@ -92,7 +92,7 @@ function EventPage() {
 						</div>
 
 						<div className="container flex flex-col items-start p-4">
-							<h2 className="font-semibold text-2xl mb-4 text-white">EVENT DISCORD</h2>
+							<h2 className="font-retro text-2xl mb-4 text-white">EVENT DISCORD</h2>
 							<p className="text-xl mb-8 text-white">
 								Join the HackRPI 2025 Discord server to stay connected and make the most of your hackathon experience!
 								Have questions for the staff? Want to chat with other participants? Looking for a team? Join the
@@ -111,11 +111,11 @@ function EventPage() {
 				</div>
 
 				<div className="flex flex-col items-start justify-start w-full" id="project-submission">
-					<h1 className="p-4 text-4xl font-modern text-hackrpi-yellow">Project Submission and Judging</h1>
+					<h1 className="p-4 text-4xl font-modern text-hackrpi-orange">Project Submission and Judging</h1>
 					<div className="flex flex-col md:flex-row">
 						<div className="container p-4">
-							<h1 className="font-semibold text-3xl mb-4 text-hackrpi-light-purple">JUDGING CRITERIA</h1>
-							<p className="mb-2 text-hackrpi-light-purple">
+							<h1 className="font-retro text-3xl mb-4 text-hackrpi-orange">JUDGING CRITERIA</h1>
+							<p className="mb-2 text-hackrpi-yellow">
 								After coding ends, at noon on Sunday, you will have the opportunity to present your project to a panel
 								of judges. These judges are industry professionals, professors, alumni, and fellow students who will
 								evaluate your project based on the following criteria:
@@ -148,8 +148,8 @@ function EventPage() {
 							</ul>
 						</div>
 
-						<div className="flex flex-col p-4 text-hackrpi-pink">
-							<h1 className="font-semibold text-3xl mb-4 text-hackrpi-pink">PROJECT SUBMISSION</h1>
+						<div className="flex flex-col p-4 text-hackrpi-yellow">
+							<h1 className="font-retro text-3xl mb-4 text-hackrpi-orange">PROJECT SUBMISSION</h1>
 							<p className="text-lg mb-2">
 								HackRPI uses Devpost to manage project submissions. You will need to{" "}
 								<a
