@@ -1,11 +1,11 @@
-import xenia from "../public/team/photos/joerogansauna.jpg";
-import cj from "../public/team/photos/joerogansauna.jpg";
-import matthew from "../public/team/photos/joerogansauna.jpg";
-import shankar from "../public/team/photos/joerogansauna.jpg";
-import aaryan from "../public/team/photos/joerogansauna.jpg";
-import tobias from "../public/team/photos/joerogansauna.jpg";
-import jackson from "../public/team/photos/joerogansauna.jpg";
-import suyash from "../public/team/photos/joerogansauna.jpg";
+import xenia from "../public/team/photos/Xenia_Khusid.jpg";
+import cj from "../public/team/photos/CJ_Marino.jpg";
+import matthew from "../public/team/photos/Xenia_Khusid.jpg";
+import shankar from "../public/team/photos/Shankar_Palanickal.jpg";
+import aaryan from "../public/team/photos/Aaryan_Gautam.jpg";
+import tobias from "../public/team/photos/Xenia_Khusid.jpg";
+import jackson from "../public/team/photos/Xenia_Khusid.jpg";
+import suyash from "../public/team/photos/Suyash_Amatya.jpg";
 
 export const executive = {
 	"Xenia Khusid": xenia,
