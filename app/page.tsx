@@ -61,7 +61,6 @@ export default function Home() {
 					<Sponsors />
 					<TeamComponent />
 				</div>
-				<Footer />
 				{/* Other components and elements */}
 			</div>
 		</>
