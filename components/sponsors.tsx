@@ -14,11 +14,6 @@ const tierColors: Record<sponsorTiers, { bgText: string; glow: string }> = {
 const Sponsors = () => {
 	const tierList: sponsorTiers[] = ["OBSIDIAN", "GOLD", "SILVER", "BRONZE", "COLLABORATORS"];
 	const [sponsors] = useState<SponsorsJSON>(sponsorsJson);
-<<<<<<< HEAD
-	
-=======
-
->>>>>>> b05434a75107667067c07a074fcf1dc2f7c2e131
 	return (
 		<div
 			className="relative flex flex-col w-full justify-center items-start desktop:items-center pl-8 desktop:pl-0 bg-gradient-to-b from-hackrpi-dark-blue via-hackrpi-orange to-hackrpi-dark-blue py-8 bg-blend-overlay bg-cover bg-center"
