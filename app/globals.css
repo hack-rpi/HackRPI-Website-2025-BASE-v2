@@ -16,6 +16,13 @@
 	font-size: 4rem; /* Adjust as needed */
 }
 
+.faq-box-hover:hover {
+	background-color: #410091; /* Lighter purple */
+	box-shadow: 0 0 10px #b794f4, 0 0 20px #b794f4, 0 0 30px #d8b4fe;
+	transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+
 :root,
 [data-amplify-theme] {
 	--amplify-colors-background-primary: #080a0b;
@@ -30,3 +37,4 @@
 	--amplify-components-input-color: #efefef;
 	--amplify-components-radio-label-color: #efefef;
 }
+
