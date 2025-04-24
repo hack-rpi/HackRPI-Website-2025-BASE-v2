@@ -120,7 +120,7 @@ const FAQPage = () => {
 						key={index}
 						className={`collapse collapse-arrow custom-arrow bg-retro-purple-dark p-1 text-2xl border-t-4 ${
 							index === faqs.length - 1 ? "border-b-2" : ""
-						} border-hackrpi-light-purple border-rounded-r-xl border-double faq-box-hover`}
+						} border-hackrpi-light-purple border-rounded-r-xl border-double pixel-glow-hover`}
 						data-testid={`faq-item-${index}`}
 					>
 						<input
