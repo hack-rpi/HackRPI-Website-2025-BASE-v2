@@ -27,16 +27,18 @@ jest.mock("jquery-ui/ui/widgets/autocomplete", () => ({}));
 const mockLocation = { href: "" };
 const mockAlert = jest.fn();
 
-Object.defineProperty(global, "window", {
-	value: {
-		location: mockLocation,
-		alert: mockAlert,
-	},
+// Mock window.location
+Object.defineProperty(window, "location", {
+	value: mockLocation,
 	writable: true,
 });
 
+// Mock window.alert explicitly
+window.alert = mockAlert;
+
 // Import after mocks are set up
 import { initializeSearch } from "@/utils/searchBar";
+// @ts-ignore - jQuery is mocked
 import $ from "jquery";
 
 // Get reference to mocked jQuery
@@ -200,9 +202,21 @@ describe("searchBar utility", () => {
 
 		it("should redirect on Enter key press", () => {
 			const mockInputValue = "Events";
-			const mockThis = {
-				val: jest.fn().mockReturnValue(mockInputValue)
-			};
+			const mockThis = document.createElement('input');
+
+			// Mock jQuery to return correct value when called with the context
+			mockJQuery.mockImplementationOnce((selector: any) => {
+				if (selector === mockThis) {
+					return {
+						val: jest.fn().mockReturnValue(mockInputValue)
+					};
+				}
+				return {
+					autocomplete: jest.fn(),
+					on: jest.fn(),
+					val: jest.fn()
+				};
+			});
 
 			const mockEvent = { key: "Enter" };
 
