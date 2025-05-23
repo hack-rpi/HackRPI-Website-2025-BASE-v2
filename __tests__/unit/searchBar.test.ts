@@ -85,7 +85,7 @@ describe("searchBar utility", () => {
 					"Plan",
 					"Participants",
 					"Awards",
-				])
+				]),
 			);
 			expect(jQueryAutocompleteConfig.select).toBeInstanceOf(Function);
 		});
@@ -128,20 +128,17 @@ describe("searchBar utility", () => {
 			{ input: "code of conduct", expected: "https://github.com/MLH/mlh-policies/blob/main/code-of-conduct.md" },
 		];
 
-		test.each(urlMappingTests)(
-			"should redirect '$input' to '$expected'",
-			({ input, expected }) => {
-				mockLocation.href = ""; // Reset
+		test.each(urlMappingTests)("should redirect '$input' to '$expected'", ({ input, expected }) => {
+			mockLocation.href = ""; // Reset
 
-				const mockEvent = {};
-				const mockUI = { item: { value: input } };
+			const mockEvent = {};
+			const mockUI = { item: { value: input } };
 
-				// Call the select handler
-				jQueryAutocompleteConfig.select(mockEvent, mockUI);
+			// Call the select handler
+			jQueryAutocompleteConfig.select(mockEvent, mockUI);
 
-				expect(window.location.href).toBe(expected);
-			}
-		);
+			expect(window.location.href).toBe(expected);
+		});
 
 		it("should show alert for unrecognized search terms", () => {
 			const mockEvent = {};
@@ -149,9 +146,7 @@ describe("searchBar utility", () => {
 
 			jQueryAutocompleteConfig.select(mockEvent, mockUI);
 
-			expect(mockAlert).toHaveBeenCalledWith(
-				"No redirect URL found for 'nonexistent-term'"
-			);
+			expect(mockAlert).toHaveBeenCalledWith("No redirect URL found for 'nonexistent-term'");
 			expect(window.location.href).toBe("");
 		});
 
@@ -202,19 +197,19 @@ describe("searchBar utility", () => {
 
 		it("should redirect on Enter key press", () => {
 			const mockInputValue = "Events";
-			const mockThis = document.createElement('input');
+			const mockThis = document.createElement("input");
 
 			// Mock jQuery to return correct value when called with the context
 			mockJQuery.mockImplementationOnce((selector: any) => {
 				if (selector === mockThis) {
 					return {
-						val: jest.fn().mockReturnValue(mockInputValue)
+						val: jest.fn().mockReturnValue(mockInputValue),
 					};
 				}
 				return {
 					autocomplete: jest.fn(),
 					on: jest.fn(),
-					val: jest.fn()
+					val: jest.fn(),
 				};
 			});
 
@@ -227,7 +222,7 @@ describe("searchBar utility", () => {
 
 		it("should not redirect on non-Enter key press", () => {
 			const mockThis = {
-				val: jest.fn().mockReturnValue("Events")
+				val: jest.fn().mockReturnValue("Events"),
 			};
 
 			const mockEvent = { key: "ArrowDown" };
@@ -237,4 +232,4 @@ describe("searchBar utility", () => {
 			expect(window.location.href).toBe("");
 		});
 	});
-}); 
+});

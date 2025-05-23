@@ -14,4 +14,4 @@ mockJQuery.mockAutocomplete = mockAutocomplete;
 mockJQuery.mockOn = mockOn;
 mockJQuery.mockVal = mockVal;
 
-module.exports = mockJQuery; 
+module.exports = mockJQuery;
