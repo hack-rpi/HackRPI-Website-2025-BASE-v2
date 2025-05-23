@@ -68,9 +68,9 @@ jobs:
           fetch-depth: 0
       
       - name: Prettify code
-        uses: creyD/prettier_action@v4.3
+        uses: creyD/prettier_action@v4.5
         with:
-          prettier_options: --write --tab-width=2 --use-tabs .
+          prettier_options: --write .
           # Ensure Prettier config is respected or created if missing
           prettier_plugins: prettier-plugin-tailwindcss
           github_token: ${{ secrets.GITHUB_TOKEN }}

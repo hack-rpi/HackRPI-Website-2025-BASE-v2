@@ -19,7 +19,7 @@ const Sponsors = () => {
 		<div
 			className="relative flex flex-col w-full justify-center items-start desktop:items-center pl-8 desktop:pl-0 bg-gradient-to-b from-hackrpi-dark-blue via-hackrpi-orange to-hackrpi-dark-blue py-8 bg-blend-overlay bg-cover bg-center"
 			style={{
-				backgroundImage: "url(\"/retro2.jpg\")",
+				backgroundImage: 'url("/retro2.jpg")',
 				backgroundSize: "100% 100%",
 			}}
 		>
