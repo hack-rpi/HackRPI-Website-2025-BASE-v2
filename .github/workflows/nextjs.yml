@@ -70,7 +70,7 @@ jobs:
       - name: Prettify code
         uses: creyD/prettier_action@v4.5
         with:
-          prettier_options: --write .
+          prettier_options: '--config .prettierrc --write .'
           # Ensure Prettier config is respected or created if missing
           prettier_plugins: prettier-plugin-tailwindcss
           github_token: ${{ secrets.GITHUB_TOKEN }}
