@@ -5,7 +5,7 @@ import "@/app/globals.css";
 import Footer from "@/components/footer/footer";
 import NavBar from "@/components/nav-bar/nav-bar";
 
-export default function backendAnnouncements() {
+export default function BackendAnnouncements() {
 	const [announcements, setAnnouncements] = useState([]);
 	const [title, setTitle] = useState("");
 	const [message, setMessage] = useState("");

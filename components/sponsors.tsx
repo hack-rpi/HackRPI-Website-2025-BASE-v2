@@ -50,7 +50,7 @@ const Sponsors = () => {
 											key={sponsor.name}
 											className="w-fit h-fit p-4 m-4 hover:scale-110 bg-hackrpi-light-purple bg-opacity-0 hover:bg-opacity-15 rounded-md transition-all duration-700 flex items-center justify-center mx-4"
 										>
-											<a href={sponsor.url} target="_blank" rel="noreferrer">
+											<a href="https://hackrpi.com/" target="_blank" rel="noreferrer">
 												<NextImage
 													src={`/sponsors/sponsor_logos${sponsor.logoPath}`}
 													alt={sponsor.name}
