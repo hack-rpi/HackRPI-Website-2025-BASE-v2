@@ -70,14 +70,11 @@ jobs:
       - name: Prettify code
         uses: creyD/prettier_action@v4.5
         with:
-          prettier_options: '--config .prettierrc --write .'
-          # Ensure Prettier config is respected or created if missing
+          prettier_options: '--print-width 120 --tab-width 2 --use-tabs true --semi true --single-quote false --jsx-single-quote false --trailing-comma all --bracket-spacing true --bracket-same-line false --arrow-parens always --end-of-line auto --write .'
           prettier_plugins: prettier-plugin-tailwindcss
           github_token: ${{ secrets.GITHUB_TOKEN }}
           commit_message: "🧹 Automated code formatting"
-          # Skip committing on main branch to avoid repository rule violations
           same_commit: true
-          # Only commit changes when not on main branch, and allow empty commits
           commit_options: ${{ github.ref != 'refs/heads/main' && '--no-verify --allow-empty' || '' }}
       
       - name: Detect package manager
