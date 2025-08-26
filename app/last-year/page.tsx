@@ -2,7 +2,6 @@
 
 import React from "react";
 import "@/app/globals.css";
-import Footer from "../../components/footer/footer";
 import NavBar from "@/components/nav-bar/nav-bar";
 import ProjectDisplay from "@/components/prev-projects/project-display";
 import { podiumPrizes, carouselPrizes } from "@/data/previous-prize-winners";

@@ -2,7 +2,6 @@
 
 import NavBar from "@/components/nav-bar/nav-bar";
 import "@/app/globals.css";
-import Footer from "@/components/footer/footer";
 import { useEffect, useState } from "react";
 import type { Event } from "@/data/schedule";
 import { SATURDAY_END, SATURDAY_START, SUNDAY_END, SUNDAY_START, saturdayTimes, sundayTimes } from "@/data/schedule";

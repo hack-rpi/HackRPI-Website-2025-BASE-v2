@@ -1,6 +1,5 @@
 "use client";
 
-import Footer from "@/components/footer/footer";
 import NavBar from "@/components/nav-bar/nav-bar";
 import "../app/globals.css";
 import HackRPILink from "@/components/themed-components/hackrpi-link";

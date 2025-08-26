@@ -61,18 +61,22 @@ export async function POST(req: Request) {
 		alert("Connected");
 		const body = await req.json();
 		const { title, message, links, name } = body;
+		console.log(title);
+		console.log(message);
+		console.log(links);
+		console.log(name);
 		const duplicate = await Announcement.find({ title: title });
 		if (!duplicate) {
-			const announcementToInsert = new Announcement({
-				title: title,
-				message: message,
-				links: links,
-				name: name,
-			});
-			const saved = await announcementToInsert.save();
+			// const announcementToInsert = new Announcement({
+			// 	title: title,
+			// 	message: message,
+			// 	links: links,
+			// 	name: name,
+			// });
+			//const saved = await announcementToInsert.save();
 			console.log("New announcement Added");
 		}
 	} catch (error) {
-		console.log("Error adding new announcement");
+		console.log("Error adding new announcement: " + error);
 	}
 }
