@@ -2,7 +2,6 @@
 
 import React, { useCallback, useEffect, useState } from "react";
 import HackRPILink from "../themed-components/hackrpi-link";
-import Footer from "@/components/footer/footer";
 import { Director, team } from "../../data/members";
 import { teamColors } from "../../data/members";
 import { executive } from "../../data/members";

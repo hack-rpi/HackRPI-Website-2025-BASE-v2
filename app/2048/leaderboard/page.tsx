@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { useEffect } from "react";
+//import { useState } from "react";
+//import { useEffect } from "react";
 import NavBar from "@/components/nav-bar/nav-bar";
 import "@/app/globals.css";
 import HackRPIButton from "@/components/themed-components/hackrpi-button";
@@ -471,13 +471,15 @@ const fakeLeaderboard = [
 ];
 
 export default function Page() {
-	const [leaderboardEntries, setLeaderboardEntries] = useState(fakeLeaderboard);
-	const [isDirector, setIsDirector] = useState(false); //Just change this to true to test the isDirector stuff
+	//const [leaderboardEntries, setLeaderboardEntries] = useState(fakeLeaderboard);
+	//const [isDirector, setIsDirector] = useState(false); //Just change this to true to test the isDirector stuff
+	const isDirector = false;
+	const leaderboardEntries = fakeLeaderboard;
 
-	const fetchLeaderboard = async () => {
-		//const entries = await get_leaderboard();
-		setLeaderboardEntries(fakeLeaderboard);
-	};
+	// const fetchLeaderboard = async () => {
+	// 	//const entries = await get_leaderboard();
+	// 	setLeaderboardEntries(fakeLeaderboard);
+	// };
 
 	/*async function is_director() {
 		let groups = undefined;

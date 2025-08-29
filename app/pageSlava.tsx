@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import "@/app/globals.css";
-import Footer from "@/components/footer/footer";
 import NavBar from "@/components/nav-bar/nav-bar";
 
 export default function BackendAnnouncements() {
@@ -50,7 +49,7 @@ export default function BackendAnnouncements() {
 					alert("Failed to post announcement");
 				}
 			} catch (err) {
-				alert("Could not connect to API");
+				alert("Could not connect to API: " + err);
 			}
 		}
 	}

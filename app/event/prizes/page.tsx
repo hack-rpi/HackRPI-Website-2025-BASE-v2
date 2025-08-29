@@ -2,7 +2,6 @@
 
 import NavBar from "@/components/nav-bar/nav-bar";
 import "@/app/globals.css";
-import Footer from "@/components/footer/footer";
 import { podiumPrizes, majorPrizes, minorPrizes } from "@/data/prizes";
 import Podium from "@/components/prizes/podium";
 import MajorPrizes from "@/components/prizes/major_prizes";

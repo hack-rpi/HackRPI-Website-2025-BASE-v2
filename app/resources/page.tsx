@@ -2,7 +2,6 @@
 
 import "@/app/globals.css";
 import NavBar from "@/components/nav-bar/nav-bar";
-import Footer from "@/components/footer/footer";
 import HackRPILink from "@/components/themed-components/hackrpi-link";
 
 export default function page() {

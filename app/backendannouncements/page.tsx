@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import "@/app/globals.css";
-import Footer from "@/components/footer/footer";
 import NavBar from "@/components/nav-bar/nav-bar";
 
 export default function BackendAnnouncements() {
@@ -27,7 +26,7 @@ export default function BackendAnnouncements() {
 		}
 
 		fetchAnnouncements();
-	}, []);
+	}, [announcements]);
 
 	async function addAnnouncement() {
 		if (title === "") {

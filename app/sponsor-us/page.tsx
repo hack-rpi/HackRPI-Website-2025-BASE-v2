@@ -2,7 +2,6 @@
 
 import React from "react";
 import "@/app/globals.css";
-import Footer from "../../components/footer/footer";
 import NavBar from "@/components/nav-bar/nav-bar";
 import HackRPILink from "@/components/themed-components/hackrpi-link";
 

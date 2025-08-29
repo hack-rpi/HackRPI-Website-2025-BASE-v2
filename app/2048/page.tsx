@@ -367,7 +367,7 @@ export default function Page() {
 		return () => {
 			window.removeEventListener("keydown", handleKeyDown);
 		};
-	}, []);
+	});
 
 	if (gameReady === false) {
 		return (
