@@ -27,11 +27,11 @@ export const links: NavGroup[] = [
 export default function NavBar({ showOnScroll }: { showOnScroll: boolean }) {
 	const [showNav, setShowNav] = useState(false);
 	const [windowWidth, setWindowWidth] = useState(0);
-	const [isDarkMode, setIsDarkMode] = useState(
+	/*const [isDarkMode, setIsDarkMode] = useState(
 		typeof window !== "undefined" &&
 			(localStorage.getItem("theme") === "dark" ||
 				(!localStorage.getItem("theme") && window.matchMedia("(prefers-color-scheme: dark)").matches)),
-	);
+	);*/
 
 	const navHeight = 96;
 
