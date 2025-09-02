@@ -45,3 +45,26 @@
 	--amplify-components-input-color: #efefef;
 	--amplify-components-radio-label-color: #efefef;
 }
+
+.invisibleSpace{
+	color:transparent;
+}
+
+@media screen and (min-width: 0px) {
+	.adjustedFontSize{
+		font-size:6.2vw;
+		line-height: 2.5rem;
+	}
+}
+@media screen and (min-width: 301px) {
+	.adjustedFontSize{
+		font-size:6.2vw;
+		line-height: 2.5rem;
+	}
+}
+@media screen and (min-width: 555px) {
+	.adjustedFontSize{
+		font-size:2.25rem;
+		line-height: 2.5rem;
+	}
+}
