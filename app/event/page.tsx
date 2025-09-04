@@ -215,21 +215,21 @@ function EventPage() {
 						</div>
 
 						{/* Submission Timeline */}
-						<div className="max-w-4xl mx-auto mb-12">
+						<div className="w-full max-w-[1600px] mx-auto mb-12 px-2 sm:px-4">
 							<div className="relative">
 								{/* Timeline Line */}
-								<div className="absolute left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-hackrpi-orange via-hackrpi-pink to-hackrpi-light-purple"></div>
+								<div className="absolute left-6 sm:left-8 lg:left-10 top-0 bottom-0 w-1 bg-gradient-to-b from-hackrpi-orange via-hackrpi-pink to-hackrpi-light-purple"></div>
 								
 								{/* Timeline Steps */}
 								<div className="space-y-8">
 									{/* Step 1 */}
 									<div className="relative flex items-start">
-										<div className="relative z-10 w-16 h-16 bg-hackrpi-orange rounded-full flex items-center justify-center text-2xl shadow-lg shadow-hackrpi-orange/50">
+										<div className="relative z-10 w-14 h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 bg-hackrpi-orange rounded-full flex items-center justify-center text-xl md:text-2xl lg:text-3xl shadow-lg shadow-hackrpi-orange/50">
 											1
 										</div>
-										<div className="ml-8 bg-gradient-to-r from-hackrpi-orange/10 to-transparent border-l-4 border-hackrpi-orange p-6 rounded-r-lg flex-1">
-											<h3 className="text-xl font-bold text-hackrpi-orange mb-2">Create Your Account</h3>
-											<p className="text-gray-300">
+										<div className="ml-6 md:ml-8 lg:ml-10 bg-gradient-to-r from-hackrpi-orange/10 to-transparent border-l-4 border-hackrpi-orange p-5 md:p-6 lg:p-8 rounded-r-lg flex-1">
+											<h3 className="text-2xl md:text-3xl font-bold text-hackrpi-orange mb-2">Create Your Account</h3>
+											<p className="text-gray-300 md:text-lg">
 												<a
 													href="https://secure.devpost.com/users/register?ref_content=signup_global_nav&ref_feature=signup&ref_medium=button"
 													target="_blank"
@@ -245,13 +245,13 @@ function EventPage() {
 
 									{/* Step 2 */}
 									<div className="relative flex items-start">
-										<div className="relative z-10 w-16 h-16 bg-hackrpi-pink rounded-full flex items-center justify-center text-2xl shadow-lg shadow-hackrpi-pink/50">
+										<div className="relative z-10 w-14 h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 bg-hackrpi-pink rounded-full flex items-center justify-center text-xl md:text-2xl lg:text-3xl shadow-lg shadow-hackrpi-pink/50">
 											2
 										</div>
-										<div className="ml-8 bg-gradient-to-r from-hackrpi-pink/10 to-transparent border-l-4 border-hackrpi-pink p-6 rounded-r-lg flex-1">
-											<h3 className="text-xl font-bold text-hackrpi-pink mb-2">Prepare Your Submission</h3>
-											<p className="text-gray-300 mb-3">Include these essential elements:</p>
-											<ul className="space-y-2 text-sm text-gray-400">
+										<div className="ml-6 md:ml-8 lg:ml-10 bg-gradient-to-r from-hackrpi-pink/10 to-transparent border-l-4 border-hackrpi-pink p-5 md:p-6 lg:p-8 rounded-r-lg flex-1">
+											<h3 className="text-2xl md:text-3xl font-bold text-hackrpi-pink mb-2">Prepare Your Submission</h3>
+											<p className="text-gray-300 mb-3 md:text-lg">Include these essential elements:</p>
+											<ul className="space-y-2 text-sm md:text-base lg:text-lg text-gray-400">
 												<li className="flex items-center">
 													<span className="text-hackrpi-yellow mr-2">▸</span>
 													Project title and description
@@ -274,12 +274,12 @@ function EventPage() {
 
 									{/* Step 3 */}
 									<div className="relative flex items-start">
-										<div className="relative z-10 w-16 h-16 bg-hackrpi-yellow rounded-full flex items-center justify-center text-2xl shadow-lg shadow-hackrpi-yellow/50">
+										<div className="relative z-10 w-14 h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 bg-hackrpi-yellow rounded-full flex items-center justify-center text-xl md:text-2xl lg:text-3xl shadow-lg shadow-hackrpi-yellow/50">
 											3
 										</div>
-										<div className="ml-8 bg-gradient-to-r from-hackrpi-yellow/10 to-transparent border-l-4 border-hackrpi-yellow p-6 rounded-r-lg flex-1">
-											<h3 className="text-xl font-bold text-hackrpi-yellow mb-2">Submit Before Deadline</h3>
-											<div className="space-y-2 text-gray-300">
+										<div className="ml-6 md:ml-8 lg:ml-10 bg-gradient-to-r from-hackrpi-yellow/10 to-transparent border-l-4 border-hackrpi-yellow p-5 md:p-6 lg:p-8 rounded-r-lg flex-1">
+											<h3 className="text-2xl md:text-3xl font-bold text-hackrpi-yellow mb-2">Submit Before Deadline</h3>
+											<div className="space-y-2 text-gray-300 md:text-lg">
 												<p className="flex items-center">
 													<span className="text-hackrpi-orange font-bold mr-2">📅</span>
 													Submit by <span className="font-bold text-hackrpi-orange mx-1">11:00 AM Sunday</span>
@@ -294,12 +294,12 @@ function EventPage() {
 
 									{/* Step 4 */}
 									<div className="relative flex items-start">
-										<div className="relative z-10 w-16 h-16 bg-hackrpi-light-purple rounded-full flex items-center justify-center text-2xl shadow-lg shadow-hackrpi-light-purple/50">
+										<div className="relative z-10 w-14 h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 bg-hackrpi-light-purple rounded-full flex items-center justify-center text-xl md:text-2xl lg:text-3xl shadow-lg shadow-hackrpi-light-purple/50">
 											4
 										</div>
-										<div className="ml-8 bg-gradient-to-r from-hackrpi-light-purple/10 to-transparent border-l-4 border-hackrpi-light-purple p-6 rounded-r-lg flex-1">
-											<h3 className="text-xl font-bold text-hackrpi-light-purple mb-2">Present Your Project</h3>
-											<p className="text-gray-300">
+										<div className="ml-6 md:ml-8 lg:ml-10 bg-gradient-to-r from-hackrpi-light-purple/10 to-transparent border-l-4 border-hackrpi-light-purple p-5 md:p-6 lg:p-8 rounded-r-lg flex-1">
+											<h3 className="text-2xl md:text-3xl font-bold text-hackrpi-light-purple mb-2">Present Your Project</h3>
+											<p className="text-gray-300 md:text-lg">
 												After noon, no changes allowed. Be ready to give a live demo and explain your project to the judges!
 											</p>
 										</div>
@@ -312,7 +312,7 @@ function EventPage() {
 						<div className="text-center">
 							<HackRPILink
 								href="https://hackrpi2025.devpost.com/"
-								className="inline-block text-3xl px-12 py-6 bg-gradient-to-r from-hackrpi-orange to-hackrpi-pink hover:from-hackrpi-pink hover:to-hackrpi-light-purple transform hover:scale-110 transition-all duration-300 shadow-lg hover:shadow-xl"
+								className="inline-block w-full sm:w-auto text-3xl sm:text-4xl md:text-5xl px-10 sm:px-14 md:px-20 py-6 sm:py-8 md:py-10 bg-gradient-to-r from-hackrpi-orange to-hackrpi-pink hover:from-hackrpi-pink hover:to-hackrpi-light-purple transform hover:scale-105 md:hover:scale-110 transition-all duration-300 shadow-xl hover:shadow-2xl ring-4 ring-hackrpi-yellow/60 border-hackrpi-yellow/70 !text-white hover:!text-white drop-shadow-md rounded-xl"
 								target="_blank"
 								ariaLabel="Submit your project on Devpost"
 							>
