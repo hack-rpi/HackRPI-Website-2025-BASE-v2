@@ -113,7 +113,7 @@ function EventPage() {
 					<h1 className="p-4 text-5xl font-modern text-center text-transparent bg-clip-text bg-gradient-to-r from-hackrpi-orange to-hackrpi-yellow mb-8">
 						Project Submission and Judging
 					</h1>
-					
+
 					{/* Judging Criteria Section */}
 					<div className="w-full max-w-7xl px-4 mb-16">
 						<div className="text-center mb-12">
@@ -122,11 +122,11 @@ function EventPage() {
 								<div className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-hackrpi-orange to-hackrpi-pink"></div>
 							</h2>
 							<p className="mt-8 text-lg text-hackrpi-yellow max-w-3xl mx-auto">
-								After coding ends at noon on Sunday, present your project to our panel of industry professionals, 
+								After coding ends at noon on Sunday, present your project to our panel of industry professionals,
 								professors, alumni, and fellow students. They'll evaluate your work based on these criteria:
 							</p>
 						</div>
-						
+
 						<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 							{/* Practicality & Utility Card */}
 							<div className="group relative bg-gradient-to-br from-hackrpi-pink/20 to-hackrpi-pink/5 border-2 border-hackrpi-pink/50 rounded-lg p-6 transform transition-all duration-300 hover:scale-105 hover:border-hackrpi-pink">
@@ -135,7 +135,8 @@ function EventPage() {
 								</div>
 								<h3 className="font-bold text-xl text-hackrpi-pink mb-3">Practicality & Utility</h3>
 								<p className="text-gray-300 text-sm leading-relaxed">
-									What problem do you want to solve? How applicable is your hack to problems we're facing today? Any future plans?
+									What problem do you want to solve? How applicable is your hack to problems we're facing today? Any
+									future plans?
 								</p>
 								<div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-hackrpi-pink to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
 							</div>
@@ -219,7 +220,7 @@ function EventPage() {
 							<div className="relative">
 								{/* Timeline Line */}
 								<div className="absolute left-6 sm:left-8 lg:left-10 top-0 bottom-0 w-1 bg-gradient-to-b from-hackrpi-orange via-hackrpi-pink to-hackrpi-light-purple"></div>
-								
+
 								{/* Timeline Steps */}
 								<div className="space-y-8">
 									{/* Step 1 */}
@@ -237,8 +238,8 @@ function EventPage() {
 													className="text-hackrpi-light-purple hover:text-hackrpi-pink underline transition-colors"
 												>
 													Sign up for a Devpost account
-												</a>
-												{" "}to get started with your submission.
+												</a>{" "}
+												to get started with your submission.
 											</p>
 										</div>
 									</div>
@@ -278,7 +279,9 @@ function EventPage() {
 											3
 										</div>
 										<div className="ml-6 md:ml-8 lg:ml-10 bg-gradient-to-r from-hackrpi-yellow/10 to-transparent border-l-4 border-hackrpi-yellow p-5 md:p-6 lg:p-8 rounded-r-lg flex-1">
-											<h3 className="text-2xl md:text-3xl font-bold text-hackrpi-yellow mb-2">Submit Before Deadline</h3>
+											<h3 className="text-2xl md:text-3xl font-bold text-hackrpi-yellow mb-2">
+												Submit Before Deadline
+											</h3>
 											<div className="space-y-2 text-gray-300 md:text-lg">
 												<p className="flex items-center">
 													<span className="text-hackrpi-orange font-bold mr-2">📅</span>
@@ -298,9 +301,12 @@ function EventPage() {
 											4
 										</div>
 										<div className="ml-6 md:ml-8 lg:ml-10 bg-gradient-to-r from-hackrpi-light-purple/10 to-transparent border-l-4 border-hackrpi-light-purple p-5 md:p-6 lg:p-8 rounded-r-lg flex-1">
-											<h3 className="text-2xl md:text-3xl font-bold text-hackrpi-light-purple mb-2">Present Your Project</h3>
+											<h3 className="text-2xl md:text-3xl font-bold text-hackrpi-light-purple mb-2">
+												Present Your Project
+											</h3>
 											<p className="text-gray-300 md:text-lg">
-												After noon, no changes allowed. Be ready to give a live demo and explain your project to the judges!
+												After noon, no changes allowed. Be ready to give a live demo and explain your project to the
+												judges!
 											</p>
 										</div>
 									</div>
