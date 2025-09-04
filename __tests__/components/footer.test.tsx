@@ -59,7 +59,8 @@ describe("Footer Component", () => {
 		render(<Footer />);
 
 		// Check if the location details are rendered
-		expect(screen.getByText("Darrin Communications Center @ Rensselaer Polytechnic Institute")).toBeInTheDocument();
+		expect(screen.getByText("Darrin Communications Center", { exact: false })).toBeInTheDocument();
+		expect(screen.getByText("@ Rensselaer Polytechnic Institute", { exact: false })).toBeInTheDocument();
 		expect(screen.getByText("110 8th St, Troy, NY 12180")).toBeInTheDocument();
 	});
 

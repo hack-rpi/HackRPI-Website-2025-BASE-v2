@@ -314,7 +314,6 @@ function EventPage() {
 								href="https://hackrpi2025.devpost.com/"
 								className="inline-block w-full sm:w-auto text-3xl sm:text-4xl md:text-5xl px-10 sm:px-14 md:px-20 py-6 sm:py-8 md:py-10 bg-gradient-to-r from-hackrpi-orange to-hackrpi-pink hover:from-hackrpi-pink hover:to-hackrpi-light-purple transform hover:scale-105 md:hover:scale-110 transition-all duration-300 shadow-xl hover:shadow-2xl ring-4 ring-hackrpi-yellow/60 border-hackrpi-yellow/70 !text-white hover:!text-white drop-shadow-md rounded-xl"
 								target="_blank"
-								ariaLabel="Submit your project on Devpost"
 							>
 								SUBMIT ON DEVPOST
 							</HackRPILink>
