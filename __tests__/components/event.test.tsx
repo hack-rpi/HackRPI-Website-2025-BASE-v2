@@ -129,18 +129,20 @@ describe("Event Page", () => {
 		// Check for the project submission section
 		expect(screen.getByText("PROJECT SUBMISSION")).toBeInTheDocument();
 
-		// Check for specific criteria
-		const criteriaItems = [
+		// Check for specific criteria headings - without colons now in the new design
+		const criteriaHeadings = [
 			"Practicality & Utility",
-			"Creativity:",
-			"Technical Difficulty:",
-			"Effort:",
-			"User Experience:",
-			"Collaboration & Learning:",
+			"Creativity",
+			"Technical Difficulty",
+			"Effort",
+			"User Experience",
+			"Collaboration & Learning",
 		];
 
-		criteriaItems.forEach((item) => {
-			expect(screen.getByText(item, { exact: false })).toBeInTheDocument();
+		criteriaHeadings.forEach((heading) => {
+			// Use getAllByText since some words might appear in descriptions too
+			const elements = screen.getAllByText(heading, { exact: false });
+			expect(elements.length).toBeGreaterThan(0);
 		});
 	});
 
@@ -159,11 +161,11 @@ describe("Event Page", () => {
 	it("renders the Devpost submission link", () => {
 		render(<EventPage />);
 
-		// Check for the Devpost link
-		const devpostLink = screen.getByTestId("hackrpi-link-https---hackrpi2024-devpost-com-");
+		// Check for the Devpost link - updated to 2025
+		const devpostLink = screen.getByTestId("hackrpi-link-https---hackrpi2025-devpost-com-");
 		expect(devpostLink).toBeInTheDocument();
-		expect(devpostLink).toHaveAttribute("href", "https://hackrpi2024.devpost.com/");
-		expect(devpostLink.textContent).toBe("DEVPOST");
+		expect(devpostLink).toHaveAttribute("href", "https://hackrpi2025.devpost.com/");
+		expect(devpostLink.textContent).toBe("SUBMIT ON DEVPOST");
 	});
 
 	it("renders mentoring and Discord information", () => {
