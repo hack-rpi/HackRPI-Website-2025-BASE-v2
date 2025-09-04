@@ -123,7 +123,7 @@ function EventPage() {
 							</h2>
 							<p className="mt-8 text-lg text-hackrpi-yellow max-w-3xl mx-auto">
 								After coding ends at noon on Sunday, present your project to our panel of industry professionals,
-								professors, alumni, and fellow students. They'll evaluate your work based on these criteria:
+								professors, alumni, and fellow students. They&apos;ll evaluate your work based on these criteria:
 							</p>
 						</div>
 
@@ -135,8 +135,8 @@ function EventPage() {
 								</div>
 								<h3 className="font-bold text-xl text-hackrpi-pink mb-3">Practicality & Utility</h3>
 								<p className="text-gray-300 text-sm leading-relaxed">
-									What problem do you want to solve? How applicable is your hack to problems we're facing today? Any
-									future plans?
+									What problem do you want to solve? How applicable is your hack to problems we&apos;re facing today?
+									Any future plans?
 								</p>
 								<div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-hackrpi-pink to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
 							</div>
