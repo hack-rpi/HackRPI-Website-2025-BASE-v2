@@ -67,3 +67,4 @@ amplifyconfiguration*
 # repomix
 /repomix-output.xml
 /repomix.config.json
+.playwright-mcp/

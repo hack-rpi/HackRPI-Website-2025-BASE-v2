@@ -109,75 +109,223 @@ function EventPage() {
 					</div>
 				</div>
 
-				<div className="flex flex-col items-start justify-start w-full" id="project-submission">
-					<h1 className="p-4 text-4xl font-modern text-hackrpi-orange">Project Submission and Judging</h1>
-					<div className="flex flex-col md:flex-row">
-						<div className="container p-4">
-							<h1 className="font-retro text-3xl mb-4 text-hackrpi-orange">JUDGING CRITERIA</h1>
-							<p className="mb-2 text-hackrpi-yellow">
-								After coding ends, at noon on Sunday, you will have the opportunity to present your project to a panel
-								of judges. These judges are industry professionals, professors, alumni, and fellow students who will
-								evaluate your project based on the following criteria:
+				<div className="flex flex-col items-center justify-start w-full py-12" id="project-submission">
+					<h1 className="p-4 text-5xl font-modern text-center text-transparent bg-clip-text bg-gradient-to-r from-hackrpi-orange to-hackrpi-yellow mb-8">
+						Project Submission and Judging
+					</h1>
+
+					{/* Judging Criteria Section */}
+					<div className="w-full max-w-7xl px-4 mb-16">
+						<div className="text-center mb-12">
+							<h2 className="font-retro text-4xl mb-4 text-hackrpi-orange inline-block relative">
+								JUDGING CRITERIA
+								<div className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-hackrpi-orange to-hackrpi-pink"></div>
+							</h2>
+							<p className="mt-8 text-lg text-hackrpi-yellow max-w-3xl mx-auto">
+								After coding ends at noon on Sunday, present your project to our panel of industry professionals,
+								professors, alumni, and fellow students. They&apos;ll evaluate your work based on these criteria:
 							</p>
-							<ul className="text-lg list-disc list-inside text-hackrpi-yellow">
-								<li className=" border-b border-gray-400 mb-2 text-hackrpi-pink">
-									<strong className="text-hackrpi-pink">Practicality & Utility:</strong> What problem do you want to
-									solve? How applicable is your hack to problems we&apos;re facing today? Any future plans?
-								</li>
-								<li className=" border-b border-gray-400 mb-2 text-hackrpi-light-purple">
-									<strong className="text-hackrpi-light-purple">Creativity:</strong> How original is your hack? Is this
-									a novel idea or something that many people have come across?
-								</li>
-								<li className=" border-b border-gray-400 mb-2 text-hackrpi-pink">
-									<strong className="text-hackrpi-pink">Technical Difficulty:</strong> How technically challenging is
-									it? Which technologies did you use?
-								</li>
-								<li className=" border-b border-gray-400 mb-2 text-hackrpi-light-purple">
-									<strong className="text-hackrpi-light-purple">Effort:</strong> Did the team genuinely commit time and
-									effort to this product?
-								</li>
-								<li className=" border-b border-gray-400 mb-2 text-hackrpi-pink">
-									<strong className="text-hackrpi-pink">User Experience:</strong> What impression do you get from the
-									hack? Does it provide for a smooth user experience?
-								</li>
-								<li className=" border-b border-gray-400 mb-2 text-hackrpi-light-purple">
-									<strong className="text-hackrpi-light-purple">Collaboration & Learning:</strong> Did the team work
-									well together and split up work? Did they learn from the experience?
-								</li>
-							</ul>
 						</div>
 
-						<div className="flex flex-col p-4 text-hackrpi-yellow">
-							<h1 className="font-retro text-3xl mb-4 text-hackrpi-orange">PROJECT SUBMISSION</h1>
-							<p className="text-lg mb-2">
-								HackRPI uses Devpost to manage project submissions. You will need to{" "}
-								<a
-									href="https://secure.devpost.com/users/register?ref_content=signup_global_nav&ref_feature=signup&ref_medium=button"
-									target="_blank"
-									rel="noopener noreferrer"
-									className="text-blue-500 hover:underline"
-								>
-									create a Devpost account
-								</a>{" "}
-								and submit your project to the HackRPI 2025 hackathon page. Make sure to include a title, description,
-								demo video, and any other relevant information about your project.
+						<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+							{/* Practicality & Utility Card */}
+							<div className="group relative bg-gradient-to-br from-hackrpi-pink/20 to-hackrpi-pink/5 border-2 border-hackrpi-pink/50 rounded-lg p-6 transform transition-all duration-300 hover:scale-105 hover:border-hackrpi-pink">
+								<div className="absolute -top-3 -right-3 w-12 h-12 bg-hackrpi-pink rounded-full flex items-center justify-center text-2xl group-hover:rotate-12 transition-transform duration-300">
+									🎯
+								</div>
+								<h3 className="font-bold text-xl text-hackrpi-pink mb-3">Practicality & Utility</h3>
+								<p className="text-gray-300 text-sm leading-relaxed">
+									What problem do you want to solve? How applicable is your hack to problems we&apos;re facing today?
+									Any future plans?
+								</p>
+								<div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-hackrpi-pink to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+							</div>
+
+							{/* Creativity Card */}
+							<div className="group relative bg-gradient-to-br from-hackrpi-light-purple/20 to-hackrpi-light-purple/5 border-2 border-hackrpi-light-purple/50 rounded-lg p-6 transform transition-all duration-300 hover:scale-105 hover:border-hackrpi-light-purple">
+								<div className="absolute -top-3 -right-3 w-12 h-12 bg-hackrpi-light-purple rounded-full flex items-center justify-center text-2xl group-hover:rotate-12 transition-transform duration-300">
+									💡
+								</div>
+								<h3 className="font-bold text-xl text-hackrpi-light-purple mb-3">Creativity</h3>
+								<p className="text-gray-300 text-sm leading-relaxed">
+									How original is your hack? Is this a novel idea or something that many people have come across?
+								</p>
+								<div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-hackrpi-light-purple to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+							</div>
+
+							{/* Technical Difficulty Card */}
+							<div className="group relative bg-gradient-to-br from-hackrpi-orange/20 to-hackrpi-orange/5 border-2 border-hackrpi-orange/50 rounded-lg p-6 transform transition-all duration-300 hover:scale-105 hover:border-hackrpi-orange">
+								<div className="absolute -top-3 -right-3 w-12 h-12 bg-hackrpi-orange rounded-full flex items-center justify-center text-2xl group-hover:rotate-12 transition-transform duration-300">
+									⚡
+								</div>
+								<h3 className="font-bold text-xl text-hackrpi-orange mb-3">Technical Difficulty</h3>
+								<p className="text-gray-300 text-sm leading-relaxed">
+									How technically challenging is it? Which technologies did you use?
+								</p>
+								<div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-hackrpi-orange to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+							</div>
+
+							{/* Effort Card */}
+							<div className="group relative bg-gradient-to-br from-hackrpi-yellow/20 to-hackrpi-yellow/5 border-2 border-hackrpi-yellow/50 rounded-lg p-6 transform transition-all duration-300 hover:scale-105 hover:border-hackrpi-yellow">
+								<div className="absolute -top-3 -right-3 w-12 h-12 bg-hackrpi-yellow rounded-full flex items-center justify-center text-2xl group-hover:rotate-12 transition-transform duration-300">
+									💪
+								</div>
+								<h3 className="font-bold text-xl text-hackrpi-yellow mb-3">Effort</h3>
+								<p className="text-gray-300 text-sm leading-relaxed">
+									Did the team genuinely commit time and effort to this product?
+								</p>
+								<div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-hackrpi-yellow to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+							</div>
+
+							{/* User Experience Card */}
+							<div className="group relative bg-gradient-to-br from-hackrpi-pink/20 to-hackrpi-pink/5 border-2 border-hackrpi-pink/50 rounded-lg p-6 transform transition-all duration-300 hover:scale-105 hover:border-hackrpi-pink">
+								<div className="absolute -top-3 -right-3 w-12 h-12 bg-hackrpi-pink rounded-full flex items-center justify-center text-2xl group-hover:rotate-12 transition-transform duration-300">
+									✨
+								</div>
+								<h3 className="font-bold text-xl text-hackrpi-pink mb-3">User Experience</h3>
+								<p className="text-gray-300 text-sm leading-relaxed">
+									What impression do you get from the hack? Does it provide for a smooth user experience?
+								</p>
+								<div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-hackrpi-pink to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+							</div>
+
+							{/* Collaboration & Learning Card */}
+							<div className="group relative bg-gradient-to-br from-hackrpi-light-purple/20 to-hackrpi-light-purple/5 border-2 border-hackrpi-light-purple/50 rounded-lg p-6 transform transition-all duration-300 hover:scale-105 hover:border-hackrpi-light-purple">
+								<div className="absolute -top-3 -right-3 w-12 h-12 bg-hackrpi-light-purple rounded-full flex items-center justify-center text-2xl group-hover:rotate-12 transition-transform duration-300">
+									🤝
+								</div>
+								<h3 className="font-bold text-xl text-hackrpi-light-purple mb-3">Collaboration & Learning</h3>
+								<p className="text-gray-300 text-sm leading-relaxed">
+									Did the team work well together and split up work? Did they learn from the experience?
+								</p>
+								<div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-hackrpi-light-purple to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+							</div>
+						</div>
+					</div>
+
+					{/* Project Submission Section */}
+					<div className="w-full max-w-7xl px-4">
+						<div className="text-center mb-12">
+							<h2 className="font-retro text-4xl mb-4 text-hackrpi-orange inline-block relative">
+								PROJECT SUBMISSION
+								<div className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-hackrpi-pink to-hackrpi-orange"></div>
+							</h2>
+							<p className="mt-8 text-lg text-hackrpi-yellow max-w-3xl mx-auto">
+								Submit your project through Devpost and showcase your amazing work!
 							</p>
-							<p className="text-lg mb-2">
-								You can submit your project at any time before 11:00 AM on Sunday. You must have a Devpost submission to
-								be eligible for judging. You can edit your project submission until 12:00 PM on Sunday.{" "}
-							</p>
-							<p className="text-lg mb-2">
-								After noon, you will not be able to make any changes to your project or your submission. Judging begins
-								immediately after the submission deadline. You must be present at the event to give a live demo and
-								explain your project to the judges.
-							</p>
+						</div>
+
+						{/* Submission Timeline */}
+						<div className="w-full max-w-[1600px] mx-auto mb-12 px-2 sm:px-4">
+							<div className="relative">
+								{/* Timeline Line */}
+								<div className="absolute left-6 sm:left-8 lg:left-10 top-0 bottom-0 w-1 bg-gradient-to-b from-hackrpi-orange via-hackrpi-pink to-hackrpi-light-purple"></div>
+
+								{/* Timeline Steps */}
+								<div className="space-y-8">
+									{/* Step 1 */}
+									<div className="relative flex items-start">
+										<div className="relative z-10 w-14 h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 bg-hackrpi-orange rounded-full flex items-center justify-center text-xl md:text-2xl lg:text-3xl shadow-lg shadow-hackrpi-orange/50">
+											1
+										</div>
+										<div className="ml-6 md:ml-8 lg:ml-10 bg-gradient-to-r from-hackrpi-orange/10 to-transparent border-l-4 border-hackrpi-orange p-5 md:p-6 lg:p-8 rounded-r-lg flex-1">
+											<h3 className="text-2xl md:text-3xl font-bold text-hackrpi-orange mb-2">Create Your Account</h3>
+											<p className="text-gray-300 md:text-lg">
+												<a
+													href="https://secure.devpost.com/users/register?ref_content=signup_global_nav&ref_feature=signup&ref_medium=button"
+													target="_blank"
+													rel="noopener noreferrer"
+													className="text-hackrpi-light-purple hover:text-hackrpi-pink underline transition-colors"
+												>
+													Sign up for a Devpost account
+												</a>{" "}
+												to get started with your submission.
+											</p>
+										</div>
+									</div>
+
+									{/* Step 2 */}
+									<div className="relative flex items-start">
+										<div className="relative z-10 w-14 h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 bg-hackrpi-pink rounded-full flex items-center justify-center text-xl md:text-2xl lg:text-3xl shadow-lg shadow-hackrpi-pink/50">
+											2
+										</div>
+										<div className="ml-6 md:ml-8 lg:ml-10 bg-gradient-to-r from-hackrpi-pink/10 to-transparent border-l-4 border-hackrpi-pink p-5 md:p-6 lg:p-8 rounded-r-lg flex-1">
+											<h3 className="text-2xl md:text-3xl font-bold text-hackrpi-pink mb-2">Prepare Your Submission</h3>
+											<p className="text-gray-300 mb-3 md:text-lg">Include these essential elements:</p>
+											<ul className="space-y-2 text-sm md:text-base lg:text-lg text-gray-400">
+												<li className="flex items-center">
+													<span className="text-hackrpi-yellow mr-2">▸</span>
+													Project title and description
+												</li>
+												<li className="flex items-center">
+													<span className="text-hackrpi-yellow mr-2">▸</span>
+													Demo video showcasing your hack
+												</li>
+												<li className="flex items-center">
+													<span className="text-hackrpi-yellow mr-2">▸</span>
+													Technologies used and challenges faced
+												</li>
+												<li className="flex items-center">
+													<span className="text-hackrpi-yellow mr-2">▸</span>
+													Team member information
+												</li>
+											</ul>
+										</div>
+									</div>
+
+									{/* Step 3 */}
+									<div className="relative flex items-start">
+										<div className="relative z-10 w-14 h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 bg-hackrpi-yellow rounded-full flex items-center justify-center text-xl md:text-2xl lg:text-3xl shadow-lg shadow-hackrpi-yellow/50">
+											3
+										</div>
+										<div className="ml-6 md:ml-8 lg:ml-10 bg-gradient-to-r from-hackrpi-yellow/10 to-transparent border-l-4 border-hackrpi-yellow p-5 md:p-6 lg:p-8 rounded-r-lg flex-1">
+											<h3 className="text-2xl md:text-3xl font-bold text-hackrpi-yellow mb-2">
+												Submit Before Deadline
+											</h3>
+											<div className="space-y-2 text-gray-300 md:text-lg">
+												<p className="flex items-center">
+													<span className="text-hackrpi-orange font-bold mr-2">📅</span>
+													Submit by <span className="font-bold text-hackrpi-orange mx-1">11:00 AM Sunday</span>
+												</p>
+												<p className="flex items-center">
+													<span className="text-hackrpi-pink font-bold mr-2">✏️</span>
+													Edit until <span className="font-bold text-hackrpi-pink mx-1">12:00 PM Sunday</span>
+												</p>
+											</div>
+										</div>
+									</div>
+
+									{/* Step 4 */}
+									<div className="relative flex items-start">
+										<div className="relative z-10 w-14 h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 bg-hackrpi-light-purple rounded-full flex items-center justify-center text-xl md:text-2xl lg:text-3xl shadow-lg shadow-hackrpi-light-purple/50">
+											4
+										</div>
+										<div className="ml-6 md:ml-8 lg:ml-10 bg-gradient-to-r from-hackrpi-light-purple/10 to-transparent border-l-4 border-hackrpi-light-purple p-5 md:p-6 lg:p-8 rounded-r-lg flex-1">
+											<h3 className="text-2xl md:text-3xl font-bold text-hackrpi-light-purple mb-2">
+												Present Your Project
+											</h3>
+											<p className="text-gray-300 md:text-lg">
+												After noon, no changes allowed. Be ready to give a live demo and explain your project to the
+												judges!
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						{/* CTA Button */}
+						<div className="text-center">
 							<HackRPILink
-								href="https://hackrpi2024.devpost.com/"
-								className="text-3xl mt-4 text-center text-hackrpi-orange"
+								href="https://hackrpi2025.devpost.com/"
+								className="inline-block w-full sm:w-auto text-3xl sm:text-4xl md:text-5xl px-10 sm:px-14 md:px-20 py-6 sm:py-8 md:py-10 bg-gradient-to-r from-hackrpi-orange to-hackrpi-pink hover:from-hackrpi-pink hover:to-hackrpi-light-purple transform hover:scale-105 md:hover:scale-110 transition-all duration-300 shadow-xl hover:shadow-2xl ring-4 ring-hackrpi-yellow/60 border-hackrpi-yellow/70 !text-white hover:!text-white drop-shadow-md rounded-xl"
 								target="_blank"
 							>
-								DEVPOST
+								SUBMIT ON DEVPOST
 							</HackRPILink>
+							<p className="mt-4 text-sm text-gray-400">
+								Ready to showcase your amazing project? Click above to start your submission!
+							</p>
 						</div>
 					</div>
 				</div>
