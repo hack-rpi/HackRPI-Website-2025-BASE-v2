@@ -4,8 +4,6 @@ import FAQPage from "@/components/faq/faq";
 import TitleComponent from "@/components/title-components/title";
 import NavBar from "@/components/nav-bar/nav-bar";
 import AboutSection from "../components/about-us";
-import TeamComponent from "@/components/team/team";
-import Sponsors from "@/components/sponsors";
 
 export default function Home() {
 	return (

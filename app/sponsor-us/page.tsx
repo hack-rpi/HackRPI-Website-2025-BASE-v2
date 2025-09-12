@@ -1,14 +1,57 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "@/app/globals.css";
 import NavBar from "@/components/nav-bar/nav-bar";
 import HackRPILink from "@/components/themed-components/hackrpi-link";
 
 function SponsorUsPage() {
+
+  const [showNav, setShowNav] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(0);
+  /*const [isDarkMode, setIsDarkMode] = useState(
+    typeof window !== "undefined" &&
+      (localStorage.getItem("theme") === "dark" ||
+        (!localStorage.getItem("theme") && window.matchMedia("(prefers-color-scheme: dark)").matches)),
+  );*/
+
+  const navHeight = 96;
+
+  // Add event listener to the window to update the scrollY state
+  useEffect(() => {
+    const storedTheme = localStorage.getItem("theme");
+    if (storedTheme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else if (!storedTheme && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      document.documentElement.classList.add("dark");
+    }
+
+    const scrollThreshold = window.innerHeight - navHeight;
+    setWindowWidth(window.innerWidth);
+    const handleScroll = () => {
+      setShowNav(window.scrollY > scrollThreshold);
+    };
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);  
+
+  let navbarLocalBad = <></>
+  if(windowWidth >= 860) {
+    navbarLocalBad = <NavBar showOnScroll={false} />;
+  }
+  
+    
 	return (
 		<div className="w-full min-h-screen h-fit flex flex-col items-center">
-			<NavBar showOnScroll={false} />
+			{navbarLocalBad}
 			<div className="w-11/12 flex-grow flex-shrink basis-auto flex flex-col items-start justify-center pt-24 desktop:pt-16  mb-4">
 				<div className="flex w-full flex-wrap mb-2 items-center justify-center">
 					<div className="flex flex-col items-center justify-start w-5/6 md:w-1/2 min-w-[350px] mb-2">
