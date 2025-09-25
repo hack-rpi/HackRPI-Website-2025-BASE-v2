@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import RegistrationButton from "@/components/themed-components/registration-link";
 import SponsorUSButton from "../themed-components/sponsor-us-button";
+import DonateNowButton from "../themed-components/donate-now-button";
 
 export default function TitleText() {
 	const [year, setYear] = useState(1824);
@@ -46,6 +47,7 @@ export default function TitleText() {
 			</p>
 			<RegistrationButton className="text-3xl" />
       <SponsorUSButton className="text-3xl" />
+      <DonateNowButton className="text-3xl" />
 		</div>
 	);
 }
