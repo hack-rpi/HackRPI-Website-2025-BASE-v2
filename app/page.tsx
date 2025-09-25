@@ -4,6 +4,7 @@ import FAQPage from "@/components/faq/faq";
 import TitleComponent from "@/components/title-components/title";
 import NavBar from "@/components/nav-bar/nav-bar";
 import AboutSection from "../components/about-us";
+import Sponsors from "@/components/sponsors";
 
 export default function Home() {
 	return (
@@ -15,6 +16,7 @@ export default function Home() {
 					<TitleComponent />
 					<AboutSection />
 					<FAQPage />
+          <Sponsors />
 				</div>
 				{/* Other components and elements */}
 			</div>
