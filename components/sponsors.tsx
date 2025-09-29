@@ -42,12 +42,12 @@ const Sponsors = () => {
 							</div>
 							<div className="border-b-4 border-hackrpi-white rounded-full border-double mt-2 h-6 "></div>
 
-							<div className="flex flex-row flex-wrap justify-around items-center">
+							<div className="flex flex-row flex-wrap justify-around items-center mb-12">
 								{sponsors[tier].map((sponsor) => {
 									return (
 										<div
 											key={sponsor.name}
-											className={`w-fit h-fit p-4 m-4 hover:scale-110 bg-hackrpi-light-purple bg-opacity-0 hover:bg-opacity-45 rounded-md transition-all duration-300 flex items-center justify-center mx-4 ${tierColors[tier].glow}`}
+											className={`w-fit h-fit p-4 m-4 hover:scale-110 bg-hackrpi-light-purple bg-opacity-75 hover:bg-opacity-100 rounded-md transition-all duration-300 flex items-center justify-center mx-4 ${tierColors[tier].glow}`}
 										>
 											<a href={sponsor.url} target="_blank" rel="noreferrer">
 												<NextImage
