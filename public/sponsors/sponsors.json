@@ -4,6 +4,11 @@
 	"GOLD": [
 	],
 	"SILVER": [
+    {
+      "name": "RPI School of Science",
+      "logoPath": "/RPI_SOS.png",
+      "url": "https://science.rpi.edu/"
+    }
 	],
 	"BRONZE": [
 	],
@@ -17,6 +22,11 @@
 			"name": "Pure Buttons",
 			"logoPath": "/Pure-Buttons-Blue-Gradient-Logo-RGB.svg",
 			"url": "https://hackp.ac/mlh-standoutstickers-hackathons"
-		}
+		},
+    {
+      "name": "Monster Energy",
+      "logoPath": "/MonsterEnergy.png",
+      "url": "https://www.monsterenergy.com/en-us/"
+    }
 	]
 }
