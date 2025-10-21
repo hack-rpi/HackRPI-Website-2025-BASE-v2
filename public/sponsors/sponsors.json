@@ -5,6 +5,11 @@
 	],
 	"SILVER": [
     {
+      "name": "Velan Studios",
+      "logoPath": "/Velan_Studios_Logo.png",
+      "url": "https://www.velanstudios.com/"
+    },
+    {
       "name": "RPI School of Science",
       "logoPath": "/RPI_SOS.png",
       "url": "https://science.rpi.edu/"
