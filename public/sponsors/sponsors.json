@@ -1,5 +1,15 @@
 {
-	"OBSIDIAN": [{ "name": "Nuvalence", "logoPath": "/Nuvalence.png", "url": "https://nuvalence.io/" }],
+	"OBSIDIAN": [
+    { "name": "Nuvalence",
+      "logoPath": "/Nuvalence.png",
+      "url": "https://nuvalence.io/"
+    },
+    {
+			"name": "Severino Center for Technological Entrepreneurship",
+			"logoPath": "/Severino.jpg",
+			"url": "https://severinocenter.rpi.edu/"
+	  }
+  ],
 	"GOLD": [
 	],
 	"SILVER": [
@@ -55,11 +65,6 @@
 			"name": "Pure Buttons",
 			"logoPath": "/Pure-Buttons-Blue-Gradient-Logo-RGB.svg",
 			"url": "https://hackp.ac/mlh-standoutstickers-hackathons"
-		},
-    {
-			"name": "Severino Center for Technological Entrepreneurship",
-			"logoPath": "/Severino.jpg",
-			"url": "https://severinocenter.rpi.edu/"
 		},
     {
 			"name": "Taichi Bubble Tea",
